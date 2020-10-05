@@ -1,0 +1,209 @@
+{if $full_page}
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.suppliers} - {$ur_here}</div>
+        <div class="content">
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>{$lang.suppliers_settlement_order_list}</li>
+                    <li>{$lang.look_log}</li>
+                    <li class="red">{$lang.set_settlement_remind}</li>
+                    <li class="red">{$lang.settlement_formula}</li>
+                    <li class="red">{$lang.amount_formula}</li>
+                    <li class="red">{$lang.order_settlement_remind}</li>
+                    <li class="red">{$lang.set_settlement}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-head">
+                    <form action="javascript:searchOrder()" name="searchHighForm">
+                        <div class="search mr0">
+                            <div class="imitate_select select_w120">
+                                <div class="cite">{$lang.settlement_status}</div>
+                                <ul>
+                                    <li><a href="javascript:;" data-value="-1">{$lang.settlement_status}</a></li>
+                                    <li><a href="javascript:;" data-value="1">{$lang.is_settlement}</a></li>
+                                    <li><a href="javascript:;" data-value="0">{$lang.no_settlement}</a></li>
+                                </ul>
+                                <input name="state" type="hidden" value="-1">
+                            </div>
+
+                            <div id="text_time_start" class="text_time">
+                                <input type="text" readonly placeholder="{$lang.order_start_time}" autocomplete="off" class="text mr0" id="start_time_id" name="start_time">
+                            </div>
+                            <span class="bolang">&nbsp;&nbsp;~&nbsp;&nbsp;</span>
+                            <div id="text_time_end" class="text_time">
+                                <input type="text" readonly autocomplete="off" placeholder="{$lang.order_end_time}" class="text" id="end_time_id" value="" name="end_time">
+                            </div>
+                            <div class="input">
+                                <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.order_sn}" autocomplete="off">
+                                <input type="submit" class="btn" value="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="common-content">
+                	<div class="list-div relative" id="listDiv">
+                        {/if}
+                        <div class="commission-head-tit">
+                            <div class="fbutton"><a href="{$action_link.href}"><div class="csv" title="{$action_link.text}"><span><i class="icon icon-download-alt"></i>{$action_link.text}</span></div></a></div>
+                            <div class="total_row">
+                                <div class="item">
+                                    <span>{$lang.suppliers_percent}：<font class="red" id="all_brokerage_amount">{$valid.suppliers_percent}%</font></span>
+                                </div>
+                                <div class="item">
+                                    <span>{$lang.all_brokerage_amount}：<font class="red2" id="all_brokerage_amount">{$valid.brokerage_amount}</font></span>
+                                    <span>{$lang.is_brokerage_amount}：<font class="green" id="is_brokerage_amount">{$valid.formated_is_settlement_amout}</font></span>
+                                    <span>{$lang.no_brokerage_amount}：<font class="red" id="no_brokerage_amount">{$valid.formated_no_settlement_amout}</font></span>
+                                </div>
+                            </div>
+                        </div>
+                        <table cellpadding="1" cellspacing="1">
+                            <thead>
+                                <tr>
+                            <th width="5%"><div class="tDiv">{$lang.order_sn}</div></th>
+                            <th width="8%"><div class="tDiv">{$lang.add_time}</div></th>
+                            <th width="8%"><div class="tDiv">{$lang.consignee}</div></th>
+                            <th width="20%"><div class="tDiv">{$lang.order_amount}</div></th>
+                            <th width="8%"><div class="tDiv">{$lang.effective_amount_into}</div></th>
+                            <th width="8%"><div class="tDiv">{$lang.order_refund_total}</div></th>
+                            <th width="8%"><div class="tDiv">{$lang.brokerage_amount}</div></th>
+                            <th width="8%"><div class="tDiv">{$lang.settlement_state}</div></th>
+                            <th width="10%" class="handle">{$lang.handler}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {foreach from=$order_list item=list}
+                                <tr>
+                                    <td><div class="tDiv">{$list.order_sn}</div></td>
+                                    <td>
+                                        <div class="tDiv">
+                                            <p>{$list.user_name}</p>
+                                            <p>{$list.add_time}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="tDiv">
+                                            <p>{$list.consignee}</p>
+                                            <p>{$list.address}</p>
+                                        </div>
+                                    </td>
+                                    <!--总金额-->
+                                    <td>
+                                        <div class="tDiv">
+                                            <p>{$list.order_amount}</p>
+                                        </div>
+                                    </td>
+                                    <!--有效结算-->
+                                    <td>
+                                        <div class="tDiv">
+                                            
+                                            <p>{$list.effective_amount_into}</p>
+                                           
+                                        </div>
+                                    </td>
+                                    <!--退款金额-->
+                                    <td>
+                                        <div class="tDiv">
+                                            {$list.formated_return_amount}
+                                        </div>
+                                    </td>
+                                    <!--应结金额-->
+                                    <td>
+                                        <div class="tDiv">
+                                            {$list.brokerage_amount}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {if !$list.is_settlement}
+                                        <div class="tDiv">
+                                            <div class="switch mauto {if $list.is_settlement}active{/if}" {if !$list.is_settlement}onclick="listTable.switchBt(this, 'toggle_on_settlement', {$list.order_id})"{/if} title="{$lang.yes}">
+                                                 <div class="circle"></div>
+                                            </div>
+                                            <input type="hidden" value="0" name="is_settlement">
+                                        </div>
+                                        {else}
+                                        <div class="tDiv"><img src="images/yes.png" class="pl3"></div>
+                                        {/if}
+                                    </td>
+                                    <td class="handle">
+                                        <div class="tDiv a2">
+                                            <a href="suppliers_account.php?act=list&act_type=detail&log_type=2&order_id={$list.order_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.log}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {foreachelse}
+                                <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
+                                {/foreach}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="12">
+                                        <div class="tDiv">
+                                            <div class="list-page">
+                                                {include file="library/page.lbi"}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        {if $full_page}
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+    {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript">
+    
+    listTable.recordCount = {$record_count|default:0};
+    listTable.pageCount = {$page_count|default:1};
+    listTable.query = 'order_query';
+    {foreach from=$filter item=item key=key}
+    listTable.filter.{$key} = '{$item}';
+    {/foreach}
+    
+    $(".ps-container").perfectScrollbar();
+    
+    //日期选择插件调用start sunle
+	var opts1 = {
+		'targetId':'start_time_id',//时间写入对象的id
+		'triggerId':['start_time_id'],//触发事件的对象id
+		'alignId':'text_time_start',//日历对齐对象
+		'format':'-',//时间格式 默认'YYYY-MM-DD HH:MM:SS'
+		'min':'' //最小时间
+	},opts2 = {
+		'targetId':'end_time_id',
+		'triggerId':['end_time_id'],
+		'alignId':'text_time_end',
+		'format':'-',
+		'min':''
+	}
+	xvDate(opts1);
+	xvDate(opts2);
+        
+        function searchOrder()
+    {		
+		listTable.filter = [];
+		listTable.filter['id'] = {$suppliers_id|default:0};
+        listTable.filter['order_sn'] = Utils.trim(document.forms['searchHighForm'].elements['order_sn'].value);
+        listTable.filter['state'] = Utils.trim(document.forms['searchHighForm'].elements['state'].value);
+        listTable.filter['start_time'] = Utils.trim(document.forms['searchHighForm'].elements['start_time'].value);
+        listTable.filter['end_time'] = Utils.trim(document.forms['searchHighForm'].elements['end_time'].value);
+        listTable.filter['page'] = 1;
+        listTable.loadList();
+    }
+    
+    function order_downloadList(){
+		page_downloadList("{$page_count}",'suppliers_commission','ajax_download','suppliers_commission','merchant_download','{$lang.order_settlement_window}');
+	}
+    </script>     
+</body>
+</html>
+{/if}

@@ -1,0 +1,185 @@
+{if $temp eq 'pic_album'}
+    <div class="pic_album">
+        <div class="items border-bottom0">
+            <div class="item album_Percent hide">
+                <div class="label">上传进度：</div>
+                <div class="label_value">
+                    <div class="text_div mr0 w120 pl0"><span class="Percent_pic" ></span></div><div class="Percent"></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="label">选择相册：</div>
+                <div class="label_value">
+                    <div id="parent_cat" class="imitate_select select_w320">
+                      <div class="cite">{if $album_mame}{$album_mame}{else}{$lang.please_select}{/if}</div>
+                      <ul>
+                        {foreach from=$cat_select item=item}
+                        <li><a href="javascript:;" data-value="{$item.album_id}"  class="ftx-01">{$item.name}</a></li>
+                        {/foreach}
+                      </ul>
+                      <input name="album_id" type="hidden" id="album_number" value="{$album_id}" >
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="label">{$lang.img_url}：</div>
+                <div class="label_value">
+                    <div class="type-file-box">
+                        <input type="button" name="button" id="button" class="type-file-button type-file-button-radius" value="上传..." />
+                        <span class="red lh30 ml10">按住ctrl可同时批量选择多张图片上传</span>
+                    </div>
+                    <div class="form_prompt"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+    var uploader_gallery = new plupload.Uploader({//创建实例的构造方法
+		runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+		browse_button: 'button', // 上传按钮
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		},
+		url: "gallery_album.php?is_ajax=1&act=upload_pic", //远程上传地址
+		filters: {
+			max_file_size: '2mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+			mime_types: [//允许文件上传类型
+				{title: "files", extensions: "jpg,png,gif"}
+			]
+		},
+		multi_selection: true, //true:ctrl多文件上传, false 单文件上传
+		init: {
+			FilesAdded: function(up, files) { //文件上传前
+				window.Percent = 0; //初始化进度
+				var i = 0;
+				plupload.each(files, function(file) { //遍历文件
+					i ++;
+				});
+				
+				window.Percentage = 1/i;
+				$(".album_Percent").show();
+				album_submitBtn();
+			},
+			FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+				window.Percent = window.Percent + Percentage*100;
+				$(".Percent_pic").css({"width": window.Percent + "%"});
+				$(".Percent").html(Math.round(window.Percent) + "%");
+			},
+			UploadComplete:function(up,file){//所有文件上传成功时触发
+				window.location.href="gallery_album.php?act=view&id={$album_id}"; 
+			},
+			Error: function(up, err) { //上传出错的时候触发
+				alert(err.message);
+			}
+		}
+	});
+	uploader_gallery.init();
+	function album_submitBtn(){
+		var album_id = $("#album_number").val();
+		var data = {
+			album_id: album_id
+		};
+		uploader_gallery.setOption("multipart_params", data);
+		uploader_gallery.start();
+	};
+        
+</script>
+{/if}
+{if $temp eq 'album_move'}
+
+    <div class="items">
+        <div class="item">
+            <div class="label">选择相册：</div>
+            <div id="parent_cat" class="imitate_select select_w320">
+              <div class="cite">{if $album_mame}{$album_mame}{else}{$lang.please_select}{/if}</div>
+              <ul>
+                    {foreach from=$cat_select item=list}
+                    {if $list.album_id neq $album_id}<li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>{/if}
+                    {/foreach}
+              </ul>
+              <input name="album_id" type="hidden" value="0"  id="remove_album_id">
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+    $(function(){
+        //select下拉默认值赋值
+        $('.imitate_select').each(function()
+        {
+            var sel_this = $(this)
+            var val = sel_this.children('input[type=hidden]').val();
+            sel_this.find('a').each(function(){
+                if($(this).attr('data-value') == val){
+                    sel_this.children('.cite').html($(this).html());
+                }
+            })
+        });
+    })
+    </script>
+{/if}
+{if $temp eq 'add_albun_pic'}
+    <form id="add_albun_pic" method="post" enctype="multipart/form-data" runat="server" >
+        <div class="items">
+            <div class="item">
+                <div class="label"><em class="red">*</em>{$lang.label_album_name}</div>
+                <div class="value">
+                    <input type="text" name='album_mame'  class="text" autocomplete="off" ectype="required" data-msg="{$lang.please_album_name}"/>
+                </div>
+            </div>
+            <div class="item">
+                <div class="label">{$lang.label_cover}</div>
+                <div class="value">
+                    <div class="type-file-box mr0">
+                        <div class="input">
+                            <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly>
+                            <input type="button" name="button" id="button" class="type-file-button" value="上传..." />
+                            <input type="file" class="type-file-file"  name="album_cover" data-state="imgfile" size="30" hidefocus="true" value="" />
+                        </div>
+                        <input type="hidden" name="file_url" value="" class="type-file-text" autocomplete="off" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="label">{$lang.label_description}</div>
+                <div class="value">
+                    <textarea class="textarea" name="album_desc" id="role_describe"></textarea>
+                </div>
+            </div>
+            <div class="item">
+                <div class="label">{$lang.label_sort}</div>
+                <div class="value">
+                    <input type="text" name="sort_order" value="50" size="35" class="text w100" />
+                </div>
+            </div>
+        </div>
+    </form>
+{/if}
+
+{if $temp eq 'ajaxPiclist'}
+	{if $is_vis eq 1 || $is_vis eq 2}
+	<div class="gallery_album" data-act="get_albun_pic" data-vis="{$is_vis}" data-inid="pic_list" data-url='get_ajax_content.php' data-where="sort_name={$filter.sort_name}&album_id={$filter.album_id}&is_vis={$is_vis}&inid={$inid}">
+		<ul class="ga-images-ul" ectype="pic_replace" data-type="{if $is_vis eq 1}check{elseif $is_vis eq 2}radio{/if}">
+			{foreach from=$pic_list item=pic_album key=key}
+			<li data-url="{$pic_album.pic_file}" data-picid='{$pic_album.pic_id}'><div class="img-container"><img src="{$pic_album.pic_file}"></div><i class="checked"></i></li>
+			{foreachelse}
+			<li class="notic">暂无图片</li>
+			{/foreach}
+		</ul>
+        <div class="clear"></div>
+		{include file="library/lib_page.lbi"}
+	</div>
+	{else}
+	<div class="gallery_album" data-act="get_albun_pic" data-inid="pic_list" data-url='get_ajax_content.php' data-where="sort_name={$filter.sort_name}&album_id={$filter.album_id}">
+		<ul class="ga-images-ul">
+			{foreach from=$pic_list item=pic_list}
+			<li><a href="javascript:;" onclick="addpic('{$pic_list.pic_file}',this)"><img src="{$pic_list.pic_file}"><span class="pixel">{$pic_list.pic_spec}</span></a></li>
+			{foreachelse}
+			<li class="notic">暂无图片</li>
+			{/foreach}
+		</ul>
+		<div class="clear"></div>
+		{include file="library/lib_page.lbi"}
+	</div>
+	{/if}
+{/if}

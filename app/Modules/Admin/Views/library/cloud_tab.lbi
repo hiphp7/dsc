@@ -1,0 +1,5 @@
+<div class="tabs_info">
+    <ul>
+    	<li {if $menu_select.current eq '01_cloud_setting'}class="curr"{/if}><a href="cloud_setting.php?act=step_up">{$lang.01_cloud_setting}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,80 @@
+<?php
+
+$_LANG = array(
+    'cat_id' => 'Serial number',
+    'cat_name' => 'Category name',
+    'isleaf' => 'Don\'t allow',
+    'noleaf' => 'allow',
+    'keywords' => 'The keyword',
+    'cat_desc' => 'Classification description',
+    'parent_id' => 'The higher classification',
+    'sort_order' => 'The sorting',
+    'measure_unit' => 'Number of units',
+    'delete_info' => 'Delete the selected',
+    'category_edit' => 'Edit product categories',
+    'move_goods' => 'Transfer of goods',
+    'cat_top' => 'Top classification',
+    'show_in_nav' => 'Whether to display in the navigation bar',
+    'cat_style' => 'Classified stylesheet files',
+    'is_show' => 'Whether or not shown',
+    'show_in_index' => 'Set to home page recommendation',
+    'notice_show_in_index' => 'This setting can display the recommended products under this category in the latest, hot and recommended places on the home page',
+    'add_presale_cat' => 'Add pre-sale categories',
+    'presale_cat_list' => 'Pre-sale category list',
+    'index_new' => 'The latest',
+    'index_best' => 'The high-quality goods',
+    'index_hot' => 'hot',
+    'back_list' => 'Return category list',
+    'continue_add' => 'Go ahead and add categories',
+    'notice_style' => 'You can specify a stylesheet file for each commodity category. For example, if the file is stored in the themes directory, enter themes/style.css',
+    'catname_empty' => 'The category name cannot be empty!',
+    'catname_exist' => 'The same category name already exists!',
+    'parent_isleaf' => 'The selected category cannot be the last category!',
+    'cat_isleaf' => 'It is not the final category or there are products under this category, you can not delete!',
+    'cat_noleaf' => 'There are other sub-categories below, can not be modified to the final classification!',
+    'is_leaf_error' => 'The selected superior classification cannot be the current classification or the sub-classification of the current classification!',
+    'grade_error' => 'The price scale can only be an integer between 0 and 10',
+    'catadd_succed' => 'New product category added successfully!',
+    'catedit_succed' => 'Commodity classification editor successful!',
+    'catdrop_succed' => 'Commodity classification deletion successful!',
+    'catremove_succed' => 'Commodity classification transfer successful!',
+    'move_cat_success' => 'The transfer of commodity classification has been successfully completed!',
+    'cat_move_desc' => 'What is the classification of transferred goods?',
+    'select_source_cat' => 'Select the categories to transfer',
+    'select_target_cat' => 'Selective target classification',
+    'source_cat' => 'From this classification',
+    'target_cat' => 'Transferred to the',
+    'start_move_cat' => 'Began to shift',
+    'cat_move_notic' => 'In addition to the goods or in the goods management, if you need to make changes to the classification of goods, then you can use this function, the correct management of your goods classification.',
+    'cat_move_empty' => 'You didn\'t choose the right category!',
+    'sel_goods_type' => 'Please select item type',
+    'sel_filter_attr' => 'Select filter properties',
+    'filter_attr' => 'Attribute screening',
+    'filter_attr_notic' => 'Filter properties filter items in the previous category page',
+    'filter_attr_not_repeated' => 'Filter properties are not repeatable',
+    'js_languages' =>
+        array(
+            'catname_empty' => 'The category name cannot be empty!',
+            'unit_empyt' => 'Unit of quantity cannot be empty!',
+            'is_leafcat' => 'The category you selected is a final category. The parent category of the new \\r\\n category cannot be a final category',
+            'not_leafcat' => 'The category you selected is not a final category. Item transfer of \\r\\n can only be done between final categories.',
+            'filter_attr_not_repeated' => 'Filter properties are not repeatable',
+            'filter_attr_not_selected' => 'Select filter properties',
+            'cat_name_null' => 'Please enter category name',
+        ),
+    'operation_prompt_content' =>
+        array(
+            'list' =>
+                array(
+                    0 => 'Shows a list of pre-sale items.',
+                    1 => 'Can be deleted or modified pre-sale commodity classification name.',
+                ),
+            'info' =>
+                array(
+                    0 => 'Select the existing top pre-sale category.',
+                ),
+        ),
+);
+
+
+return $_LANG;

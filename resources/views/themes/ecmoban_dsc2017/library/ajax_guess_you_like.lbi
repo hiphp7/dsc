@@ -1,0 +1,23 @@
+            <div class="p-panel-main guess-love">
+                <div class="ftit ftit-delr"><h3>{$lang.guess_love}</h3></div>
+                <div class="gl-list clearfix">
+                    <ul class="clearfix">
+                        <!--{foreach from=$guess_goods item=goods name=guess_goods}-->
+                        {if $smarty.foreach.guess_goods.iteration < 8}
+                        <li class="opacity_img">
+                            <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" width="190" height="190"></a></div>
+                            <div class="p-price">
+                                {if $goods.promote_price neq ''}
+                                    {$goods.promote_price}
+                                {else}
+                                    {$goods.shop_price}
+                                {/if}
+                            </div>
+                            <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                            <div class="p-num">{$lang.Sold}<em>{$goods.sales_volume}</em>{$lang.jian}</div>
+                        </li>
+                        {/if}
+                        <!--{/foreach}-->
+                    </ul>
+                </div>
+            </div>

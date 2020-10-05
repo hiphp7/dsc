@@ -1,0 +1,36 @@
+/*!
+ * 大商创后台英文版en样式
+ * 
+ * SunLe
+ * 
+ * Date: 2019-06-20 13:00
+ */
+
+.ecsc-head-layout{ display: flex; flex-direction: row; justify-content: center; }
+.ecsc-head-layout .wrapper{ width: auto; }
+
+.ecsc-nav{ width: auto; }
+.ecsc-nav li a{ width: auto; }
+
+.admin-logo .t h1{ margin: 5px 0 0 0; border-left: 0; }
+
+.ecsc-seller-info{ width: 680px; }
+.ecsc-seller-info .list-items{ width: auto; margin-left: 125px; }
+.ecsc-seller-info .seller-desc .item span:first-child{ width: auto; }
+
+.basic-info .detail-rate li{ width: 88px; margin-right: 12px; }
+
+.main-content .type-a .content ul li{ min-width: initial; padding: 0 9px; }
+
+.main-content .container .container-right li{ width: 25%; margin: 0; }
+
+.sidebar .sitemap-menu dl dd a{ width: 130px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+.ecsc-table-handle i.sc_icon_see, .ecsc-table-handle i.sc_icon_rmb{ display: inherit; margin: 0 auto; }
+
+.ecsc-layout-left .sidebar .column-menu li a,
+.ecsc-layout-left .sidebar .column-menu li.current a{ padding-left: 15px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+
+.search-gao-list{width: 80px;}
+.search-gao-bar{ right: -410px; }
+.search-gao-bar .handle-btn{ width: 76px; left: -90px; }

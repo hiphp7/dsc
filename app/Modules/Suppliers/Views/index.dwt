@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout suppliers-layout">
+    <div class="site wrapper">
+		{include file ='library/seller_menu_user.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                <div class="top-container">
+                    <div class="basic-info">
+                    	
+                    </div>
+                </div>
+                <div class="seller-cont">
+                    <div class="container_left">
+                    	<div class="ecsc-seller-info">
+                            <div class="store-info">
+                                <div class="seller-name">{$suppliers_info.shop_name}</div>
+                                <div class="seller-desc">
+                                    <h1>{$lang.welcome}{$suppliers_info.supply_name}</h1>
+                                    <div class="item">
+                                        <span class="store-name"><em>{$lang.lable_suppliers_name}</em><strong>{$suppliers_info.suppliers_name}</strong></span>
+                                        <span><em>{$lang.management_authority}</em><strong>{$lang.administrators}</strong></span>
+                                        <span><em>{$lang.last_logon}</em><strong>{$suppliers_info.last_login}</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container type-a type-one">
+                            <div class="hd">
+                                <h3>{$lang.goods_remind}</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    <li><a href="goods.php?act=list&is_on_sale=1&review_status=3" target="_blank">{$lang.goods_sale}<em>{$order_handle.is_enabled|default:0}</em></a></li>
+                                    <li><a href="goods.php?act=trash" target="_blank">{$lang.commodity_recycling_bin}<em>{$order_handle.is_delete|default:0}</em></a></li>
+                                    <li><a href="goods.php?act=list&is_on_sale=0" target="_blank">{$lang.off_shelf_goods}<em>{$order_handle.is_on_sale|default:0}</em></a></li>
+                                    <li><a href="goods.php?act=list&stock_warning=1">{$lang.inventory_warning_commodity}<em>{$order_handle.is_warn|default:0}</em></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="container type-a type-two">
+                            <div class="hd">
+                                <h3>{$lang.trade_tips}</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    <li><a href="order.php?act=list&composite_status=1" target="_blank">{$lang.table_pay_made}<em>{$order_handle.no_pay|default:0}</em></a></li>
+                                    <li><a href="order.php?act=list&composite_status=2" target="_blank">{$lang.table_shipped}<em>{$order_handle.no_shipping|default:0}</em></a></li>
+                                    <li><a href="order.php?act=list&composite_status=3" target="_blank">{$lang.returned_exchanged}<em>{$order_handle.no_return|default:0}</em></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container_right">
+                    	<div class="contact_information">
+                        	<h1>{$lang.contact}</h1>
+                            <div class="content">
+                                <ul>
+                                    <li><em><i class="iconfont icon-tel"></i></em>{$suppliers_info.mobile_phone}</li>
+                                    <li><em><i class="iconfont icon-email"></i></em>{$suppliers_info.email}</li>
+                                    <li><em><i class="iconfont icon-weizhi"></i></em>{$suppliers_info.company_address}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank-container">
+                	<div class="container type-a">
+                        <div class="hd">
+                            <h3>{$lang.ranking_single}</h3>
+                        </div>
+                        <div class="content">
+                            <table class="ecsc-default-table rank">
+                            <thead>
+                                <tr>
+                                    <th width="20%" class="frist">{$lang.ranking}</th>
+                                    <th width="70%" class="tl">{$lang.goods_info}</th>
+                                    <th width="10%">{$lang.sales_volume}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {foreach from=$goods_info item=vo name=goods_info}
+                            <tr class="bd-line2">
+                                <td class="frist">{$smarty.foreach.goods_info.iteration}</td>
+                                <td class="tl"><a target="_blank" href="__ROOT__wholesale_goods.php?id={$vo.goods_id}" class="goods_name"> {$vo.goods_name}</a></td>
+                                <td class="tc">{$vo.goods_shipping_total}</td>
+                            </tr>
+                            {foreachelse}
+                            <tr class="bd-line2">
+                                <td class="tc" colspan="3">{$lang.no_records}</td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container type-a section_order_count">
+                        <div class="hd">
+                            <h3>{$lang.suppliers_stats}<font>{$lang.order_criteria}</font></h3>
+                            <div class="filter_date">
+                                <a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'week')">{$lang.seven_days}</a>
+                                <a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'month')">{$lang.january}</a>
+                                <a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'year')">{$lang.half_year}</a>
+                            </div>	
+                        </div>
+                        <div class="content">
+                            <div class="sc_warp">
+                                <div id="order_main" style="height:274px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container type-a section_total_count">
+                        <div class="hd">
+                            <h3>{$lang.sales_statistics}<font>{$lang.order_criteria}</font></h3>
+                            <div class="filter_date">
+                                <a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'week')">{$lang.seven_days}</a>
+                                <a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'month')">{$lang.january}</a>
+                                <a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'year')">{$lang.half_year}</a>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="sc_warp">
+                                <div id="total_main" style="height:274px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript" src="__ROOT__js/echarts-all.js"></script>
+<script type="text/javascript">
+	$(".canvas").each(function(){
+		var per = $(this).data("per");
+		if(per>50){
+			$(this).find('.circle').addClass('clip-auto');
+			$(this).find('.circle_right').removeClass('wth0');
+		}
+		$(this).find(".circle_left").css("-webkit-transform","rotate("+(18/5)*per+"deg)");
+	});
+
+	if($(".section_order_count").length > 0){
+		set_statistical_chart(".section_order_count .filter_date a:first", "order", "week"); //初始设置
+	}
+	
+	if($(".section_total_count").length > 0){
+		set_statistical_chart(".section_total_count .filter_date a:first", "sale", "week"); //初始设置
+	}
+	
+	function set_statistical_chart(obj, type, date)
+	{
+		var obj = $(obj);
+		obj.addClass("active");
+		obj.siblings().removeClass("active");
+		
+		$.ajax({
+			type:'get',
+			url:'index.php',
+			data:'act=set_statistical_chart&type='+type+'&date='+date,
+			dataType:'json',
+			success:function(data){
+				if(type == 'order'){
+					var div_id = "order_main";
+				}
+				if(type == 'sale'){
+					var div_id = "total_main";
+				}	
+				var myChart = echarts.init(document.getElementById(div_id));
+				myChart.setOption(data);
+			}
+		})
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<div class="tabs_info">
+    <ul>
+        <li {if $menu_select.current eq '01_sms_list'}class="curr"{/if}><a href="sms">{$lang.01_sms_list}</a></li>
+    	<li {if $menu_select.current eq '01_sms_setting'}class="curr"{/if}><a href="sms_setting.php?act=step_up">{$lang.01_sms_setting}</a></li>
+        <li {if $menu_select.current eq 'dscsms_configure'}class="curr"{/if}><a href="dscsms_configure.php?act=list">{$lang.dscsms_configure}</a></li>
+    </ul>
+</div>

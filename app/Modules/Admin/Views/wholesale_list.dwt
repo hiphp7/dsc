@@ -1,0 +1,377 @@
+{if $full_page}
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.suppliers} - {$ur_here}</div>
+        <div class="content">
+        	<div class="explanation m10" id="explanation">
+            	<div class="ex_tit">
+					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+                    {if $open eq 1}
+                    <div class="view-case">
+                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                        <div class="view-case-info">
+                        	<a href="http://help.ecmoban.com/article-6545.html" target="_blank">{$lang.head_remind.list.3}</a>
+                        </div>
+                    </div>			
+                    {/if}				
+				</div>
+                <ul>
+                	<li>{$lang.head_remind.list.4}</li>
+                    <li>{$lang.head_remind.list.5}</li>
+                    <li>{$lang.head_remind.list.6}</li>
+                </ul>
+            </div> 
+            <div class="flexilist">
+            	<div class="common-head">
+                    <div class="refresh">
+                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    </div>
+                    <div class="search">
+                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
+						{include file ='library/search_store.lbi'}
+                        {if $common_tabs.info}
+                        <div class="select m0">
+                            <div class="imitate_select select_w170">
+                                <div class="cite">{$lang.adopt_status}</div>
+                                <ul>
+                                    <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.adopt_status}</a></li>
+                                    <li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.not_audited}</a></li>
+                                    <li><a href="javascript:;" data-value="2" class="ftx-01">{$lang.audited_not_adopt}</a></li>
+                                    <li><a href="javascript:;" data-value="3" class="ftx-01">{$lang.audited_yes_adopt}</a></li>
+                                </ul>
+                                <input name="review_status" type="hidden" value="0" id="">
+                            </div>
+                        </div>
+                        {/if}
+                    	<div class="input">
+                        	<input type="text" name="keyword" class="text nofocus" placeholder="{$lang.goods_name}" autocomplete="off" />
+                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="common-content">
+					<form method="post" action="{$action}.php" name="listForm">
+                	<div class="list-div" id="listDiv">
+                    	{/if}
+                        <div class="flexigrid ht_goods_list">
+                    	<table cellpadding="0" cellspacing="0" border="0">
+                        	<thead>
+                            	<tr>
+                                	<th width="3%" class="sign"><div class="tDiv"><input type="checkbox" name="all_list" class="checkbox" id="all_list" /><label for="all_list" class="checkbox_stars"></label></div></th>
+                                	<th width="5%" class="sky_id">{$lang.record_id}</th>
+                                    <th width="18%"><div class="tDiv">{$lang.goods_name}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.suppliers_name}</div></th>
+                                    <th width="12%"><div class="tDiv">{$lang.shop_price}/{$lang.goods_sn}</div></th>
+                                    <th width="10%"><div class="tDiv">{$lang.goods_label}</div></th>
+                                    <th width="6%"><div class="tDiv">{$lang.sort_order}</div></th>
+                                    <th width="7%"><div class="tDiv">{$lang.goods_number}</div></th>
+                                    <th width="7%"><div class="tDiv">{$lang.warehouse_moq}</div></th>
+                                    <th width="7%"><div class="tDiv">{$lang.audit_status}</div></th>
+                                    <th width="7%"><div class="tDiv">{$lang.share_status}</div></th>
+                                    <th width="17%" class="handle">{$lang.handler}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								{foreach from=$goods_list item=goods}
+                            	<tr>
+                                    <td class="sign">
+                                    <div class="tDiv">
+										<input type="checkbox" name="checkboxes[]" value="{$goods.goods_id}" class="checkbox" id="checkbox_{$goods.goods_id}" />
+										<label for="checkbox_{$goods.goods_id}" class="checkbox_stars"></label>
+									</div>
+                                    </td>
+                                    <td class="sky_id"><div class="tDiv">{$goods.goods_id}</div></td>
+                                    <td>
+                                    	<div class="tDiv goods_list_info">
+											<div class="img"><a href="__ROOT__wholesale_goods.php?id={$goods.goods_id}" target="_blank" title="{$goods.goods_name|escape:html}"><img src="{$goods.goods_thumb}" width="68" height="68" /></a></div>
+                                            <div class="desc">
+                                        	<div class="name">
+                                                <span onclick="listTable.edit(this, 'edit_goods_name', {$goods.goods_id})" title="{$goods.goods_name|escape:html}" data-toggle="tooltip" class="span">{$goods.goods_name|escape:html}</span>
+                                            </div>
+                                            	{if $goods.brand_name}<p class="brand">{$lang.brand}<em>{$goods.brand_name}</em></p>{/if}
+                                                <p class="activity"> 
+                                                    {if $goods.is_shipping}
+                                                    <em class="free">{$lang.free_mail}</em>
+                                                    {/if}
+                                                    {if $goods.is_promote}
+                                                        {if $nowTime gte $goods.end_time}
+                                                    <em class="saleEnd">{$lang.end_sale}</em>
+                                                        {else}
+                                                    <em class="sale">{$lang.sale}</em>
+                                                        {/if}
+                                                    {/if}
+                                                    
+                                                    {if $goods.is_xiangou}
+                                                        {if $nowTime gte $goods.xiangou_end_date}
+                                                    <em class="purchaseEnd">{$lang.end_restriction}</em>
+                                                        {else}
+                                                    <em class="purchase">{$lang.restriction}</em>
+                                                        {/if}
+                                                    {/if}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="tDiv">
+                                            <div class="goods_list_seller" title="{$goods.suppliers_name}" data-toggle="tooltip">{if $goods.suppliers_name}<font class="red">{$goods.suppliers_name}</font>{else}<font class="blue3">{$lang.self}</font>{/if}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    	<div class="tDiv">
+                                        	<div class="tDiv_item">
+                                            	<span class="label">{$lang.shop_price}：</span>
+                                            	<div class="value">
+                                                    <span onclick="listTable.edit(this, 'edit_goods_price', {$goods.goods_id})">{$goods.goods_price}</span>
+                                            	</div>
+                                            </div>
+                                            
+                                            <div class="tDiv_item">
+                                            	<span class="label">{$lang.goods_sn}：</span>
+                                                <div class="value">
+                                                    {$goods.goods_sn}
+                                                </div>
+                                            </div>
+                                    	</div>
+                                    </td>
+                                    <td>
+                                    	<div class="tDiv">
+                                            <div class="tlist tlist-last">
+                                            	<span>{$lang.on_sale}：</span>
+                                            	<div class="switch {if $goods.enabled}active{/if}" title="{if $goods.enabled}{$lang.yes}{else}{$lang.no}{/if}" onclick="listTable.switchBt(this, 'toggle_on_sale', {$goods.goods_id})">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <input type="hidden" value="{$goods.enabled}" name="">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><div class="tDiv"><span onclick="listTable.edit(this, 'edit_sort_order', {$goods.goods_id})">{$goods.sort_order}</span></div></td>
+                                    <td>
+                                    	<div class="tDiv">
+                                    		{if $goods.is_attr}
+                                            	<a href="javascript:;" ectype="add_sku" data-goodsid="{$goods.goods_id}" data-userid="{$goods.user_id}"><i class="icon icon-edit font16"></i></a>
+                                            {else}
+                                            	<span onclick="listTable.edit(this, 'edit_goods_number', {$goods.goods_id})">{$goods.goods_number}</span>
+                                            {/if}
+                                    	</div>
+                                    </td>
+                                    <td><div class="tDiv"><span onclick="listTable.edit(this, 'edit_warehouse_moq', {$goods.goods_id})">{$goods.moq}</span></div></td>
+                                    <td>
+                                    	<div class="tDiv">
+                                            {if $goods.review_status eq 1}
+                                            <font class="org2">{$lang.not_audited}</font>
+                                            {elseif $goods.review_status eq 2}
+                                            <font class="red">{$lang.audited_not_adopt}</font><br/>
+                                            <i class="tip yellow" title="{$goods.review_content}"  data-toggle="tooltip">{$lang.prompt}</i>
+                                            {elseif $goods.review_status eq 3 || $goods.review_status eq 4}
+                                            <font class="blue">{$lang.audited_yes_adopt}</font>
+                                            {elseif $goods.review_status eq 5}
+                                            <font class="navy2">{$lang.wuxu_adopt}</font>
+                                            {/if}									
+                                        </div>
+                                    </td>
+                                    <td><div class="tDiv">{if $goods.standard_goods eq 1}<span class="green">已分享</span>{else}未分享{/if}</div></td>
+                                    <td class="handle">
+                                        <div class="tDiv ht_tdiv" style="padding-bottom:0px;">
+                                        	<p>
+                                            	<a href="__ROOT__wholesale_goods.php?id={$goods.goods_id}" target="_blank" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
+                                        		<a href="javascript:;" ectype="review_status" class="btn_see" data-type="{$type}" data-goodsid="{$goods.goods_id|default:0}" data-goodsname="{$goods.goods_name|escape:html}"><i class="icon icon-edit"></i>{$lang.check}</a>
+                                            </p>
+                                           <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.trash_goods_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                           {if $goods.standard_goods eq 1}
+                                           <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.no_standard_goods_lib_confirm}','no_standard_goods')" class="btn_inst"><i class="sc_icon sc_icon_inst"></i>{$lang.no_share}</a>
+                                           {else}
+                                           <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.standard_goods_lib_confirm}','standard_goods')" class="btn_inst"><i class="sc_icon sc_icon_inst"></i>{$lang.share}</a>
+                                           {/if}
+                                        </div>
+                                    </td>
+                                </tr>
+								{foreachelse}
+								<tr><td class="no-records"  colspan="20">{$lang.no_records}</td></tr>								
+								{/foreach}
+                            </tbody>
+                            <tfoot>
+                            	<tr>
+                                	<td colspan="12">
+                                    	<div class="tDiv">
+                                            <div class="tfoot_btninfo">
+                                                <div class="checkbox_item fl font12 mt5 mr5">
+                                                	<input type="checkbox" name="all_list" class="ui-checkbox" id="all_list"><label for="all_list" class="ui-label">{$lang.check_all}</label>
+                                                </div>
+                                                <input type="hidden" name="act" value="batch" />
+                                                <!-- 操作类型 start -->
+                                                <div class="imitate_select select_w120">
+                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <ul>
+                                                        <li><a href="javascript:changeAction();" data-value="" class="ftx-01">{$lang.select_please}</a></li>
+                                                        <li><a href="javascript:changeAction();" data-value="trash" class="ftx-01">{$lang.drop}</a></li>
+                                                        <li><a href="javascript:changeAction();" data-value="on_sale" class="ftx-01">{$lang.on_sale}</a></li>
+                                                        <li><a href="javascript:changeAction();" data-value="not_on_sale" class="ftx-01">{$lang.not_on_sale}</a></li>
+                                                        <li><a href="javascript:changeAction();" data-value="review_to" class="ftx-01">{$lang.adopt_goods}</a></li>
+                                                        <li><a href="javascript:changeAction();" data-value="standard_goods" class="ftx-01">{$lang.share}</a></li>
+                                                        <li><a href="javascript:changeAction();" data-value="no_standard_goods" class="ftx-01">{$lang.no_share}</a></li>
+                                                    </ul>
+                                                    <input name="type" type="hidden" value="" id="">
+                                                </div>
+                                                <!-- 操作类型 end -->
+                                                
+                                                <!-- 审核商品 start -->
+                                                <div id="review_status" class="imitate_select select_w120" style="display:none">
+                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <ul>
+                                                        <li><a href="javascript:get_review_status(1);" data-value="1" class="ftx-01">{$lang.not_audited}</a></li>
+                                                        <li><a href="javascript:get_review_status(2);" data-value="2" class="ftx-01">{$lang.audited_not_adopt}</a></li>
+                                                        <li><a href="javascript:get_review_status(3);" data-value="3" class="ftx-01">{$lang.audited_yes_adopt}</a></li>
+                                                    </ul>
+                                                    <input name="review_status" type="hidden" value="1" id="">
+                                                </div>
+                                                <input name="review_content" type="text" value="" class="text text_2 mr10 lh26" style="display:none" />
+                                                <!-- 审核商品 end -->
+                                                <input type="submit" value="{$lang.button_submit}" id="btnSubmit" name="btnSubmit" class="btn btn_disabled" disabled="true" ectype="btnSubmit" />				
+                                            </div>
+                                            <div class="list-page">
+                                               {include file="library/page.lbi"}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        </div>
+                        {if $full_page}
+                    </div>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--高级搜索 start-->
+	{include file="library/goods_search.lbi"}
+	<!--高级搜索 end-->
+    
+ 	{include file ='library/pagefooter.lbi'}
+	<script type="text/javascript">
+	//分页传值
+	listTable.recordCount = {$record_count|default:0};
+	listTable.pageCount = {$page_count|default:1};
+
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+	
+	function changeAction()
+	{
+		var frm = document.forms['listForm'];
+	
+		// 切换分类列表的显示
+		$("#move_cat_list").css({'display':frm.elements['type'].value == 'move_to' ? '' : 'none'});
+	
+		// 切换商品审核列表的显示
+		$("#review_status").css({'display':frm.elements['type'].value == 'review_to' ? '' : 'none'});
+		
+		// 商品运费模板
+	
+		if(frm.elements['type'].value != 'review_to'){
+			frm.elements['review_content'].style.display = 'none';
+		}
+	
+		// 供应商列表的显示
+		{if $suppliers_list > 0}
+			$("#suppliers_id").css({'display':frm.elements['type'].value == 'suppliers_move_to' ? '' : 'none'});
+		{/if}
+	}
+	  
+    //商品审核 start
+	$(document).on("click","a[ectype='review_status']",function(){
+		var goods_name = $(this).data('goodsname');
+		var goods_id = $(this).data('goodsid');
+		var type = $(this).data('type');
+		
+		var content  = 	'<form id="reviewForm" enctype="multipart/form-data" method="post" action="dialog.php?act=update_review_status">' +
+						'<div class="item fl" style="padding:20px 0px 10px; width:333px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' +
+							'{$lang.label_goods_name}<em title="' + goods_name + '">' + goods_name + '</em>' +
+						'</div>' +
+						'<div class="item fl" style="width:333px">' +
+							'<div class="fl" style="padding-top:9px">{$lang.commodity_audit}</div>' +
+							'<div class="checkbox_items" style="padding-top:10px; width:80%">' +
+								'<div class="checkbox_item">' + 
+									'<input name="review_status" class="ui-radio review_status" id="pro_no" value="1" checked="checked" type="radio" onclick="handleReviewStatus(this);">' +
+									'<label for="pro_no" class="ui-radio-label">{$lang.not_audited}</label>' +
+								'</div>' +
+								'<div class="checkbox_item">' + 
+									'<input name="review_status" class="ui-radio review_status" id="pro_on" value="3" checked="checked" type="radio" onclick="handleReviewStatus(this);">' +
+									'<label for="pro_on" class="ui-radio-label">{$lang.audited_adopt}</label>' +
+								'</div>' +
+								'<div class="checkbox_item mr15">' +
+									'<input name="review_status" class="ui-radio review_status" id="pro_yes" value="2" type="radio" onclick="handleReviewStatus(this);">' + 
+									'<label for="pro_yes" class="ui-radio-label">{$lang.audited_not_adopt}</label> ' +
+								'</div>' +
+							'</div>' +
+						'</div>' +
+						'<div class="item fl hide" id="review_content" style="padding:20px 0px; width:333px">' +
+							'<textarea name="review_content" value="" cols="60" rows="4" class="textarea"></textarea>' +
+						'</div>' +
+						'<input name="goods_id" type="hidden" value="' + goods_id + '">' + 
+						'</form>';
+		pb({
+			id:"review_status_dialog",
+			title:"{$lang.01_review_status}",
+			width:403,
+			content:content,
+			ok_title:"{$lang.button_submit_alt}",
+			cl_title:"{$lang.cancel}",
+			drag:true,
+			foot:true,
+			onOk:function(){
+				insert_review_status();
+			}
+		});
+	});
+        
+	function insert_review_status(){
+		var actionUrl = "wholesale.php?act=update_review_status";  
+		$("#reviewForm").ajaxSubmit({
+				type: "POST",
+				dataType: "JSON",
+				url: actionUrl,
+				data: { "action": "TemporaryImage" },
+				success: function (data) {
+					location.href = "wholesale.php?act=list";
+				},
+				async: true  
+		 });
+	}
+	
+	function handleReviewStatus(t){
+		if(t.value == 2){
+			$("#review_content").show();
+		}else{
+			$("#review_content").hide();
+			$(":input[name='review_content']").val('');
+		}
+	}
+        
+	function get_review_status(){
+		var frm = document.forms['listForm'];
+		
+		if(frm.elements['type'].value == 'review_to'){
+			if(frm.elements['review_status'].value == 2){
+				frm.elements['review_content'].style.display = '';
+			}else{
+				frm.elements['review_content'].style.display = 'none';
+			}
+		}else{
+			frm.elements['review_content'].style.display = 'none';
+		}
+	}
+	//ecmoban模板堂 --zhuo  end
+    </script>
+</body>
+</html>
+{/if}

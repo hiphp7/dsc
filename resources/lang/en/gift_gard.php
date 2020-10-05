@@ -1,0 +1,52 @@
+<?php
+
+$_LANG = array (
+  'not_gift_gard' => 'Gift card number does not exist',
+  'not_gift_gard_null' => 'Gift CARDS do not exist',
+  'gift_gard_error' => 'Gift card number or password error',
+  'gift_gard_used' => 'Gift card have been used',
+  'gift_gard_login' => 'Go to the gift card login page',
+  'gift_gard_overdue' => 'The gift card has expired',
+  'back_Last' => 'Return',
+  'delivery_Prompt' => 'Please fill in the complete harvest information in case the goods cannot reach you. Thank you for your cooperation',
+  'delivery_again' => 'To pick up the goods again',
+  'delivery_Success' => 'Pick up the goods success',
+  'my_delivery' => 'my delivery',
+  'delivery_fail' => 'delivery fail',
+  'password_error' => 'password wrong',
+  'back_gift_login' => 'return to login page',
+  'gift_gard_overdue_time' => 'The gift card has expired',
+  'gift_gard_Use_time' => 'The gift card will start with the date',
+  'gift_gard_number' => 'Gift card number',
+  'gift_gard_password' => 'Gift card password',
+  'submit' => 'Submit',
+  'gift_gard_use_time' => 'The date the gift card begins to be used is',
+  'Credit_Card_Number' => 'Credit Card Number',
+  'Exit_gift_card' => 'Exit gift card',
+  'Take_delivery_goods' => 'Take delivery goods',
+  'gift_gard_null' => 'This gift card does not add goods, please contact customer service!',
+  'input_th_info' => 'Fill in the information about the purchase',
+  'Recipient_name' => 'Recipient Name',
+  'Consignee_info_null' => 'consignee information cannot be empty',
+  'receipt_address' => 'delivery address',
+  'Please_select_area' => 'Please choose your area',
+  'Detailed_address' => 'detailed address',
+  'Detailed_address_null' => 'Please fill in the detailed address',
+  'Contact_number' => 'contact number',
+  'Contact_number_null' => 'Please fill in the contact form',
+  'shipping_time' => 'Hope to receive the time',
+  'Confirmation_delivery' => 'Confirm pick-up time',
+  'gift_login_success' => 'Login gift card successful',
+  'gift_logout_success' => 'The gift card was successfully withdrawn',
+  'gift_logout_overdue' => 'The gift card login has expired',
+  'receipt_fail' => 'The goods failed',
+  'receipt_Success' => 'The goods successfully',
+  'js_languages' => 
+  array (
+    'gift_gard_number_null' => 'Please enter the gift card number',
+    'gift_gard_password_null' => 'Please enter the gift card password',
+  ),
+);
+
+
+return $_LANG;

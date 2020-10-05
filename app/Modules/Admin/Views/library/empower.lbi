@@ -1,0 +1,13 @@
+
+
+<div class="step_content">
+    <div class="item">
+        <div class="step_label">{$lang.authorization_code}</div>
+        <div class="step_value">
+            <input type="text" class="text w180" name="AppKey" value="" placeholder="{$lang.please_input_code}" />
+            <div class="notic">
+            	<p><a href="https://www.dscmall.cn/authorization.html" target="_blank">{$lang.get_code}</a></p>
+            </div>
+        </div>
+    </div>
+</div>

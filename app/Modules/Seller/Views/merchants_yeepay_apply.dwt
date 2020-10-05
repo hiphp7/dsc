@@ -1,0 +1,618 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+{include file ='library/seller_html_head.lbi'}
+
+<style>
+.show {display:block}
+.hide {display:none}
+
+</style>
+</head>
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+                {include file ='library/seller_menu_tab.lbi'}
+                {/if}
+
+                <div class="ecsc-form-goods">
+                    <div class="explanation clear mb20" id="explanation">
+                        <div class="ex_tit"><i class="sc_icon"></i><h4>温馨提示</h4></div>
+                        <ul>
+                            <li>易宝支付子商户入网申请。</li>
+                            <li>1. 请填写真实准确信息。</li>
+                            <li>2. 用于后续资金分帐结算功能</li>
+                        </ul>
+                    </div>
+
+                <form method="post" action="merchants_account.php?act=account_manage&act_type=yeepay_apply" name="listForm" id="merchants_form" enctype="multipart/form-data" onsubmit="return false;">
+                <div class="wrapper-list">
+                	<dl>
+                    	<dt>{$lang.require_field}&nbsp;{$lang.mer_full_name}</dt>
+                        <dd>
+                        	<input name="mer_full_name" value="{$real.mer_full_name}" type="text" id="mer_full_name" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.mer_short_same}</dt>
+                        <dd>
+                            <input name="mer_short_same" value="{$real.mer_short_same}" type="text" id="mer_short_same" class="text">
+                            <div class="form_prompt">收银台上显示的收款方名称</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.mer_cert_type}</dt>
+                        <dd>
+                            <div id="mer_cert_type" class="imitate_select select_w145 mr0">
+                                <div class="cite">请选择</div>
+                                <ul>
+                                    <li><a href="javascript:;" data-value="CORP_CODE" class="ftx-01">{$lang.mer_cert_type_1}</a></li>
+                                    <li><a href="javascript:;" data-value="UNI_CREDIT_CODE" class="ftx-01">{$lang.mer_cert_type_2}</a></li>
+                               </ul>
+                               <input name="mer_cert_type" type="hidden" value="0" id="mer_cert_type_val">
+
+                            </div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.mer_cert_no}</dt>
+                        <dd>
+                            <input name="mer_cert_no" value="{$real.mer_cert_no}" type="text" id="mer_cert_no" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_name}</dt>
+                        <dd>
+                            <input name="legal_name" value="{$real.legal_name}" type="text" id="legal_name" class="text">
+                            <div class="form_prompt"></div>
+                            <div class="notic">{$lang.legal_name_title}</div>
+                        </dd>
+                    </dl>
+                    <dl>
+                    	<dt>{$lang.require_field}&nbsp;{$lang.legal_id_card}</dt>
+                        <dd><input name="legal_id_card" value="{$real.legal_id_card}" type="text" id="legal_id_card" class="text"><div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.mer_level}</dt>
+                        <dd>
+                            <div id="mer_level1_no" class="imitate_select select_w145 mr0 select_category">
+                                <div class="cite">请选择{$lang.mer_level1_no}</div>
+                                <ul>
+                                    {foreach from=$category_list item=list}
+                                    <li><a href="javascript:;" data-value="{$list.id}" class="ftx-01">{$list.name}</a></li>
+                                    {/foreach}
+                                </ul>
+                                <input name="mer_level1_no" type="hidden" value="" id="mer_level1_no_val">
+                            </div>
+
+                            <div id="mer_level2_no" class="imitate_select select_w260 ml5">
+                                <div class="cite">请选择{$lang.mer_level2_no}</div>
+                                <ul class="child_category">
+
+                                </ul>
+                                <input name="mer_level2_no" type="hidden" value="" id="mer_level2_no_val">
+                            </div>
+
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.mer_area}：</dt>
+                        <dd>
+                            <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
+                                <input type="hidden" value="{$real.mer_province}" name="mer_province" id="selProvinces">
+                                <div class="txt">{$lang.mer_province}</div>
+                                <i class="down u-dropdown-icon"></i>
+                                <div class="options clearfix" style="max-height:300px;">
+                                    {foreach from=$mer_province_list item=list}
+                                    <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div id="dlCity" class="ui-dropdown smartdropdown alien">
+                                <input type="hidden" value="{$real.mer_city}" name="mer_city" id="selCities">
+                                <div class="txt">{$lang.mer_city}</div>
+                                <i class="down u-dropdown-icon"></i>
+                                <div class="options clearfix" style="max-height:300px;">
+                                    {foreach from=$mer_city_list item=list}
+                                    <span class="liv" data-text="{$list.region_name}" data-type="3"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div id="dlRegion" class="ui-dropdown smartdropdown alien">
+                                <input type="hidden" value="{$real.mer_district}" name="mer_district" id="selDistricts">
+                                <div class="txt">{$lang.mer_district}</div>
+                                <i class="down u-dropdown-icon"></i>
+                                <div class="options clearfix" style="max-height:300px;">
+                                    {foreach from=$city item=list}
+                                    <span class="liv" data-text="{$list.region_name}" data-type="4"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                    {/foreach}
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.mer_address}</dt>
+                        <dd>
+                            <input name="mer_address" value="{$real.mer_address}" type="text" id="mer_address" class="text">
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                    	<dt>{$lang.require_field}&nbsp;{$lang.mer_contact_name}</dt>
+                        <dd><input name="mer_contact_name" value="{$real.mer_contact_name}" type="text" id="mer_contact_name" class="text"><div class="form_prompt"></div></dd>
+                    </dl>
+                    <dl>
+                    	<dt>{$lang.require_field}&nbsp;{$lang.mer_legal_phone}</dt>
+                        <dd><input name="mer_legal_phone" value="{$real.mer_legal_phone}" type="text" id="mer_legal_phone" class="text"><div class="form_prompt"></div></dd>
+                    </dl>
+                    <dl>
+                    	<dt>{$lang.mer_legal_email}</dt>
+                        <dd>
+                        	<input name="mer_legal_email" value="{$real.mer_legal_email}" type="text" id="mer_legal_email" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.tax_regist_cert}</dt>
+                        <dd>
+                            <input name="tax_regist_cert" value="{$real.tax_regist_cert}" type="text" id="tax_regist_cert" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.account_license}</dt>
+                        <dd>
+                            <input name="account_license" value="{$real.account_license}" type="text" id="account_license" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.org_code}</dt>
+                        <dd>
+                            <input name="org_code" value="{$real.org_code}" type="text" id="org_code" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt style="width: 18%;">{$lang.is_org_code_long}</dt>
+                        <dd style="width: 80%;">
+                            <div id="is_org_code_long" class="imitate_select select_w145 mr0">
+                                <div class="cite">请选择</div>
+                                <ul>
+                                    <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.is_org_code_long_0}</a></li>
+                                    <li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.is_org_code_long_1}</a></li>
+                               </ul>
+                               <input name="is_org_code_long" type="hidden" value="0" id="is_org_code_long_val">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.org_code_expiry}</dt>
+                        <dd>
+                            <input name="org_code_expiry" value="{$real.org_code_expiry}" type="text" id="org_code_expiry" class="text">
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.card_no}</dt>
+                        <dd>
+                            <input name="card_no" value="{$real.card_no}" type="text" id="card_no" class="text">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.head_bank_code}</dt>
+                        <dd>
+                            <div id="head_bank_code" class="imitate_select select_w145 mr0">
+                                <div class="cite">请选择</div>
+                                <ul>
+                                    {foreach from=$bank_list item=list}
+                                    <li><a href="javascript:;" data-value="{$list.code}" class="ftx-01">{$list.name}</a></li>
+                                    {/foreach}
+                               </ul>
+                               <input name="head_bank_code" type="hidden" value="" id="head_bank_code_val">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.bank_area}：</dt>
+                        <dd>
+                            <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
+                                <input type="hidden" value="{$real.bank_province}" name="bank_province" id="selProvinces">
+                                <div class="txt">{$lang.bank_province}</div>
+                                <i class="down u-dropdown-icon"></i>
+                                <div class="options clearfix" style="max-height:300px;">
+                                    {foreach from=$bank_province_list item=list}
+                                    <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div id="dlCity" class="ui-dropdown smartdropdown alien">
+                                <input type="hidden" value="{$real.bank_city}" name="bank_city" id="selCities">
+                                <div class="txt">{$lang.bank_city}</div>
+                                <i class="down u-dropdown-icon"></i>
+                                <div class="options clearfix" style="max-height:300px;">
+                                    {foreach from=$bank_city_list item=list}
+                                    <span class="liv" data-text="{$list.region_name}" data-type="3"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                    {/foreach}
+                                </div>
+                            </div>
+
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.bank_code}</dt>
+                        <dd>
+                            <div id="bank_code" class="imitate_select select_w320 mr5">
+                                <div class="cite">请选择</div>
+                                <ul class="bank_info">
+
+                               </ul>
+                               <input name="bank_code" type="hidden" value="" id="bank_code_val">
+                            </div>
+                            <a href="javascript:;" id="get_bank_code" class="yzm-btn lh">{$lang.get_bank_code}</a>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <!-- 企业上传资质信息 -->
+                    <div class="explanation clear mb20" id="explanation">
+                        <ul>
+                            <li>上传企业资质图片。</li>
+                        </ul>
+                    </div>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_idcard_front}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile1" class="type-file-text" {if $real.legal_idcard_front}value="{$real.legal_idcard_front}"{/if}  readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_idcard_front" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_idcard_front}
+                                <span class="show">
+                                <a href="{$real.legal_idcard_front}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_idcard_front}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_idcard_back}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile2" class="type-file-text" {if $real.legal_idcard_back}value="{$real.legal_idcard_back}"{/if}  readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_idcard_back" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_idcard_back}
+                                <span class="show">
+                                <a href="{$real.legal_idcard_back}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_idcard_back}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_corp_code}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile3" class="type-file-text" {if $real.legal_corp_code}value="{$real.legal_corp_code}"{/if} readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_corp_code" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_corp_code}
+                                <span class="show">
+                                <a href="{$real.legal_corp_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_corp_code}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_tax_code}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile4" class="type-file-text" {if $real.legal_tax_code}value="{$real.legal_tax_code}"{/if}  readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_tax_code" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_tax_code}
+                                <span class="show">
+                                <a href="{$real.legal_tax_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_tax_code}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_org_code}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile5" class="type-file-text" {if $real.legal_org_code}value="{$real.legal_org_code}"{/if}  readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_org_code" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_org_code}
+                                <span class="show">
+                                <a href="{$real.legal_org_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_org_code}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_uni_credit_code}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile6" class="type-file-text" {if $real.legal_uni_credit_code}value="{$real.legal_uni_credit_code}"{/if}  readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_uni_credit_code" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_uni_credit_code}
+                                <span class="show">
+                                <a href="{$real.legal_uni_credit_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_uni_credit_code}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.legal_op_bank_code}：</dt>
+                        <dd>
+                             <div class="type-file-box">
+                                <div class="input">
+                                    <input type="text" name="textfile7" class="type-file-text" {if $real.legal_op_bank_code}value="{$real.legal_op_bank_code}"{/if}  readonly>
+                                    <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload_dot}">
+                                    <input type="file" class="type-file-file" name="legal_op_bank_code" size="30" hidefocus="true">
+                                </div>
+                                {if $real.legal_op_bank_code}
+                                <span class="show">
+                                <a href="{$real.legal_op_bank_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.legal_op_bank_code}>')" onmouseout="toolTip()"></i></a>
+                                </span>
+                                {/if}
+                            </div>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <!--<dl>
+                        <dt>{$lang.require_field}&nbsp;{$lang.label_mobile_code}</dt>
+                        <dd>
+                            <input name="sms_value" id="sms_value" type="hidden" value="sms_code" />
+                            <input name="mobile_code" type="text" id="mobile_code" class="text text_4 mr10">
+                            <a href="javascript:sendSms();" id="zphone" class="yzm-btn lh">{$lang.get_verify}</a>
+                            <div class="form_prompt"></div>
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt>{$lang.label_review_status}：</dt>
+                        <dd><div class="green txtline">{$lang.review_status.$real.review_status}</div>{if $real.review_status eq 2}<div class="notic">{$lang.label_intro}{$real.review_content}</div>{/if}</dd>
+                    </dl>-->
+
+                    <dl class="button_info">
+                    	<dt>&nbsp;</dt>
+                        <dd>
+                            <!--<input type="hidden" name="flag"  id="flag" value="change_password_f">
+                            <input type="hidden" name="seccode" id="seccode" value="" />
+                            <input type="hidden" name="form_act" value="{$form_act}"/>-->
+
+                            <input type="hidden" name="step" value="1"/>
+                            <input type="button" class="sc-btn sc-blueBg-btn btn35" id="query" value="{$lang.submit}" ectype="submitBtn" />
+                            <input type="reset" class='sc-btn btn35 sc-blue-btn' value='{$lang.button_reset}' />
+                        </dd>
+                    </dl>
+                </div>
+                </form>
+                </div>
+
+                {if $full_page}
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript" src="__ROOT__js/jquery.picTip.js"></script>
+<script type="text/javascript" src="__TPL__/js/region.js"></script>
+<link rel="stylesheet" href="__ROOT__assets/mobile/vendor/layer/skin/layer.css">
+<script type="text/javascript" src="__ROOT__assets/mobile/vendor/layer/layer.js"></script>
+<script type="text/javascript">
+$(function(){
+    // 地区联动
+    $.levelLink();
+
+    // 选择商户分类 select下拉默认值赋值
+    $(document).on("click",".select_category li a",function(){
+        var _this = $(this);
+        var val = _this.data('value');
+        var text = _this.html();
+
+        _this.parents(".imitate_select").find(".cite span").html(text).css("color","#707070");
+        _this.parents(".imitate_select").find("input[type=hidden]").val(val);
+        _this.parents(".imitate_select").find("ul").hide();
+
+        if (val){
+            $.post("merchants_account.php?act=select_category", {id:val}, function(result){
+                if (result.status == 0 && result.data.length > 0) {
+                     var html = '';
+                     for (var i = 0; i < result.data.length; i++) {
+                         html += '<li><a href="javascript:;" data-value="'+result['data'][i]['id']+'"  class="ftx-01">'+result['data'][i]['name']+'</a></li>';
+                     }
+                     if (html) {
+                        $('.child_category').html(html);
+                     }
+                } else {
+                    $('.child_category').html('');
+                }
+                return false;
+            }, 'json');
+        }
+    });
+
+    // 获取支行信息
+    $(document).on("click","#get_bank_code",function(){
+
+        var head_bank_code = $('input[name="head_bank_code"]').val(); // 总行编码
+        var bank_province = $('input[name="bank_province"]').val(); // 省
+        var bank_city = $('input[name="bank_city"]').val();  // 市
+
+        if (!head_bank_code) {
+            layer.msg('请先选择开户行');
+            return false;
+        }
+        if (!bank_province) {
+            layer.msg('请先选择开户行所在省');
+            return false;
+        }
+
+        if (head_bank_code && bank_province){
+            $.post("merchants_account.php?act=get_bank_code", {
+                head_bank_code:head_bank_code,
+                bank_province:bank_province,
+                bank_city:bank_city,
+            }, function(result){
+                if (result.status == 0 && result.data.length > 0) {
+                     var html = '';
+                     for (var i = 0; i < result.data.length; i++) {
+                         html += '<li><a href="javascript:;" data-value="'+result['data'][i]['code']+'"  class="ftx-01">'+result['data'][i]['name']+'</a></li>';
+                     }
+                     if (html) {
+                        $('.bank_info').html(html);
+                     }
+                } else {
+                    $('.bank_info').html('');
+                }
+                return false;
+            }, 'json');
+        }
+    });
+
+
+	var mobile_phone = $("#mobile_phone").val();
+	var code = '{$sms_security_code}';
+	if(mobile_phone != ''){
+		$("#mobile_phone").focus();
+	}
+	
+	$("#seccode").val(code);
+
+
+	
+	// 第一步表单提交
+	$("*[ectype='submitBtn']").click(function(){
+		//if ($("#merchants_form").valid()) {
+
+			var ajax_data = $("#merchants_form").serialize();
+
+            $("#merchants_form").ajaxSubmit({
+                type: "POST",
+                dataType: "json",
+                url: "merchants_account.php?act=account_manage&act_type=yeepay_apply",
+                data: {
+                    ajax_data
+                },
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data, textStatus) {
+                    layer.msg(data.msg);
+
+                    if(data.error == 0){
+                        if(data.url){
+                            window.location.href = data.url;
+                        }else{
+                            window.location.reload();
+                        }
+                    }else{
+                        return false;
+                    }
+                },
+            });
+		//}
+	});
+
+	<!-- 验证第一步表单-->
+	/*$('#merchants_form').validate({
+		errorPlacement:function(error, element){
+			var error_div = element.parents('dl').find('div.form_prompt');
+			error_div.append(error);
+		},
+		rules:{
+			real_name :{
+				required : true
+			},
+			textfile1 : {
+				required : true
+			},
+			textfile2 : {
+				required : true
+			},
+			self_num :{
+				required : true
+			},
+			bank_name :{
+				required : true
+			},
+			bank_card :{
+				required : true
+			},
+			mobile_phone :{
+				required : true,
+				isMobile : true
+			}
+		},
+		messages:{
+			real_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>'+label_real_name_not_null
+			},
+			textfile1 : {
+				required : '<i class="icon icon-exclamation-sign"></i>'+file_front_of_id_card
+			},
+			textfile2 : {
+				required : '<i class="icon icon-exclamation-sign"></i>'+file_reverse_of_id_card
+			},
+			self_num:{
+				 required : '<i class="icon icon-exclamation-sign"></i>'+label_self_num_not_null
+			},
+			bank_name:{
+				 required : '<i class="icon icon-exclamation-sign"></i>'+label_bank_name_not_null
+			},
+			bank_card:{
+				 required : '<i class="icon icon-exclamation-sign"></i>'+label_bank_card_not_null
+			},
+			mobile_phone:{
+				 required : '<i class="icon icon-exclamation-sign"></i>'+label_bank_mobile_not_null,
+				 isMobile : '<i class="icon icon-exclamation-sign"></i>'+mobile_incorrect
+			}
+		}			
+	});*/
+
+});
+</script>
+</body>
+</html>
+{/if}

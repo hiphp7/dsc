@@ -1,0 +1,51 @@
+<?php
+
+$_LANG = array (
+  'wholesale_cat' => 'Classification of goods',
+  'wholesale_cat_list' => 'Wholesale breakdown',
+  'add_wholesale_cat' => 'Add category',
+  'edit_wholesale_cat' => 'Edit wholesale classification',
+  'cat_isleaf' => 'It is not the final category or there are products under this category, you can not delete!',
+  'cat_name' => 'Category name',
+  'parent_id' => 'The higher classification',
+  'cat_top' => 'Top classification',
+  'catname_exist' => 'The same category name already exists!',
+  'continue_add' => 'Continue to add',
+  'back_list' => 'Return category list',
+  'catadd_succed' => 'Wholesale classification added successfully!',
+  'catedit_succed' => 'Wholesale classification editor success!',
+  'is_show' => 'Whether or not shown',
+  'show_in_nav' => 'Whether to display in the navigation bar',
+  'keywords' => 'The keyword',
+  'cat_desc' => 'Classification description',
+  'icon' => 
+  array (
+    'watch' => 'watch',
+    'digital' => 'digital',
+    'books' => 'book',
+    'outdoors' => 'outdoor',
+    'care' => 'care',
+    'drug' => 'The medicine',
+    'computer' => 'The computer',
+    'ele' => 'Household appliances',
+    'bed' => 'The bed',
+    'makeup' => 'makeup',
+    'clothes' => 'Dress collocation',
+    'car' => 'The car',
+    'package' => 'gift',
+    'baby' => 'Maternal and infant',
+    'shoes' => 'shoes',
+    'heal' => 'Medical care',
+    'food' => 'food',
+    'tangdou' => 'Jelly beans',
+    'liangyoufushi1' => 'Grain and oil non-staple food 1',
+    'weizhi' => 'location',
+    'jucha2' => 'Tea 2',
+    'jinkou' => 'import',
+    'shuiguo' => 'fruit',
+    'jiubei' => 'glass',
+  ),
+);
+
+
+return $_LANG;

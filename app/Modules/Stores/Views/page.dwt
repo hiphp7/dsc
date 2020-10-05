@@ -1,0 +1,19 @@
+<div id="turn-page">
+    <span id="page-link">
+        <div class="pagination">
+            <ul>
+                <!--<li>{literal}{if $filter.page neq 1}<a href="javascript:listTable.gotoPageFirst()">{/if}{/literal}<span>{$lang.admin_home}</span>{if $filter.page neq 1}</a>{/if}</li>-->
+                <li>{literal}{if $filter.page neq 1}<a href="javascript:listTable.gotoPagePrev()">{/if}{/literal}<span class="prev">{$lang.page_prev}</span>{if $filter.page neq 1}</a>{/if}</li>
+                {foreach from=$page_count_arr item=page_count name=pageCount}
+                {if $page_count eq $filter.page}
+                	<li><span class="currentpage">{$page_count}</span></li>
+                {else}
+                	<li><a href="javascript:listTable.gotoPage({$page_count})"><span>{$page_count}</span></a></li>
+                {/if}
+                {/foreach}
+                <li>{literal}{if $filter.page neq $filter.page_count}<a href="javascript:listTable.gotoPageNext()">{/if}{/literal}<span class="next">{$Lang.page_next}</span>{if $filter.page neq $filter.page_count}</a>{/if}</li>
+                <!--<li>{literal}{if $filter.page neq $filter.page_count}<a href="javascript:listTable.gotoPageLast()" class="last">{/if}{/literal}<span>{$lang.page_last}</span>{if $filter.page neq $filter.page_count}</a>{/if}</li>-->
+            </ul>
+        </div>
+    </span>
+</div>

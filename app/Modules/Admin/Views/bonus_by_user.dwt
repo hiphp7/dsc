@@ -1,0 +1,184 @@
+<!doctype html>
+{if $full_page}
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+    <div class="warpper">
+        <div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+        <div class="content">
+            <div class="explanation" id="explanation">
+                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                    <li>{$lang.operation_prompt_content.send.0}</li>
+                    <li>{$lang.operation_prompt_content.send.1}</li>
+                    <li>{$lang.operation_prompt_content.send.2}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-content">
+                    <div class="step">
+                        <div class="step_content">
+                            <div class="batch_tab">
+                                <div class="checkbox_items">
+                                    <div class="checkbox_item">
+                                        <input type="radio" name="issue_bonus" id="user_name" class="ui-radio-16x16" value="name" checked="">
+                                        <label for="user_name" class="ui-radio-label-16x16">{$lang.user_name_send}</label>
+                                    </div>
+                                    <div class="checkbox_item">
+                                        <input type="radio" name="issue_bonus" id="user_grade" value="grade" class="ui-radio-16x16">
+                                        <label for="user_grade" class="ui-radio-label-16x16">{$lang.user_grade_send}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="user_name_bonus">
+                                <div class="common-head">
+
+                                    <div class="search">
+                                       <form name="theForm" action="bonus.php" method="post" id="username_form">
+                                <div class="goods_search_div">
+                                    <input type="text" name="keyword" class="text w120" value="" placeholder="{$lang.user_name}" autocomplete="off" />
+                                    <input type="button" class="btn btn30" name="search" value="{$lang.search_word}" ectype="search" onclick="searchUser();" class="button" />
+                                </div>
+
+                            </form>
+                                    </div>
+                                </div>
+                                <div class="common-content">
+                                    <form method="POST" action="bonus.php" name="listForm">
+                                    <div class="list-div"  id="listDiv">
+                                        {/if}
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <thead>
+                                                <tr>
+                                                    <th width="3%" class="sign"><div class="tDiv"><input type="checkbox" name="all_list" class="checkbox" id="all_list" /><label for="all_list" class="checkbox_stars"></label></div></th>
+                                                    <th width="5%"><div class="tDiv"><a href="javascript:listTable.sort('user_id'); ">{$lang.record_id}</a>{$sort_user_id}</div></th>
+
+                                                    <th width="10%"><div class="tDiv">{$lang.user_name}</div></th>
+                                                    <th width="10%"><div class="tDiv">{$lang.nick_name}</div></th>
+                                                    <th width="8%"><div class="tDiv">{$lang.last_login_time}</div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {foreach from=$user_list item=list}
+                                                <tr>
+                                                    <td class="sign"><div class="tDiv"><input type="checkbox" name="checkboxes[]" value="{$list.user_id}" class="checkbox" id="checkbox_{$list.user_id}" /><label for="checkbox_{$list.user_id}" class="checkbox_stars"></label></div></td>
+                                                    <td><div class="tDiv">{$list.user_id}</div></td>
+                                                    <td><div class="tDiv">{$list.user_name}</div></td>
+                                                    <td><div class="tDiv">{$list.nick_name}</div></td>
+                                                     <td><div class="tDiv">{$list.last_login_time}</div></td>
+
+                                                </tr>
+                                                {foreachelse}
+                                                    <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
+                                                {/foreach}
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="12">
+                                                        <div class="tDiv">
+                                                            <input type="submit" name="send_user" value="{$lang.confirm_send_bonus}" class="btn btn35 red_btn fn"/>
+                                                            <input type="hidden" name="id" value="{$id}" />
+                                                            <input type="hidden" name="act" value="send_by_user" />
+
+                                                            <div class="list-page">
+                                                                {include file="library/page.lbi"}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        {if $full_page}
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="user_grade_bonus" style="display:none;">
+                            <form action="bonus.php" method="post" name="theForm2" id="usergrade_form">
+                                <div class="move_buttom_div" style="border-top:0;">
+                                    <div class="data_format_select">
+                                        <div class="label">{$lang.senduserrank}：</div>
+                                        <div class="value">
+                                            <div id="rank_id" class="imitate_select select_w320">
+                                                <div class="cite">{$lang.select_user_grade}</div>
+                                                <ul style="display: none;">
+                                                    {foreach from=$ranklist item=list key=key}
+                                                    <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$list}</a></li>
+                                                    {/foreach}
+                                                </ul>
+                                                <input name="rank_id" type="hidden" value="0" id="rank_id_val">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="data_format_content">
+                                        <div class="item">
+                                            <div class="label">{$lang.validated_email}：</div>
+                                            <div class="value">
+                                                <div class="switch switch_2" title="{$lang.no}">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <input type="hidden" name="validated_email" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tc mt50">
+                                    <input type="submit" name="send_rank" value="{$lang.confirm_send_bonus}" class="btn btn35 red_btn mr20" />
+                                    <input type="hidden" name="act" value="send_by_user" />
+                                    <input type="hidden" name="id" value="{$id}" />
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript">
+
+    listTable.recordCount = {$record_count|default:0};
+    listTable.pageCount = {$page_count|default:1};
+
+    listTable.query = "search_users";
+    {foreach from=$filter item=item key=key}
+    listTable.filter.{$key} = '{$item}';
+    {/foreach}
+
+
+        //红包发放方式切换
+        $(".batch_tab").find("input[type='radio']").on("click",function(){
+            var value = $(this).val();
+            if(value == "name"){
+                $("#user_name_bonus").show();
+                $("#user_grade_bonus").hide();
+            }else{
+                $("#user_name_bonus").hide();
+                $("#user_grade_bonus").show();
+            }
+        });
+
+        /**
+        * 按用户名搜索用户
+ */
+        function searchUser()
+
+        {
+
+            var frm = $("form[name='theForm']");
+            listTable.filter['keywords'] = Utils.trim(frm.find("input[name='keyword']").val());
+
+            var grm = $("form[name='listForm']");
+
+            listTable.filter['id'] = Utils.trim(grm.find("input[name='id']").val());
+
+            listTable.filter['page'] = 1;
+            listTable.loadList();
+        }
+
+    </script>
+{/if}
+</body>
+</html>

@@ -1,0 +1,198 @@
+<form enctype="multipart/form-data" method="post" action="goods_lib.php" name="theForm">
+	<div class="step_content import_step_content">
+		<div class="ecsc-form-goods">	
+			<dl>
+				<dt>{$lang.label_goods_name}</dt>
+				<dd class="lh30" >
+                    <input type="text" class="text w220" name="goods_name" value="{$goods.goods_name|escape}" size="20" />
+                    <span class="hide" ectype='lib_goods_name'>{$goods.goods_name}</span>
+                </dd>
+			</dl>	
+			<dl>
+				<dt>{$lang.goods_sn}：</dt>
+				<dd>
+					<input type="text" class="text w150" name="goods_sn" value="{$goods.goods_sn|escape}" size="20" />
+				</dd>
+			</dl>	
+            <dl>
+				<dt>{$lang.goods_price_s}</dt>
+				<dd>
+					<input type="text" class="text w50" name="shop_price" size="10" value="{$goods.shop_price}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>{$lang.label_goods_stock}</dt>
+				<dd>
+					<input type="text" class="text w50" name="goods_number" value="99" size="10" />
+				</dd>
+			</dl>
+            <dl>
+                <dt>{$lang.select_type}</dt>
+                <dd>
+                    <div class="categorySelect">
+                        <div class="selection">
+                            <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                            <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
+                        </div>
+                        <div class="select-container" style="display:none;">
+                            {include file="library/filter_category.lbi"}
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>{$lang.shop_type}</dt>
+                <dd class="txtline">
+                    <div class="categorySelect fl">
+                        <div class="selection">
+                            <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{if $user_cat_name}{$user_cat_name}{else}{$lang.select_cat}{/if}" autocomplete="off" readonly data-filter="cat_name" />
+                            <input type="hidden" name="user_cat" id="category_id" value="{$goods.user_cat|default:0}" data-filter="cat_id" />
+                        </div>
+                        <div class="select-container" style="display:none;">
+                            {include file="library/filter_category_seller.lbi"}
+                        </div>
+                    </div>                                    	
+                </dd>
+            </dl>
+            <dl>
+                <dt class="step_label">{$lang.select_brand}</dt>
+                <dd class="step_value">
+                    <div class="search_select">
+                        <div class="brandSelect">
+                            <div class="selection">
+                                <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="{$lang.select_barnd}" autocomplete="off" readonly data-filter="brand_name" />
+                                <input type="hidden" name="brand_id" id="brand_id" value="{$goods.brand_id}" data-filter="brand_id" />
+                            </div>
+                            <div class="brand-select-container" style="display:none;">
+                                {include file="library/filter_brand.lbi"}
+                            </div>
+                        </div>                            
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="step_label">{$lang.goods_freight_s}</dt>
+                <dd class="step_value">
+                    <div class="checkbox_items">
+                        <div class="checkbox_item mr15">
+                            <input type="radio" name="freight" class="ui-radio freight" id="freight_1" value="1" checked="checked" />
+                            <label for="freight_1" class="ui-radio-label">{$lang.lab_freight_fixed}</label> 
+                        </div>
+                        <div class="checkbox_item">
+                            <input type="radio" name="freight" class="ui-radio freight" id="freight_2" value="2"  />
+                            <label for="freight_2" class="ui-radio-label">{$lang.lab_freight_temp}</label> 
+                        </div>
+                        <input id="shipping_fee" type="text" name="shipping_fee" class="text w150" autocomplete="off" value="0.00"/>
+                        <div id="tid" class="imitate_select select_w170"style="display:none;">
+                         	<div class="cite">{$lang.please_select}</div>
+                            <ul style="display: none;">
+                                {foreach from=$transport_list item=item key=key}
+                                <li><a href="javascript:;" data-value="{$item.tid}" class="ftx-01">{$item.title}</a></li>
+                                {/foreach}
+                            </ul>
+                            <input name="tid" type="hidden" value="0">
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+				<dt>{$lang.shop_recommend}</dt>
+				<dd>
+					<div class="checkbox_items">
+						<div class="checkbox_item">
+							<input type="checkbox" name="store_best" class="ui-checkbox" value="1" {if $goods.store_best eq 1}checked="checked"{/if} id="store_best">
+							<label class="ui-label" for="store_best">{$lang.boutique}</label>
+						</div>
+						<div class="checkbox_item">
+							<input type="checkbox" name="store_new" class="ui-checkbox" value="1" id="store_new" {if $goods.store_new eq 1}checked="checked"{/if}>
+							<label class="ui-label" for="store_new">{$lang.new}</label>
+						</div>
+						<div class="checkbox_item">
+							<input type="checkbox" name="store_hot" class="ui-checkbox" value="1" id="store_hot" {if $goods.store_hot eq 1}checked="checked"{/if}>
+							<label class="ui-label" for="store_hot">{$lang.hot}</label>
+						</div>
+					</div>
+				</dd>
+			</dl>
+            <dl>
+                <dt class="step_label">{$lang.return_mark}</dt>
+                <dd class="step_value">
+                    <div class="checkbox_items">
+                        <div class="checkbox_item">
+                            <input type="checkbox" name="return_type[]" class="ui-checkbox freight" id="return_type_0" value="0" {if $is_cause && in_array(0, $is_cause)}checked="checked"{/if}>
+                            <label class="ui-label" for="return_type_0">{$lang.return_type.0}</label>
+                        </div>
+
+                        <div class="checkbox_item">
+                            <input type="checkbox" name="return_type[]" class="ui-checkbox freight" id="return_type_1" value="1" {if $is_cause && in_array(1, $is_cause)}checked="checked"{/if}>
+                            <label class="ui-label" for="return_type_1">{$lang.return_type.1}</label>
+                        </div>
+
+                        <div class="checkbox_item">
+                            <input type="checkbox" name="return_type[]" class="ui-checkbox freight" id="return_type_2" value="2" {if $is_cause && in_array(2, $is_cause)}checked="checked"{/if}>
+                            <label class="ui-label" for="return_type_2">{$lang.return_type.2}</label>
+                        </div>
+
+                        <div class="checkbox_item">
+                            <input type="checkbox" name="return_type[]" class="ui-checkbox freight" id="return_type_3" value="3" {if $is_cause && in_array(3, $is_cause)}checked="checked"{/if}>
+                            <label class="ui-label" for="return_type_3">{$lang.return_type.3}</label>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+			<dl>
+				<dt>{$lang.lab_goods_service}</dt>
+				<dd>
+					<div class="checkbox_items">
+						<div class="checkbox_item">
+							<input type="checkbox" name="is_reality" class="ui-checkbox" value="1" id="is_reality" {if $goods.is_delivery eq 1}checked="checked"{/if}>
+							<label class="ui-label" for="is_reality">{$lang.goods_service.0}</label>
+						</div>
+						<div class="checkbox_item">
+							<input type="checkbox" name="is_return" class="ui-checkbox" value="1" id="is_return" {if $goods.is_return eq 1}checked="checked"{/if}>
+							<label class="ui-label" for="is_return">{$lang.goods_service.1}</label>
+						</div>
+						<div class="checkbox_item">
+							<input type="checkbox" name="is_fast" class="ui-checkbox" value="1" id="is_fast" {if $goods.is_free eq 1}checked="checked"{/if}>
+							<label class="ui-label" for="is_fast">{$lang.goods_service.2}</label>
+						</div>
+					</div>
+				</dd>
+			</dl>
+            <dl>
+				<dt>{$lang.upper_shelf}</dt>
+				<dd>
+					<div class="switch switch_2" title="{$lang.no}">
+						<div class="circle"></div>
+					</div>
+					<input type="hidden" value="0" name="is_on_sale">
+				</dd>
+			</dl>
+            <dl>
+                <dt>{$lang.label_goods_attr}</dt>
+                <dd>
+                    <a href="javascript:void(0);" class="sc-btn btn28 sc-blueBg-btn" ectype="set_import_attr">{$lang.set_property}</a>
+                </dd>
+            </dl>
+			<dl>
+				<dt>{$lang.free_freight}</dt>
+				<dd>
+					<div class="switch switch_2" title="{$lang.no}">
+						<div class="circle"></div>
+					</div>
+					<input type="hidden" value="0" name="is_shipping">
+				</dd>
+			</dl>
+			<div class="buttom tc">
+				<div class="button_info">
+					<input type="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn btn35" />
+					<input type="reset" value="{$lang.button_reset}" class="sc-btn btn35 sc-blue-btn" />
+					<input type="hidden" name="act" value="goods_import_action" />
+                    <input type="hidden" name="standard" value="{$standard}" />
+					<input type="hidden" name="lib_goods_id" value="{$goods.goods_id}" />
+                    <input type="hidden" name="new_goods_type" value="" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,207 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | team Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used by the team
+    |
+    */
+
+    'team_menu' => '拼團活動',
+    'week' => '周',
+    'month' => '月',
+    'year' => '年',
+    'day' => '天',
+    'hour' => '小時',
+    'minute' => '分鐘',
+    'team_ing' => '進行中',
+    'team_fail' => '失敗團',
+    'team_success' => '成功團',
+    'modify_success' => '修改成功',
+    'modify_fail' => '修改失敗',
+    'add_success' => '添加成功',
+    'add_fail' => '添加失敗',
+    'audit_status' => '審核狀態',
+    'goto_audit' => '審核',
+    'already_audit' => '已審核',
+    'refuse_audit' => '審核未通過',
+    'no_audit' => '未審核',
+    'isnot_aduit_reason' => '審核未通過原因',
+    'already_enabled' => '已啟用',
+    'already_disabled' => '已禁用',
+    'is_show' => '是否顯示',
+    'drp_open' => '開啟',
+    'drp_close' => '關閉',
+    'team_category_edit' => '修改頻道',
+    'team_category_add' => '添加頻道',
+    'please_category' => '請選擇分類',
+    'please_team_category' => '請選擇頻道',
+    'team_category_child_limit4' => '子頻道不能超過4個',
+    'team_name_empty' => '頻道名稱不能為空',
+    'team_category_no_top' => '所選擇的上級頻道不能是當前頻道或者當前頻道的下級頻道!',
+    'team_category_is_top' => '當前頻道是頂級頻道,不能修改為下級頻道',
+    'please_number' => '開團有效期，請輸入有效數字',
+    'team_num_not_less_than_one' => '成團人數不能小於1人團',
+    'team_validity_time_24hour' => '開團有效期不能超過24小時',
+    'team_desc_empty' => '拼團介紹不能為空',
+    'team_exist' => '該拼團商品活動結束之前，不可添加新的活動',
+    'team_goods' => '拼團商品',
+    'team_category' => '活動頻道',
+    'team_info' => '開團團隊',
+    'team_recycle' => '回收站',
+    'team_category_add_tips' => [
+        '顯示平台內所有參與拼團的頻道，管理員可以選擇添加頻道，再將不同的商品添加到各個頻道內，多樣地展示商品。',
+        '主頻道將顯示在拼團首頁，每個主頻道下可添加四個子頻道'
+    ],
+    'team_category_name' => '頻道名稱',
+    'team_category_name_notice' => '頻道將顯示在首頁頭部，前台點擊可以切換不同的頻道',
+    'team_category_parent' => '上級頻道',
+    'please_select_parent_category' => '請選擇一級頻道',
+    'select_parent_category_notice' => '若不選擇上級頻道，則此頻道為頂級頻道',
+    'team_category_icon' => '頻道小圖標',
+	'team_category_icon_application' => '頻道小圖標應用於子級頻道，頂級頻道設置無效',
+    'team_content' => '拼團介紹',
+    'team_goods_add' => '添加拼團商品',
+    'team_goods_add_tips' => [
+        '管理員可以在此頁添加參與拼團的商品，設置該商品的拼團價，頻道等。',
+        '開團有效期不能超過24小時,時間格式：小時，輸入1~24 數字。',
+        '該拼團商品活動結束之前，不可添加新的活動。'
+    ],
+    'team_limit_num' => '購買人次',
+    'team_limit_num_null' => '請輸入購買人次',
+    'team_limit_num_notice' => '（虛擬）已參團人數將會影響商品在「排行-熱銷」中的順序',
+    'team_goods_limit' => '限購數量',
+    'team_goods_limit_null' => '請輸入限購數量',
+    'team_goods_limit_notice' => '每位參團人員（包括團長）單筆訂單的限購數量',
+
+    'please_select' => '請選擇',
+    'choose_again' => '重選',
+    'choose_cancel' => '取消選擇',
+    'choose_brand' => '請選擇品牌',
+    'all_brand' => '全部品牌',
+    'search_brand' => '搜索品牌',
+    'no_brand_records' => '沒有符合條件的品牌',
+    'please_select_team_goods' => '請選擇拼團商品',
+    'team_price' => '拼團價格',
+    'team_price_null' => '請輸入拼團價格',
+    'team_price_notice' => '拼團購買時的商品價格（默認本店售價）',
+    'team_num' => '幾人團',
+    'team_num_null' => '請輸入幾人團',
+    'team_num_notice' => '此商品的成團人數，需設置爲大於1的整數',
+    'team_validity_time' => '開團有效期',
+    'team_validity_time_null' => '請輸入開團有效期',
+    'team_validity_time_notice' => '團長開團成功後開始倒計時，寫入時間最好在24小時以內 (時間格式：小時，輸入1~24 數字)',
+
+    'team_category_list' => '頻道列表',
+    'team_category_list_tips' => [
+        '顯示平台內所有參與拼團的頻道，管理員可以選擇添加頻道，再將不同的商品添加到各個頻道內，多樣地展示商品。',
+        '主頻道將顯示在拼團首頁，每個主頻道下可添加四個子頻道。'
+    ],
+    'team_goods_number' => '商品數量',
+    'team_category_set' => '設置',
+    'team_category_add_child' => '新增下一級',
+    'team_category_child_list' => '查看下一級',
+    'confirm_delete_category' => '您確定要刪除該頻道及子頻道嗎？',
+
+    'team_goods_list' => '拼團商品列表',
+	'back_list' => '返回拼團商品列表', 
+    'team_goods_list_tips' => [
+        '顯示平台內所有參與拼團的商品信息，將商品添加到不同的排行榜內顯示。',
+        '同一款商品，拼團商品活動結束之前，不可添加新的拼團活動。'
+    ],
+    'shop_name' => '商家名稱',
+    'price_team_products' => '原價/拼團/貨號',
+    'team_ranking_add' => '添加排行(按鈕)',
+    'team_sku_stock' => 'SKU/庫存',
+    'shop_price' => '原價',
+    'good_sn' => '貨號',
+    'is_best' => '精品',
+    'is_new' => '新品',
+    'is_hot' => '熱銷',
+    'of_team_num' => '人團',
+    'of_limit_num' => '人次',
+    'confirm_close_team' => '您確定要結束該拼團活動嗎？',
+    'closed' => '結束',
+    'cancel_team' => '取消拼團',
+    'cancel_best' => '取消精品',
+    'cancel_new' => '取消新品',
+    'cancel_hot' => '取消熱銷',
+
+    'teaminfo_list' => '團隊列表',
+    'teaminfo_all' => '全部團',
+    'teaminfo_ing' => '正在拼團',
+    'teaminfo_success' => '成功團',
+    'teaminfo_fail' => '失敗團',
+    'teaminfo_list_tips' => [
+        '顯示平台內所有參與拼團的信息，管理員可以看到由拼團產生的所有訂單，並對訂單進行處理操作。'
+    ],
+    'teaminfo_time' => '開團時間',
+    'residue_time' => '剩餘時間',
+    'residue_team_num' => '差幾人成團',
+    'teaminfo_status' => '拼團狀態',
+    'team_is_over' => '已結束',
+    'team_is_success' => '已成團',
+    'confirm_delete_goods' => '您確定要刪除該拼團商品嗎？',
+
+    'team_recycle_tips' => [
+        '顯示平台內所有刪除拼團的商品信息，將商品恢復到拼團商品列表。'
+    ],
+    'goods_img' => '商品圖片',
+    'confirm_recover_goods' => '您確定要恢復該拼團商品嗎？',
+    'recover' => '恢復',
+    'batch_recover' => '批量恢復',
+
+    'ranking_list' => '排行',
+    'team_user_list' => '拼團成員',
+    'waiting_team' => '等待成團',
+    'team_succes' => '拼團成功',
+    'team_failure' => '拼團失敗',
+    'team_goods_info' => '商品詳情',
+    'team_goods_comment' => '商品評論',
+    'my_team_order' => '拼團訂單',
+    'team_keywords_result' => '搜索結果',
+    'invalid_number' => '對不起，您輸入非法商品數值',
+    'team_tc_img' => '頻道小圖標不能為空',	
+	'js_languages' => [
+        'jl_select_team_goods' => '您沒有選拼團商品！',
+		'jl_team_price_not_null' => '拼團價格不能爲空！',
+		'jl_team_num_not_null' => '成團人數不能爲空並且不能小於1人團！',
+		'jl_validity_time_not_null' => '開團有效期不能爲空！寫入時間最好在24小時以內 (時間格式：小時，輸入1~24 數字)',
+		'jl_astrict_num_not_null' => '限購數量不能爲空！',
+		'jl_select_tc_id' => '您沒有選拼團頻道！',
+    ],
+
+    'label_payment' => '支付方式：',
+    'referer' => '來源',
+    'touch' => '微商城',
+    'wxapp' => '小程序',
+    'cashdesk' => '收銀臺',
+
+    'os' => [
+        OS_UNCONFIRMED => '未確認',
+        OS_CONFIRMED => '已確認',
+        OS_SPLITED => '已確認',
+        OS_SPLITING_PART => '已確認',
+        OS_CANCELED => '已取消',
+        OS_INVALID => '無效',
+        OS_RETURNED => '退貨',
+    ],
+    'ss' => [
+        SS_UNSHIPPED => '未發貨',
+        SS_PREPARING => '配貨中',
+        SS_SHIPPED => '已發貨',
+        SS_RECEIVED => '收貨確認',
+        SS_SHIPPED_PART => '已發貨(部分商品)',
+        SS_SHIPPED_ING => '配貨中', // 已分單
+    ],
+    'ps' => [
+        PS_UNPAYED => '未付款',
+        PS_PAYING => '付款中',
+        PS_PAYED => '已付款',
+        PS_PAYED_PART => '部分付款(定金)',
+    ]
+];

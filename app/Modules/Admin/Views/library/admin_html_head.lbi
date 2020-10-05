@@ -1,0 +1,52 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$lang.cp_home}{if $ur_here} - {$ur_here} {/if}</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="shortcut icon" href="__ROOT__favicon.ico" />
+<link rel="icon" href="__ROOT__animated_favicon.gif" type="image/gif" />
+
+<link rel="stylesheet" type="text/css" href="__TPL__/css/main.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/purebox.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/order-new.css?v=2" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/jquery-ui/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/spectrum-master/spectrum.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/perfect-scrollbar/perfect-scrollbar.min.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/calendar/calendar.min.css" />
+
+{if $cfg_lang eq 'en'}
+<link rel="stylesheet" type="text/css" href="__TPL__/css/en.css" />
+{/if}
+
+<script type="text/javascript" src="__ROOT__calendar.php?lang={$cfg_lang}"></script>
+
+<script type="text/javascript" src="__ROOT__js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.json.js"></script>
+<script type="text/javascript" src="__ROOT__js/transport_jquery.js"></script>
+<script type="text/javascript" src="__ROOT__js/utils.js"></script>
+<script type="text/javascript" src="__ROOT__js/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.form.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.nyroModal.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.validation.min.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.cookie.js"></script>
+<script type="text/javascript" src="__ROOT__js/lib_ecmobanFunc.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="__TPL__/js/common.js"></script>
+<script type="text/javascript" src="__TPL__/js/listtable.js"></script>
+<script type="text/javascript" src="__TPL__/js/listtable_pb.js"></script>
+<script type="text/javascript" src="__TPL__/js/dsc_admin2.0.js"></script>
+<script type="text/javascript" src="__TPL__/js/jquery.bgColorSelector.js"></script>
+
+<script type="text/javascript">
+/*这里把JS用到的所有语言都赋值到这里*/
+{foreach from=$lang.js_languages key=key item=item}
+var {$key} = "{$item}";
+{/foreach}
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>

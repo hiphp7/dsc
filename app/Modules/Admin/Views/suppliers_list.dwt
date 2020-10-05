@@ -1,0 +1,135 @@
+{if $full_page}
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.suppliers} - {$ur_here}</div>
+        <div class="content">
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>{$lang.show_suppliers_list}</li>
+                    <li>{$lang.can_del_edit_suppliers}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+            	<!--商品分类列表-->
+                <div class="common-head">
+                    {if $action_link}
+                    <div class="fl">
+                    	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
+                    </div>
+                    {/if}
+                    <div class="refresh">
+                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    </div> 
+                </div>
+                <div class="common-content">
+                    <form method="post" action="suppliers.php" name="listForm" onsubmit="return confirm('{$lang.sure_del_suppliers}');">
+                	<div class="list-div" id="listDiv">
+                        {/if}
+                    	<table cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th width="3%" class="sign"><div class="tDiv"><input type="checkbox" name="all_list" class="checkbox" id="all_list" /><label for="all_list" class="checkbox_stars"></label></div></th>
+                                    <th width="3%"><div class="tDiv"><a href="javascript:listTable.sort('suppliers_id'); ">{$lang.record_id}</div></th>
+                                    <th width="5%"><div class="tDiv"><a href="javascript:listTable.sort('suppliers_name'); ">{$lang.suppliers_name}</a></div></th>
+                                    <th width="5%"><div class="tDiv">{$lang.shop_name}</div></th>
+                                    <th width="10%"><div class="tDiv">{$lang.suppliers_desc}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.settlement_ratio_s}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.apply_name_s}</div></th>
+                                    <th width="15%"><div class="tDiv">{$lang.corporate_name_s}</div></th>
+                                    <th width="5%"><div class="tDiv">{$lang.settlement_address}</div></th>
+                                    <th width="10%"><div class="tDiv">{$lang.settlement_time}</div></th>
+                                    <th width="5%"><div class="tDiv">{$lang.examine_state}</div></th>
+                                    <th width="5%"><div class="tDiv">{$lang.suppliers_check}</div></th>
+                                    <th width="15%" class="handle">{$lang.handler}</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach from=$suppliers_list item=suppliers}
+                            	<tr>
+                                    <td class="sign"><div class="tDiv"><input type="checkbox" name="checkboxes[]" class="checkbox" value="{$suppliers.suppliers_id}" id="checkbox_{$suppliers.suppliers_id}" /><label for="checkbox_{$suppliers.suppliers_id}" class="checkbox_stars"></label></div></td>
+                                    <td><div class="tDiv">{$suppliers.suppliers_id}</div></td>
+                                    <td><div class="tDiv red">{$suppliers.suppliers_name|escape:html}</div></td>
+                                    <td><div class="tDiv">{$suppliers.shop_name}</div></td>
+                                    <td><div class="tDiv">{$suppliers.suppliers_desc|nl2br}</div></td>
+                                    <td><div class="tDiv"><span onclick="listTable.edit(this, 'edit_suppliers_percent', {$suppliers.suppliers_id})" title="{$suppliers.suppliers_percent|escape:html}" data-toggle="tooltip">{$suppliers.suppliers_percent}</span>%</div></td>
+                                    <td><div class="tDiv">{$suppliers.real_name}</div></td>
+                                    <td><div class="tDiv">{$suppliers.company_name}</div></td>
+                                    <td><div class="tDiv">{$suppliers.region_name}</div></td>
+                                    <td><div class="tDiv">{$suppliers.add_time}</div></td>
+                                    <td>
+                                        <div class="tDiv">
+                                            {if $suppliers.review_status eq 1}
+                                            <font class="org2">{$lang.not_audited}</font>
+                                            {elseif $suppliers.review_status eq 2}
+                                            <font class="red">{$lang.audited_not_adopt}</font><br/>
+                                            <i class="tip yellow" title="{$snatch.review_content}" data-toggle="tooltip">{$lang.prompt}</i>
+                                            {elseif $suppliers.review_status eq 3}
+                                            <font class="blue">{$lang.audited_yes_adopt}</font>
+                                            {/if}									
+                                        </div>
+                                    </td>
+                                    <td>
+                                    	<div class="tDiv">
+                                            <div class="switch {if $suppliers.is_check eq 1}active{/if}" title="{if $suppliers.is_check eq 1}{$lang.yes}{else}{$lang.no}{/if}" onclick="listTable.switchBt(this, 'is_check', {$suppliers.suppliers_id})">
+                                            	<div class="circle"></div>
+                                            </div>
+                                            <input type="hidden" value="0" name="">
+                                        </div>
+                                    </td>
+                                    <td class="handle">
+                                        <div class="tDiv a2">
+                                        {if $suppliers.review_status eq 3}<a href="suppliers.php?act=allot&id={$suppliers.suppliers_id}&user={$suppliers.user_name}" title="{$lang.allot_priv}" class="btn_region"><i class="icon icon-cog"></i>{$lang.allot_priv}</a>{/if}
+                                           <a href="suppliers.php?act=edit&id={$suppliers.suppliers_id}" title="{$lang.edit}"  class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
+                                           <a href="javascript:void(0);" onclick="listTable.remove({$suppliers.suppliers_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {foreachelse}
+                                <tr><td class="no-records" colspan="13">{$lang.no_records}</td></tr>
+                                {/foreach}
+                            </tbody>
+                            <tfoot>
+                            	<tr>
+                                    <td colspan="13">
+                                        <div class="tDiv">
+                                            <div class="tfoot_btninfo">
+                                                <input name="act" type="hidden" value="batch" />
+                                            	<input type="submit" name="remove" ectype="btnSubmit" value="{$lang.drop}" class="btn btn_disabled" disabled />
+                                            </div>
+                                            <div class="list-page">
+                                                {include file="library/page.lbi"}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        {if $full_page}
+                    </div>
+                    </form>
+                </div>
+            </div>
+		</div>
+	</div>
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
+
+listTable.recordCount = {$record_count|default:0};
+listTable.pageCount = {$page_count|default:1};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+    
+$(".ps-container").perfectScrollbar();
+</script>     
+</body>
+</html>
+{/if}

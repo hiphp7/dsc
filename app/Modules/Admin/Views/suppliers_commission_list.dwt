@@ -1,0 +1,138 @@
+{if $full_page}
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.suppliers} - {$ur_here}</div>
+        <div class="content">
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>{$lang.shop_list_administration}</li>
+                    <li>{$lang.look_order_edit}</li>
+                    <li>{$lang.where_order_look}</li>
+                    <li class="red">{$lang.set_settlement}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-head">
+                    {if $action_link}
+                    <div class="fl">
+                    	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
+                    </div>
+                    {/if}
+                    <div class="refresh{if !$action_link} ml0{/if}">
+                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    </div>
+                </div>
+                <div class="common-content">
+                    <form method="post" action="agency.php" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+                	<div class="list-div" id="listDiv">
+                        {/if}
+                    	<table cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th width="3%" class="sign"><div class="tDiv"><input type="checkbox" name="all_list" class="checkbox" id="all_list" /><label for="all_list" class="checkbox_stars"></label></div></th>
+                                    <th width="5%"><div class="tDiv">{$lang.record_id}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.suppliers_name}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.company_name}</div></th>
+                                    <th width="20%"><div class="tDiv">{$lang.company_address}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.suppliers_percent}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.order_valid_total}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.order_refund_total}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.is_settlement_amount}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.no_settlement_amount}</div></th>
+                                    <th width="10%" class="handle">{$lang.handler}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach from=$commission_list item=list}
+                            	<tr>
+                                    <td class="sign"><div class="tDiv"><input type="checkbox" name="checkboxes[]" class="checkbox" value="{$list.suppliers_id}" id="checkbox_{$list.suppliers_id}" /><label for="checkbox_{$list.suppliers_id}" class="checkbox_stars"></label></div></td>
+                                    <td><div class="tDiv">{$list.suppliers_id}</div></td>
+                                    <td><div class="tDiv red">{$list.suppliers_name|escape:html}</div></td>
+                                    <td><div class="tDiv">{$list.company_name|escape:html}</div></td>
+                                    <td>
+                                        <div class="tDiv">
+                                            <p>{$list.company_address|escape:html}</p>
+                                            <p>{$list.mobile_phone}</p>
+                                        </div>
+                                    </td>
+                                    <td><div class="tDiv">{$list.suppliers_percent}%</div></td>
+                                    <td>
+                                        <div class="tDiv">
+                                            {$list.order_valid_total}
+                                        </div>
+                                    </td>
+                                    <td><div class="tDiv">{$list.formated_return_amount}</div></td>
+                                    <td><div class="tDiv">{$list.is_settlement_amout}</div></td>
+                                    <td>
+                                        <div class="tDiv">
+                                            {$list.no_settlement_amout}
+                                        </div>
+                                    </td>
+                                    <td class="handle">
+                                        <div class="tDiv a2">
+                                            <a href="suppliers_commission.php?act=suppliers_order_list&id={$list.suppliers_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {foreachelse}
+                                <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
+                                {/foreach}
+                            </tbody>
+                            <tfoot>
+                            	<tr>
+                                    <td colspan="12">
+                                        <div class="tDiv">
+                                        	<div class="tfoot_btninfo">
+                                                <input name="act" type="hidden" value="batch" />
+                                                <input name="remove" type="submit" ectype="btnSubmit" value="{$lang.drop}" class="btn btn_disabled" disabled />
+                                            </div>
+                                            <div class="list-page">
+                                                {include file="library/page.lbi"}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        {if $full_page}
+                    </div>
+                    </form>
+                </div>
+            </div>
+		</div>
+	</div>
+    {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript">
+    
+    listTable.recordCount = {$record_count|default:0};
+    listTable.pageCount = {$page_count|default:1};
+    
+    {foreach from=$filter item=item key=key}
+    listTable.filter.{$key} = '{$item}';
+    {/foreach}
+    
+    $(".ps-container").perfectScrollbar();
+    //导出商家佣金列表
+    function download_list()
+    {
+      var args = '';
+      for (var i in listTable.filter)
+      {
+        if (typeof(listTable.filter[i]) != "function" && typeof(listTable.filter[i]) != "undefined")
+        {
+          args += "&" + i + "=" + encodeURIComponent(listTable.filter[i]);
+        }
+      }
+      
+      location.href = "suppliers_commission.php?act=commission_download" + args;
+    }
+    </script>     
+</body>
+</html>
+{/if}

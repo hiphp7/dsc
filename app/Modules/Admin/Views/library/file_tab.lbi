@@ -1,0 +1,6 @@
+<div class="tabs_info">
+    <ul>
+        <li {if $menu_select.current eq 'oss_configure'}class="curr"{/if}><a href="oss_configure.php?act=list">{$lang.oss_configure}</a></li>
+        <li {if $menu_select.current eq 'obs_configure'}class="curr"{/if}><a href="obs_configure.php?act=list">{$lang.obs_configure}</a></li>
+    </ul>
+</div>

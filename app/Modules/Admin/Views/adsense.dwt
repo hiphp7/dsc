@@ -1,0 +1,85 @@
+{if $full_page}
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.06_stats} - {$ur_here}</div>
+        <div class="content">		
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>{$ur_here}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+            	<!--商品列表-->
+                <div class="common-head">
+                    <div class="refresh ml0">
+                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    </div>
+                </div>
+                <div class="common-content">
+                    <form method="POST" action="zc_topic.php" name="listForm" onsubmit="return confirm('{$lang.zc_topic_confirm}')">
+                	<div class="list-div" id="listDiv">
+						{/if}
+                    	<table cellpadding="0" cellspacing="0" border="0">
+                        	<thead>
+                            	<tr>
+                                	<th><div class="tDiv">{$lang.adsense_name}</div></th>
+                                    <th><div class="tDiv">{$lang.cleck_referer}</div></th>
+                                    <th><div class="tDiv">{$lang.click_count}</div></th>
+                                    <th><div class="tDiv">{$lang.confirm_order}</div></th>
+                                    <th><div class="tDiv">{$lang.gen_order_amount}</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								{foreach from=$ads_stats item=list}
+                            	<tr>
+                                    <td><div class="tDiv">{$list.ad_name}</div></td>
+                                    <td><div class="tDiv">{$list.referer}</div></td>
+                                    <td><div class="tDiv">{$list.clicks}</div></td>
+                                    <td><div class="tDiv">{$list.order_confirm}</div></td>
+                                    <td><div class="tDiv">{$list.order_num}</div></td>
+                                </tr>
+                                {/foreach}
+                                
+                                {foreach from=$goods_stats item=info}
+                            	<tr>
+                                    <td><div class="tDiv">{$info.ad_name}</div></td>
+                                    <td><div class="tDiv">{$info.referer}</div></td>
+                                    <td><div class="tDiv">{$info.clicks}</div></td>
+                                    <td><div class="tDiv">{$info.order_confirm}</div></td>
+                                    <td><div class="tDiv">{$info.order_num}</div></td>
+                                </tr>
+								{foreachelse}
+                                    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+						{if $full_page}
+                    </div>
+                    </form>
+                </div>
+                <!--商品列表end-->
+            </div>
+		</div>
+	</div>
+ 	{include file ='library/pagefooter.lbi'}
+	<script type="text/javascript" language="JavaScript">
+		listTable.recordCount = {$record_count|default:0};
+		listTable.pageCount = {$page_count|default:1};
+		
+		{foreach from=$filter item=item key=key}
+		listTable.filter.{$key} = '{$item}';
+		{/foreach}
+		
+		$(function(){
+			$('.nyroModal').nyroModal();
+		})
+	</script>
+</body>
+</html>
+{/if}

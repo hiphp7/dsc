@@ -1,0 +1,40 @@
+<div class="goods_type_body">
+<div class="step_content">
+{if $goods_type_list}
+<div class="ecsc-form-goods">
+	<div class="ecsc-form-title"><i class="dian"></i><h3>{$lang.tab_properties}</h3></div>
+	<div class="step_item">
+		<div class="step_item_left"><h5>{$lang.label_goods_attr}</h5></div>
+		<div class="step_item_right">
+			<div class="item_right_li">
+				<div class="value_select">
+					<div id="attr_select" class="imitate_select select_w320">
+						<div class="cite">{$lang.please_select}</div>
+                        <ul style="display: none;">
+                            <li><a href="javascript:getAttrList(0);" data-value="0" class="ftx-01">{$lang.please_select_goods_type}</a></li>
+                            {foreach from=$goods_type_list item=goods_type key=key}
+                            <li><a href="javascript:getAttrList(0);" data-value="{$goods_type.cat_id}" class="ftx-01">{$goods_type.cat_name}</a></li>
+                            {/foreach}
+                        </ul>
+						<input name="goods_type" type="hidden" value="{$new_goods_type}" id="select_attr_val">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="step_item pb0" id="tbody-goodsAttr"></div>
+	<div class="step_item_table" id="attribute_table"></div>
+</div>
+{else}
+<div class="notic_import_attr">{$lang.please_set_goods_attribute}</div>
+{/if}
+</div>
+<div class="step" id="goods_attr_gallery"></div>
+</div>
+<script type="text/javascript">
+	
+        getAttrList();
+//
+//	$(".goods_type_body").perfectScrollbar("destroy");
+//	$(".goods_type_body").perfectScrollbar();
+</script>

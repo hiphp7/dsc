@@ -1,0 +1,82 @@
+<?php
+
+$_LANG = array(
+    'pay_status' => 'Payment status',
+    'pay_success' => 'The payment has been successful. We will deliver the goods for you as soon as possible.',
+    'pay_fail' => 'This payment fails, please contact us in time.',
+    'pay_disabled' => 'The payment method you chose has been disabled.',
+    'pay_invalid' => 'You have chosen an invalid method of payment. The payment method does not exist or has been deactivated. Please get in touch with us immediately.',
+    'receipt_code_order' => 'Receipt code order',
+    'seller_automatic_settlement' => 'The payment code automatically settles the amount the merchant should settle',
+    'return_online' => 'Online original refund',
+    'order_return_prompt' => 'Order refunds, return orders',
+    'buy_integral' => 'Purchase credits',
+    'order_return_running_number' => 'Return and exchange - serial number',
+    'merchant_handle_recharge' => 'Merchant recharge, operator: merchant online payment',
+    'order_remark' => '[order] %s',
+    'order_number' => 'The order number',
+    'individual' => 'a',
+    'order_individual_count' => 'The order number',
+    'sale_money' => 'sales',
+    'money_unit' => 'yuan',
+    'not_audited' => 'Not audit',
+    'audited_yes_adopt' => 'approved',
+    'audited_not_adopt' => 'Audit failed',
+    'goods_salevolume' => 'sales',
+    'max_value' => 'The maximum',
+    'min_value' => 'The minimum value',
+    'average_value' => 'The average',
+    'order_amount' => 'The order amount',
+    'payorder_goods_number' => 'Number of orders',
+    'seller_area_distribution' => 'Store area distribution',
+    'order_confirm_receipt' => 'The receipt of this order has been confirmed',
+    'os' =>
+        array(
+            0 => 'unconfirmed',
+            1 => 'Have been confirmed',
+            2 => 'cancel',
+            3 => 'invalid',
+            4 => 'Return of the goods',
+            5 => 'Has been single',
+            6 => 'Part of single',
+            7 => 'Partially returned',
+            8 => 'Only a refund',
+        ),
+    'ps' =>
+        array(
+            0 => 'Not paying',
+            1 => 'In the payment',
+            2 => 'Payment has been',
+            3 => 'Partial payment (deposit)',
+            4 => 'Have a refund',
+            5 => 'Part of the refund',
+            6 => 'Partial Payment',
+        ),
+    'ss' =>
+        array(
+            0 => 'Not to deliver goods',
+            1 => 'Has been shipped',
+            2 => 'Receiving confirmation',
+            3 => 'Have the goods',
+            4 => 'Shipped (some goods)',
+            5 => 'Delivery in progress (handling sub-orders)',
+            6 => 'Shipped (some goods)',
+        ),
+    'location_tracking_progress' => 'Location and tracking progress',
+    'time' => 'time',
+    'tracking_tips' =>
+        array(
+            0 => 'Error',
+            1 => 'Sorry, no record of inquiry',
+        ),
+    'order_action_user' => 'scheduled task',
+    'order_pay_timeout' => 'pay overtime',
+    'order_failure' => 'order submission failed, data lost, please re-order',
+    'order_status_not_support' => 'Order status not support this handle',
+    'track_shipping_info_one' => 'display logistics information',
+    'track_shipping_info_two' => 'hide logistics information',
+    'track_shipping_info_three' => 'see more logistics',
+);
+
+
+return $_LANG;

@@ -1,0 +1,80 @@
+<?php
+
+$_LANG = array(
+    'bucket' => 'The name of the Bucket',
+    'keyid' => 'AccessKeyID',
+    'keysecret' => 'AccessKeySecret',
+    'endpoint' => 'EndPoint',
+    'is_cname' => 'Domain name binding',
+    'regional' => 'The Bucket region',
+    'jinrong-regional' => 'Regional financial',
+    'outside_site' => 'The domain name',
+    'inside_site' => 'Network domain name',
+    '01_oss_list' => 'Return Bucket list',
+    '02_oss_add' => 'Add the Bucket',
+    'on' => 'open',
+    'off' => 'Shut down',
+    'add_success' => 'Bucket added successfully',
+    'add_failure' => 'The Bucket is',
+    'button_remove' => 'Remove the Bucket',
+    'edit_success' => 'Bucket edited successfully',
+    'remove_success' => 'Bucket deleted successfully',
+    'file_management' => 'File management',
+    'no_select_user' => 'You don\'t have any buckets to remove now!',
+    'remove_confirm' => 'Are you sure you want to delete the bucket?',
+    'is_use' => 'Whether to use',
+    'shanghai' => 'China (Shanghai: east China 2)',
+    'hangzhou' => 'China (hangzhou: east China 1)',
+    'shenzhen' => 'China (shenzhen: south China 1)',
+    'beijing' => 'China (Beijing: north China 2)',
+    'qingdao' => 'China (Qingdao: north China 1)',
+    'zhangjiakou' => 'China (zhangjiakou: north China 3)',
+    'huhehaote' => 'China (Hohhot: north China 5)',
+    'hongkong' => 'China (Hong Kong)',
+    'us_west_1' => 'West 1 (silicon valley)',
+    'us_east_1' => 'Eastern United States 1 (Virginia)',
+    'ap_southeast_1' => 'Southeast Asia 1 (Singapore)',
+    'ap_northeast_1' => 'Northeast Asia 1 (Japan)',
+    'shanghai-finance-1-pub' => 'Shanghai financial cloud public network',
+    'hzfinance' => 'Hangzhou financial cloud public network',
+    'szfinance' => 'Shenzhen financial cloud public network',
+    'regional_name_1' => 'China (Shanghai)',
+    'regional_name_2' => 'China (hangzhou)',
+    'regional_name_3' => 'China (shenzhen)',
+    'regional_name_4' => 'China (Beijing)',
+    'regional_name_5' => 'Qingdao, China',
+    'regional_name_6' => 'China (Hong Kong)',
+    'regional_name_7' => 'USA (California)',
+    'regional_name_8' => 'Asia (Singapore)',
+    'http' => 'The domain name',
+    'delimg' => 'Whether to delete images',
+    'delete_Bucket' => 'Are you sure to delete the Bucket?',
+    'bucket_oss_notic' => 'And ali cloud OSS open object name consistent',
+    'bucket_keyid_notic' => 'Fill in ali cloud Access Key management (ID)',
+    'bucket_secret_notic' => 'Fill in ali cloud Access Key management (Secret)',
+    'bucket_url_notic' => 'Select "close" by default. It is recommended to start binding domain name. The format of domain name: http://xx.xxxx.com/',
+    'js_languages' =>
+        array(
+            'oss_bucket_null' => 'A Bucket cannot be empty',
+            'oss_keyid_null' => 'KeyId cannot be empty',
+            'oss_keysecret_null' => 'KeySecret cannot be empty',
+        ),
+    'tutorials_bonus_list_one' => 'Ali cloud OSS configuration instructions',
+    'operation_prompt_content' =>
+        array(
+            'info' =>
+                array(
+                    0 => 'Fill in the OSS information created in aliyun.',
+                    1 => 'You need to enable this function in the system Settings -> commodity Settings -> extension information.',
+                ),
+            'list' =>
+                array(
+                    0 => 'This page shows a list of OSS configurations.',
+                    1 => 'You can edit and delete directly from the list page.',
+                    2 => 'OSS can be used for the storage of images, videos, logs and other massive files.',
+                ),
+        ),
+);
+
+
+return $_LANG;

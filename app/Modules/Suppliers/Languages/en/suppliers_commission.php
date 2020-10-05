@@ -1,0 +1,62 @@
+<?php
+
+$_LANG = array (
+  'suppliers_name' => 'Supplier name',
+  'company_name' => 'The name of the company',
+  'company_address' => 'The company address',
+  'order_valid_total' => 'Effective amount',
+  'order_refund_total' => 'The refund amount',
+  'is_settlement_amount' => 'Has been settled',
+  'no_settlement_amount' => 'No settlement',
+  'suppliers_percent' => 'Settlement ratio',
+  'suppliers_order_list' => 'Supplier order settlement list',
+  'operation_remind' => 'Operating hints',
+  'remind' => 
+  array (
+    0 => 'The higher the commission percentage, the higher the sub-commission the supplier gets.',
+    1 => 'Total amount = effective commission',
+    2 => 'Effective commission * commission percentage = sub-commission amount',
+    3 => 'Order settlement is only for paid, completed or partially refunded orders',
+  ),
+  'operation_log' => 'The operation log',
+  'order_settlement_window' => 'Order settlement export popup',
+  'order_sn' => 'The order number',
+  'add_time' => 'Add the time',
+  'consignee' => 'The consignee',
+  'order_amount' => 'The total amount',
+  'effective_amount_into' => 'Effective settlement',
+  'brokerage_amount' => 'Amount should be"',
+  'all_status' => 'The order status',
+  'settlement_state' => 'Settlement status',
+  'percent_value' => 'Settlement percentage',
+  'is_brokerage_amount' => 'Has"',
+  'no_brokerage_amount' => 'outstanding',
+  'is_settlement' => 'Has been settled',
+  'no_settlement' => 'No settlement',
+  'all_brokerage_amount' => 'Total amount due',
+  'not_settlement' => 'You have settled the account and the money has been transferred to the supplier\'s account. Secondary operation is not allowed',
+  '01_admin_settlement' => '[%s] platform operation supplier order [%s] shall be settled',
+  'all_order' => 'All orders',
+  'export_merchant_commission' => 'Export merchant settlement forms',
+  'down' => 
+  array (
+    'order_sn' => 'The order no.',
+    'short_order_time' => 'Place the order of time',
+    'consignee_address' => 'The consignee',
+    'total_fee' => 'The total amount',
+    'shipping_fee' => 'The freight',
+    'discount' => 'discount',
+    'coupons' => 'coupons',
+    'integral_money' => 'integral',
+    'bonus' => 'A red envelope',
+    'return_amount_price' => 'The refund amount',
+    'brokerage_amount_price' => 'Effective sharing amount',
+    'effective_amount_price' => 'The order status',
+    'settlement_status' => 'Amount should be"',
+    'ordersTatus' => 'Settlement status',
+  ),
+  'export_all_suppliers' => 'Derived form',
+);
+
+
+return $_LANG;

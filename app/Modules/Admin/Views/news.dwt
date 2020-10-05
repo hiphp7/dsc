@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>{$lang.title}</title>
+<link rel="shortcut icon" href="__ROOT__favicon.ico" />
+<link rel="icon" href="__ROOT__animated_favicon.gif" type="image/gif" />
+
+<link rel="stylesheet" type="text/css" href="__TPL__/css/main.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/layoutit.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/layer.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/dsc_visual.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/color.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__TPL__/css/purebox.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/spectrum-master/spectrum.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/perfect-scrollbar/perfect-scrollbar.min.css" />
+
+<script type="text/javascript" src="__ROOT__js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.json.js"></script>
+<script type="text/javascript" src="__ROOT__js/transport_jquery.js"></script>
+<script type="text/javascript" src="__ROOT__js/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.nyroModal.js"></script>
+<script type="text/javascript" src="__ROOT__js/plupload.full.min.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.form.js"></script>
+<script type="text/javascript" src="__ROOT__js/lib_ecmobanFunc.js"></script>
+<script type="text/javascript" src="__ROOT__js/visualization.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery.cookie.js"></script>
+<script type="text/javascript" src="__ROOT__js/spectrum-master/spectrum.js"></script>
+<script type="text/javascript" src="__ROOT__js/jquery-ui/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="__TPL__/js/common.js"></script>
+<script type="text/javascript" src="__TPL__/js/layer.js"></script>
+
+<script type="text/javascript">
+/*这里把JS用到的所有语言都赋值到这里*/
+{foreach from=$lang.js_languages key=key item=item}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+</head>
+<body class="visible">
+	<div class="design-nav-wrap fixed">
+        <div class="btns">
+            <a href="javascript:void(0);" class="btn btn_blue" ectype="downloadModal">{$lang.confirmation_release}</a>
+            <a href="javascript:void(0);" class="btn" ectype="back" {if $is_temp eq 0}style="display:none"{/if}>{$lang.restore}</a>
+            <a href="javascript:void(0);" class="btn" ectype="preview">{$lang.preview}</a>
+            <a href="javascript:void(0);" class="btn" ectype="restore">{$lang.restore_default}</a>
+        </div>
+    </div>
+	<div class="article-index" ectype="visualShell">
+        {if $pc_page}
+        {$pc_page}
+        {else}
+        <div class="demo ui-sortable">
+            <!-- 图片 -->
+            <div class="visual-item lyrow ui-draggable" data-purebox="CMS" data-mode="CMS_ADV">
+            	<div class="drag" data-html="not">
+                    <div class="setup_box">
+                        <div class="barbg"></div>
+                        <a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
+                        <a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
+                        <a href="javascript:void(0);" class="move-edit" ectype='model_edit'><i class="iconfont icon-edit1"></i>{$lang.edit}</a>
+                        <a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>{$lang.drop}</a>
+                    </div>
+                </div>
+                <div class="view" data-type="range">
+                    <div class="banner-article">
+                    	<div class="banner-main">
+                        	<div class="bd">
+                            	<ul>
+                                	<li><a href="#" target="_blank"><img src="__TPL__/images/article-index/bb.jpg" alt=""><p>{$lang.ppt_title}</p></a></li>
+                                </ul>
+                            </div>
+                            <div class="hd"><ul></ul></div>
+                        </div>
+                        <div class="banner-second">
+                        	<div class="s mb10"><a href="#" target="_blank"><img src="__TPL__/images/article-index/bs.jpg" alt=""><p>{$lang.ppt_title}</p></a></div>
+                        	<div class="s"><a href="#" target="_blank"><img src="__TPL__/images/article-index/bs_1.jpg" alt=""><p>{$lang.ppt_title}</p></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 两列 -->
+            <div class="visual-item lyrow ui-draggable" data-purebox="CMS_ARTI" data-mode="CMS_TWO_LIE">
+            	<div class="drag" data-html="not">
+                    <div class="setup_box">
+                        <div class="barbg"></div>
+                        <a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
+                        <a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
+                        <a href="javascript:void(0);" class="move-edit" ectype='model_edit'><i class="iconfont icon-edit1"></i>{$lang.edit}</a>
+                        <a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>{$lang.drop}</a>
+                    </div>
+                </div>
+                <div class="view" data-type="range">
+                    <div class="article-col-2 clearfix">
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-icon02"></i>{$lang.company_dynamics}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                            <div class="ab-bd">
+                                <div class="focus">
+                                    <a href="http://about.ecmoban.com/article-7760.html" target="_blank" class="img"><img src="__TPL__/images/article-index/col2.jpg" alt=""></a>
+                                    <div class="info">
+                                        <div class="info-name"><a href="http://about.ecmoban.com/article-7760.html" target="_blank">{$lang.dynamics.0.title}</a></div>
+                                        <div class="info-intro">{$lang.dynamics.0.content}</div>
+                                        <div class="info-time">{$lang.dynamics.0.time}</div>
+                                    </div>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="http://about.ecmoban.com/article-7737.html" target="_blank">{$lang.dynamics.1.title}</a><span class="time">{$lang.dynamics.1.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7631.html" target="_blank">{$lang.dynamics.2.title}</a><span class="time">{$lang.dynamics.2.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7548.html" target="_blank">{$lang.dynamics.3.title}</a><span class="time">{$lang.dynamics.3.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7464.html" target="_blank">{$lang.dynamics.4.title}</a><span class="time">{$lang.dynamics.4.time}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-icon02"></i>{$lang.industry_information}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                            <div class="ab-bd">
+                                <div class="focus">
+                                    <a href="#" target="_blank" class="img"><img src="__TPL__/images/article-index/col1.jpg" alt=""></a>
+                                    <div class="info">
+                                        <div class="info-name"><a href="#" target="_blank">{$lang.information.0.title}</a></div>
+                                        <div class="info-intro">{$lang.information.0.content}</div>
+                                        <div class="info-time">{$lang.information.0.time}</div>
+                                    </div>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="http://about.ecmoban.com/article-7526.html" target="_blank">{$lang.information.1.title}</a><span class="time">{$lang.information.1.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7303.html" target="_blank">{$lang.information.2.title}</a><span class="time">{$lang.information.2.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7183.html" target="_blank">{$lang.information.3.title}</a><span class="time">{$lang.information.3.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-6950.html" target="_blank">{$lang.information.4.title}</a><span class="time">{$lang.information.4.time}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 三列 -->
+            <div class="visual-item lyrow ui-draggable" data-purebox="CMS_THREE_LIE" data-mode="CMS_THREE_LIE">
+            	<div class="drag" data-html="not">
+                    <div class="setup_box">
+                        <div class="barbg"></div>
+                        <a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
+                        <a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
+                        <a href="javascript:void(0);" class="move-edit" ectype='model_edit'><i class="iconfont icon-edit1"></i>{$lang.edit}</a>
+                        <a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>{$lang.drop}</a>
+                    </div>
+                </div>
+                <div class="view" data-type="range">
+                    <div class="article-col-3 clearfix">
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-article"></i>{$lang.media_coverage}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                            <div class="ab-bd">
+                                <ul class="list">
+                                    <li><a href="http://about.ecmoban.com/article-5912.html" target="_blank">{$lang.media.0.title}</a><span class="time">{$lang.media.0.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-2662.html" target="_blank">{$lang.media.1.title}</a><span class="time">{$lang.media.1.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-2081.html" target="_blank">{$lang.media.2.title}</a><span class="time">{$lang.media.2.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-2078.html" target="_blank">{$lang.media.3.title}</a><span class="time">{$lang.media.3.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article_cat-51.html" target="_blank">{$lang.media.4.title}</a><span class="time">{$lang.media.4.time}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-article"></i>{$lang.development_history}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                            <div class="ab-bd">
+                                <ul class="list">
+                                    <li><a href="http://about.ecmoban.com/history.php" target="_blank">{$lang.history.0.title}</a><span class="time">{$lang.history.0.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/history.php" target="_blank">{$lang.history.1.title}</a><span class="time">{$lang.history.1.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/history.php" target="_blank">{$lang.history.2.title}</a><span class="time">{$lang.history.2.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/history.php" target="_blank">{$lang.history.3.title}</a><span class="time">{$lang.history.3.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/history.php" target="_blank">{$lang.history.4.title}</a><span class="time">{$lang.history.4.time}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-article"></i>{$lang.activity_list}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                            <div class="ab-bd">
+                                <ul class="list">
+                                    <li><a href="http://about.ecmoban.com/article-7772.html" target="_blank">{$lang.activity.0.title}</a><span class="time">{$lang.activity.0.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article_cat-6.html" target="_blank">{$lang.activity.1.title}</a><span class="time">{$lang.activity.1.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7069.html" target="_blank">{$lang.activity.2.title}</a><span class="time">{$lang.activity.2.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-6925.html" target="_blank">{$lang.activity.3.title}</a><span class="time">{$lang.activity.3.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-6408.html" target="_blank">{$lang.activity.4.title}</a><span class="time">{$lang.activity.4.time}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 站内快讯 -->
+            <div class="visual-item lyrow ui-draggable" data-purebox="CMS_FAST_LIE" data-mode="CMS_FAST_LIE">
+            	<div class="drag" data-html="not">
+                    <div class="setup_box">
+                        <div class="barbg"></div>
+                        <a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
+                        <a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
+                        <a href="javascript:void(0);" class="move-edit" ectype='model_edit'><i class="iconfont icon-edit1"></i>{$lang.edit}</a>
+                        <a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>{$lang.drop}</a>
+                    </div>
+                </div>
+                <div class="view" data-type="range">
+                    <div class="article-box">
+                        <div class="ab-hd"><h2><i class="iconfont icon-article"></i>{$lang.activity_list}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                        <div class="ab-bd">
+                            <ul class="quick clearfix">
+                                <li>
+                                    <div class="q-img"><a href="http://about.ecmoban.com/staffs.php" target="_blank"><img src="__TPL__/images/article-index/col3.jpg" alt=""></a></div>
+                                    <div class="q-name"><a href="http://about.ecmoban.com/staffs.php" target="_blank">{$lang.station.0.title}</a></div>
+                                    <div class="q-info">{$lang.station.0.content}</div>
+                                </li>
+                                <li>
+                                    <div class="q-img"><a href="http://about.ecmoban.com/staffs.php" target="_blank"><img src="__TPL__/images/article-index/col4.jpg" alt=""></a></div>
+                                    <div class="q-name"><a href="http://about.ecmoban.com/staffs.php" target="_blank">{$lang.station.1.title}</a></div>
+                                    <div class="q-info">{$lang.station.1.content}</div>
+                                </li>
+                                <li>
+                                    <div class="q-img"><a href="http://about.ecmoban.com/article-6390.html" target="_blank"><img src="__TPL__/images/article-index/col5.jpg" alt=""></a></div>
+                                    <div class="q-name"><a href="http://about.ecmoban.com/article-6390.html" target="_blank">{$lang.station.2.title}</a></div>
+                                    <div class="q-info">{$lang.station.2.content}</div>
+                                </li>
+                                <li>
+                                    <div class="q-img"><a href="http://about.ecmoban.com/article-7772.html" target="_blank"><img src="__TPL__/images/article-index/col6.jpg" alt=""></a></div>
+                                    <div class="q-name"><a href="http://about.ecmoban.com/article-7772.html" target="_blank">{$lang.station.3.title}</a></div>
+                                    <div class="q-info">{$lang.station.3.content}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            	</div>
+            </div>
+            <!-- 近期热门 精品推荐 -->
+            <div class="visual-item lyrow ui-draggable" data-purebox="CMS_HEAT_LIE" data-mode="CMS_HEAT_LIE">
+            	<div class="drag" data-html="not">
+                    <div class="setup_box">
+                        <div class="barbg"></div>
+                        <a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
+                        <a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
+                        <a href="javascript:void(0);" class="move-edit" ectype='model_edit'><i class="iconfont icon-edit1"></i>{$lang.edit}</a>
+                        <a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>{$lang.drop}</a>
+                    </div>
+                </div>
+                <div class="view" data-type="range">
+                    <div class="article-col-1-2 clearfix">
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-article"></i>{$lang.recent_hot_topics}</h2><a href="#" class="more" target="_blank">more&gt;</a></div>
+                            <div class="ab-bd">
+                                <ul class="list">
+                                    <li><a href="#" target="_blank">{$lang.hot_topics.0.title}</a><span class="time">{$lang.hot_topics.0.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7772.html" target="_blank">{$lang.hot_topics.1.title}</a><span class="time">{$lang.hot_topics.1.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article_cat-9.html" target="_blank">{$lang.hot_topics.2.title}</a><span class="time">{$lang.hot_topics.2.time}</span></li>
+                                    <li><a href="http://about.ecmoban.com/article-7685.html" target="_blank">{$lang.hot_topics.3.title}</a><span class="time">{$lang.hot_topics.3.time}</span></li>
+                                    <li><a href="#" target="_blank">{$lang.hot_topics.4.title}</a><span class="time">{$lang.hot_topics.4.time}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="article-box">
+                            <div class="ab-hd"><h2><i class="iconfont icon-article"></i>{$lang.quality_recommendation}</h2></div>
+                            <div class="ab-bd">
+                                <ul class="g-list clearfix">
+                                    <li>
+                                        <a href="#" target="_blank">
+                                            <img src="__TPL__/images/article-index/test_002.jpg" alt="">
+                                            <p>{$lang.quality.0.title}</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank">
+                                            <img src="__TPL__/images/article-index/test_002.jpg" alt="">
+                                            <p>{$lang.quality.0.title}</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank">
+                                            <img src="__TPL__/images/article-index/test_002.jpg" alt="">
+                                            <p>{$lang.quality.0.title}</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank">
+                                            <img src="__TPL__/images/article-index/test_002.jpg" alt="">
+                                            <p>{$lang.quality.0.title}</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            	</div>
+            </div>
+        </div>
+        {/if}
+    </div>
+    <input type="hidden" name="suffix" value="">
+    <div id="preview-layout"></div>
+    <script type="text/javascript" src="__TPL__/js/jquery.purebox.js"></script>
+    <script type="text/javascript" src="__ROOT__js/jquery.picTip.js"></script>
+
+    <script type="text/javascript">
+    $.divselect("#cat_id","#cat_id_val",function(obj){
+        var val = obj.attr("data-value");
+        var level = obj.parents(".imitate_select").attr("data-level");
+        var cat_name = obj.html();
+        $("input[name='articat_id']").val(val);
+        $("input[name='cat_name']").val(cat_name);
+        get_childCat(val,level,obj);
+    });
+
+	//获取下级分类
+    function get_childCat(val,level,obj){
+        Ajax.call('get_ajax_content.php?is_ajax=1&act=get_childcat', "cat_id="+val+"&level="+level, function(data){
+			obj.parents('.fl').find('.imitate_select').each(function(){
+				var old_level = $(this).attr('data-level');
+				if(old_level > data.level || old_level == data.level){
+					$(this).remove();
+				}
+			});
+			obj.parents('.fl').append(data.content);
+        } , 'POST', 'JSON');
+    }
+
+	//添加分类
+    $(document).on("click","*[ectype='add_cat']",function(){
+        var html = '',
+            cat_name = $("input[name='cat_name']").val(),
+            cat_id = $("input[name='articat_id']").val();
+
+		//判断是否选择文章分类
+		if(cat_id > 0 && cat_name){
+			var Identi = 0;
+			var i = 0;
+			$("#addpictable").find("tbody").find('tr').each(function(){
+				var check_cat = $(this).find('input[name="cat_idsign[]"]').val();
+				if(check_cat == cat_id){
+					Identi = 1;
+				};
+				i ++;
+			})
+			if(Identi == 0){
+				html = "<tr><td>" + cat_name + "<input type='hidden' name='cat_idsign[]' value='"+cat_id+"'></td><td><div ectype='atr_id_list'></div></td><td class='tc'><input type='text' value='50' name='sort[" + cat_id + "]' class='form-control small'></td><td class='tc'><a href='javascript:void(0);' class='btn30 sc-btn blue_btn mr10' ectype='getcat_atr' data-id='" + cat_id + "'>{$lang.select_article}</a><a href='javascript:;' class='btn30 sc-btn blue_btn' ectype='cat_del'>{$lang.js_languages.jl_delete}</a></td></tr>";
+
+				if($("#addpictable").find(".notic").length>0){
+					$("#addpictable").find(".notic").remove();
+				}
+
+				$("#addpictable").find("tbody").prepend(html);
+			}else{
+				alert(not_repeat_select_cat);
+			}
+		}else{
+			alert(select_cat);
+		}
+    });
+
+    //删除文章分类
+    $(document).on("click","*[ectype='cat_del']",function(){
+        var tbody = $(this).parents("tbody"),
+			tr_length = tbody.find("tr").length;
+
+		$(this).parents('tr').remove();
+
+		if(tr_length == 1){
+			tbody.html("<tr class='notic'><td colspan='4'>"+td_article_cat_notic+"</td></tr>");
+		}
+    });
+
+	//选择分类下的文章
+    $(document).on("click","*[ectype='getcat_atr']",function(){
+        var _this = $(this);
+        var cat_id = _this.attr('data-id');
+        var old_article = _this.parents('tr').find('[ectype="atr_id_list"]').find("[ectype='article_id']").val();
+        var def_article = _this.parents('tr').find('[ectype="atr_id_list"]').find("[ectype='def_article_id']").val();
+        if(typeof old_article == 'undefined'){
+            old_article = '';
+        }
+        Ajax.call('get_ajax_content.php?is_ajax=1&act=getcat_atr', "cat_id=" + cat_id + "&old_article=" + old_article + "&def_article=" + def_article, function(data){
+			var content = data.content;
+			pb({
+				id:"getcat_atr",
+				title:select_article,
+				width:950,
+				content:content,
+				ok_title:"{$lang.button_submit_alt}",
+				cl_title:"{$lang.cancel}",
+				drag:true,
+				foot:true,
+				onOk:function(){
+					var article_ids = $("#getcat_atr").find("input[name='select_article_ids']").val();
+                    var def_article =  $("#getcat_atr").find("input[name='def_article']").val();
+					_this.parents('tr').find('[ectype="atr_id_list"]').html(article_ids + "<input ectype='article_id' name='article_id[" + cat_id + "]' value='" + article_ids + "' type='hidden'><input ectype='def_article_id' name='def_article_id[" + cat_id + "]' value='" + def_article + "' type='hidden'>");
+				}
+			});
+        } , 'POST', 'JSON');
+    })
+    //选择文章
+	function addatr(article_id , obj){
+		var obj = $(obj);
+		var arr = '';
+		var article_ids = $("input[name='select_article_ids']").val();
+		var good_number = "5";
+		var verinumber = true;
+		 var  def_article = $("input[name='def_article']").val();
+		if(obj.hasClass("on")){
+			obj.removeClass("on");
+			obj.html('<i class="iconfont icon-dsc-plus"></i>'+js_select);
+			arr = article_ids.split(',');
+			for(var i =0;i<arr.length;i++){
+				if(arr[i] == article_id){
+					arr.splice(i,1);
+				}
+			}
+			//取消的文章是主推文章的话 重置主推文章
+			if(article_id == def_article){
+				$("input[name='def_article']").val('');
+			   obj.parents('tr').find('img').attr("src","images/no.gif");
+			}
+			obj.parents('tr').find('img').hide();
+		}else{
+			if(good_number > 0){
+				arr = article_ids.split(',');
+				if(arr.length >= good_number){
+					alert(visual_article_one + good_number + visual_article_two);
+					verinumber = false;
+				}
+			}
+			if(verinumber){
+				$(obj).addClass('on');
+				$(obj).html('<i class="iconfont icon-gou"></i>'+js_selected);
+				if(article_ids){
+					arr = article_ids + ','+article_id;
+				}else{
+					arr = article_id;
+				}
+                obj.parents('tr').find('img').show();
+			}
+		}
+		if(verinumber){
+			$("input[name='select_article_ids']").val(arr);
+		}
+	}
+
+	//添加分类
+    $(document).on("click","*[ectype='get_cat_article']",function(type){
+        get_cat_article(0);
+    });
+
+    function get_cat_article(type,click_type){
+        var cat_id = $("#on_cat_id").val(),
+            article_ids = $("input[name='select_article_ids']").val(),
+            def_article = $("input[name='def_article']").val(),
+            inid = 'atr_list';
+
+		if(type == 1 && click_type == 1){
+			cat_id = 0;
+		}
+
+	    $.jqueryAjax("get_ajax_content.php", 'act=getcat_atr&cat_id=' + cat_id + "&page=1&old_article=" + article_ids + "&type=" + type + "&def_article=" + def_article, function(data){
+			$("[ectype='"+inid+"']").html(data.content);
+			$("[ectype='"+inid+"'],[ectype='"+inid+"'] .ps_table").perfectScrollbar("destroy");
+			$("[ectype='"+inid+"'],[ectype='"+inid+"'] .ps_table").perfectScrollbar();
+		});
+    }
+
+    function checkd_article(obj){
+		var obj = $(obj);
+		var is_selected =$("input[name='arti_selected']").is(':checked');
+		var type = 0;
+		if(is_selected == true){
+			type = 1;
+		}
+		get_cat_article(type);
+	}
+
+	//设置主推文章
+	$(document).on("click","*[ectype='def_article']",function(){
+		var _this = $(this);
+		var article_id = _this.attr('data-id');
+		var def_article = $('input[name="def_article"]').val();
+		if(def_article != article_id){
+			$(this).parents('tbody').find('tr img').each(function(){
+				var id = $(this).attr('data-id');
+				if(id != article_id){
+					$(this).attr('src','__TPL__/images/no.gif');
+				}
+			});
+			_this.attr('src','__TPL__/images/yes.gif');
+			$('input[name="def_article"]').val(article_id);
+		}
+	});
+
+	//恢复默认设置
+	$(document).on("click","*[ectype='restore']",function(){
+        if(confirm(visual_article_confirm_one)){
+            $.jqueryAjax("visualnews.php", 'act=restore', function(data){
+				alert(visual_article_confirm_two);
+				location.reload();
+			});
+        }
+    });
+</script>
+</body>
+</html>

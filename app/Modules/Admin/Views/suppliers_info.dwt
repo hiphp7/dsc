@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.jurisdiction} - {$ur_here}</div>
+            <div class="content">
+            <div class="explanation" id="explanation">
+                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                    <!--<li>供货商隶属于管理员下级的角色，请注意勾选管理员。</li>-->
+                    <li>{$lang.operation_prompt_content_common}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="mian-info">
+                    <form method="post" action="suppliers.php" name="theForm" enctype="multipart/form-data"  id="agency_form">
+                        <div class="switch_info user_basic" style="display:block;">                     
+                            <div class="item">
+                                <div class="label">{$lang.require_field}&nbsp;{$lang.label_suppliers_name}</div>
+                                <div class="label_value">
+                                    <input type="text" name='suppliers_name' value='{$suppliers.suppliers_name}' class="text text_readonly" autocomplete="off" id="suppliers_name" readonly />
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.label_suppliers_desc}</div>
+                                <div class="label_value">
+                                    <textarea class="textarea text_readonly" name="suppliers_desc" id="role_describe" readonly>{$suppliers.suppliers_desc}</textarea>
+                                </div>
+                            </div>                          
+                            <div class="item">
+                                <div class="label">{$lang.apply_name}</div>
+                                <div class="label_value">
+                                    <input type="text" name='real_name' value='{$suppliers.real_name}' class="text text_readonly" autocomplete="off" id="real_name" readonly/>
+                                </div>
+                            </div>     
+                            <div class="item">
+                                <div class="label">{$lang.apply_iphone}</div>
+                                <div class="label_value">
+                                    <input type="text" name='mobile_phone' value='{$suppliers.mobile_phone}' class="text text_readonly" autocomplete="off" id="mobile_phone" readonly/>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="label">{$lang.kf_qq}</div>
+                                <div class="label_value">
+                                    <textarea class="textarea text_readonly" name="kf_qq" id="role_describe" readonly>{$suppliers.kf_qq}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="label">{$lang.apply_emile}</div>
+                                <div class="label_value">
+                                    <input type="text" name='email' value='{$suppliers.email}' class="text text_readonly" autocomplete="off" id="email" readonly/>
+                                </div>
+                            </div>                            
+                            <div class="item">
+                                <div class="label">{$lang.apply_id}</div>
+                                <div class="label_value">
+                                    <input type="text" name='self_num' value='{$suppliers.self_num}' class="text text_readonly" autocomplete="off" id="self_num" readonly/>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.corporate_name}</div>
+                                <div class="label_value">
+                                    <input type="text" name='company_name' value='{$suppliers.company_name}' class="text text_readonly" autocomplete="off" id="company_name" readonly/>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.corporate_address}</div>
+                                <div class="label_value">
+                                    <input type="text" name='company_address' value='{$suppliers.company_address}' class="text text_readonly" autocomplete="off" id="company_address" readonly/>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.apply_address}</div>
+                                <div class="label_value">
+                                    <div id="dlcountry" class="ui-dropdown smartdropdown alien">
+                                        <input type="hidden" value="1" name="country" id="selcountry">
+                                        <div class="txt">{$lang.country}</div>
+                                        <i class="down u-dropdown-icon"></i>
+                                        <div class="options clearfix" style="max-height:300px;">
+                                            <span class="liv" data-text="{$lang.china}" data-type="1"  data-value="1">{$lang.china}</span>
+                                        </div>
+                                    </div>
+                                    <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
+                                        <input type="hidden" value="{$region_level.1}" name="province" id="selProvinces">
+                                        <div class="txt">{$lang.province_alt}</div>
+                                        <i class="down u-dropdown-icon"></i>
+                                        <div class="options clearfix" style="max-height:300px;">
+                                            {foreach from=$province_list item=list}
+                                            <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                            {/foreach}
+                                        </div>
+                                    </div>
+                                    <div id="dlCity" class="ui-dropdown smartdropdown alien">
+                                        <input type="hidden" value="{$region_level.2}" name="city" id="selCities">
+                                        <div class="txt">{$lang.city}</div>
+                                        <i class="down u-dropdown-icon"></i>
+                                        <div class="options clearfix" style="max-height:300px;">
+                                            {foreach from=$city_list item=list}
+                                            <span class="liv" data-text="{$list.region_name}" data-type="3"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                            {/foreach}
+                                        </div>
+                                    </div>
+                                    <div id="dlRegion" class="ui-dropdown smartdropdown alien" >
+                                        <input type="hidden" value="{$region_level.3}" name="district" id="selDistricts">
+                                        <div class="txt">{$lang.area_alt}</div>
+                                        <i class="down u-dropdown-icon"></i>
+                                        <div class="options clearfix" style="max-height:300px;">
+                                            {foreach from=$district_list item=list}
+                                            <span class="liv" data-text="{$list.region_name}" data-type="4"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                            {/foreach}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="item">
+                                <div class="label">{$lang.apply_id_positive}</div>
+                                <div class="label_value">
+                                    <div class="type-file-box">
+                                        {if $suppliers.front_of_id_card neq ""}
+                                        <span class="show">
+                                            <a href="{$suppliers.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$suppliers.front_of_id_card}>')" onmouseout="toolTip()"></i></a>
+                                        </span>
+                                        {else}
+                                        无
+                                        {/if}
+                                    </div>                                
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.apply_id_side}</div>
+                                <div class="label_value">
+                                    <div class="type-file-box">
+                                        {if $suppliers.reverse_of_id_card neq ""}
+                                        <span class="show">
+                                            <a href="{$suppliers.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$suppliers.reverse_of_id_card}>')" onmouseout="toolTip()"></i></a>
+                                        </span>
+                                        {else}
+                                        无
+                                        {/if}
+                                    </div>                                  
+                                </div>
+                            </div>    
+                            <div class="item">
+                                <div class="label">{$lang.supplier_logo}</div>
+                                <div class="label_value">
+                                    <div class="type-file-box">
+                                        {if $suppliers.suppliers_logo neq ""}
+                                        <span class="show">
+                                            <a href="{$suppliers.suppliers_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$suppliers.suppliers_logo}>')" onmouseout="toolTip()"></i></a>
+                                        </span>
+                                        {else}
+                                        {$lang.wu}
+                                        {/if}
+                                    </div>                                  
+                                </div>
+                            </div>                             
+                            <div class="item">
+                                <div class="label">{$lang.require_field}&nbsp;{$lang.settlement_ratio}</div>
+                                <div class="label_value">
+                                    <input type="text" name='suppliers_percent' value='{$suppliers.suppliers_percent|default:100}' class="text w120" autocomplete="off" id="suppliers_percent"/>
+                                    <div class="form_prompt"></div>
+                                    <div class="notic">{$lang.settlement_ratio_remind}</div>
+                                </div>
+                            </div>
+                            {if $form_action eq 'update' && $suppliers.user_id neq 0}
+                            <div class="item">
+                                <div class="label">{$lang.adopt_status}：</div>
+                                <div class="label_value">
+                                    <div class="checkbox_items" ectype="general_audit_status">
+                                        <div class="checkbox_item"> 
+                                            <input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $suppliers.review_status eq 1}checked="checked"{/if} />
+                                            <label for="review_status_1" class="ui-radio-label">{$lang.not_audited}</label>
+                                        </div>
+                                        <div class="checkbox_item"> 
+                                            <input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $suppliers.review_status eq 2}checked="checked"{/if} />
+                                            <label for="review_status_2" class="ui-radio-label">{$lang.audited_not_adopt}</label>
+                                        </div>
+                                        <div class="checkbox_item"> 
+                                            <input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $suppliers.review_status eq 3}checked="checked"{/if} />
+                                            <label for="review_status_3" class="ui-radio-label">{$lang.audited_yes_adopt}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>			
+                            <div class="item {if $suppliers.review_status neq 2}hide{/if}" id="review_content">
+                                <div class="label">{$lang.adopt_reply}：</div>
+                                <div class="value">
+                                    <textarea name="review_content" class="textarea h100">{$suppliers.review_content}</textarea>
+                                </div>
+                            </div>
+                            <div class="item {if $suppliers.review_status neq 3}hide{/if}" ectype="userInfo">
+                                <div class="label">{$lang.require_field}{$lang.login_name}</div>
+                                <div class="label_value">
+                                    <input type="text" id="user_name" name="user_name" class="text" value="{$suppliers.user_name|escape}" autocomplete="off" />
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>                            
+                            <div class="item {if $suppliers.review_status neq 3}hide{/if}" ectype="userInfo">
+                                <div class="label">{$lang.require_field}{$lang.login_pwd}</div>
+                                <div class="label_value">
+                                    <input type="password" name="password" class="text" value="" id="password" autocomplete="off"/>
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>                         
+                            {/if}
+                            <div class="item">
+                                <div class="label">&nbsp;</div>
+                                <div class="label_value info_btn">
+                                    <a href="javascript:;" class="button" id="submitBtn">{$lang.button_submit}</a>
+                                    <input type="hidden" name="act" value="{$form_action}" />
+                                    <input type="hidden" name="id" value="{$suppliers.suppliers_id}" />
+                                    <input type="hidden" name="user_id" value="{$suppliers.user_id}" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript" src="__TPL__/js/region.js"></script>
+    <script type="text/javascript">
+	//滚动轴
+	$(".move_list").perfectScrollbar();
+	
+	$.levelLink();//地区三级联动
+	
+	$(function(){
+		$("#submitBtn").click(function(){
+			if($("#agency_form").valid()){
+                //防止表单重复提交
+                if(checkSubmit() == true){
+    				$("#agency_form").submit();
+                }
+                return false
+			}
+		});
+	
+		$('#agency_form').validate({
+			errorPlacement:function(error, element){
+				var error_div = element.parents('div.label_value').find('div.form_prompt');
+				element.parents('div.label_value').find(".notic").hide();
+				error_div.append(error);
+			},
+			rules : {
+				suppliers_name : {
+					required : true
+				},
+				suppliers_percent : {
+					number : true,
+					max : 100,
+					min : 0.01
+				}
+			},
+			messages : {
+				suppliers_name : {
+					required : '<i class="icon icon-exclamation-sign"></i>'+no_suppliers_name
+				},
+				suppliers_percent : {
+					number : '<i class="icon icon-exclamation-sign"></i>{$lang.settlement_ratio_int}',
+					max : '<i class="icon icon-exclamation-sign"></i>{$lang.settlement_ratio_max}',
+					min : '<i class="icon icon-exclamation-sign"></i>{$lang.settlement_ratio_min}',
+				}
+			}
+		});
+	});
+    </script>
+</body>
+</html>

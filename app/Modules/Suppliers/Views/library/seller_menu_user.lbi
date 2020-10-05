@@ -1,0 +1,12 @@
+<div class="ecsc-layout-left">
+	<div class="sidebar" id="sidebar">
+		<div class="column-menu">
+        	<div class="welcome">{$lang.welcome_page}<div class="arrow"></div></div>
+			<ul id="seller_center_left_menu" style="padding-top:0px;">
+				{foreach from=$user_menu_pro item=menu}
+				<li id="quicklink_{$menu.action}" data-action="{$menu.action}" style="display: block;"><a href="{$menu.url}"> {$menu.label} </a></li>
+				{/foreach}	
+			</ul>
+		</div>
+	</div>
+</div>

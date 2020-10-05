@@ -1,0 +1,230 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+				{include file ='library/url_here.lbi'}
+				{include file ='library/seller_menu_tab.lbi'}
+                <div class="search-info">
+                    <div class="search-form">
+                    <form action="javascript:searchOrder()" name="searchForm">
+                        <input type="text" class="text w140 mr10" name="consignee" value="" placeholder="{$lang.consignee}">
+                        <input type="text" class="text w140 mr10" name="order_sn" value="" placeholder="{$lang.order_sn}">
+                        <div class="search-key">
+                        <input type="text" class="text w140" name="keywords" value="" placeholder="{$lang.search_keywords_placeholder2}">
+                        <input type="submit" class="submit" value="{$lang.search}">
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="btn-info">
+                    <a href="javascript:download_orderlist();" class="sc-btn sc-blue-btn"><i class="icon-download-alt"></i>{$lang.11_order_export}</a>
+                </div>
+                <div class="clear"></div>
+                {/if}
+                <form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
+                <div class="table_list" id="listDiv">
+                    <table class="ecsc-default-table order">
+                        <thead>
+                            <tr>
+                            	<th class="w50 frist">{$lang.record_id}</th>
+                                <th class="w500 tl">{$lang.goods_info}</th>
+                                <th class="w100"><a href="javascript:listTable.sort('consignee', 'DESC'); ">{$lang.consignee}</a>{$sort_consignee}</th>
+                                <th class="w100"><a href="javascript:listTable.sort('order_amount', 'DESC'); ">{$lang.total_fee}</a>{$sort_total_fee}</th>
+                                
+                                <th class="w100">{$lang.order_status}</th>
+                                <th class="w100">{$lang.pay_status}</th>
+                                <th class="w100">{$lang.shipping_status}</th>
+                                <th class="w150">{$lang.transaction_action}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	{foreach from=$order_list item=order key=okey}
+                        	<tr><td colspan="8" class="sep-row">&nbsp;</td></tr>
+                            <tr>
+                                <th colspan="8">
+                                	<div class="order-sku">
+                                        <div class="item"><span>{$lang.order_sn}：</span><a href="order.php?act=info&order_id={$order.order_id}" id="order_{$okey}">{$order.order_sn}</a></div>
+                                        <div class="item"><span>{$lang.order_time}：</span><span>{$order.short_order_time}</span></div>
+                                    	<div class="item"><div class="order_icon order_icon_wholesale" title="{$lang.wholesale_order}">{$lang.wholesale_order}</div></div>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                            	<td class="bdl frist trigger">
+                                    <div class="checkbox-info">
+                                        <input type="checkbox" class="ui-checkbox" value="{$order.order_sn}" id="checkbox_{$order.order_sn}" name="checkboxes[]"><label for="checkbox_{$order.order_sn}" class="ui-label"></label>
+                                    </div>
+                                    <div class="number">{$order.order_id}</div>
+                                </td>
+                                <td class="bdl order-goods-list">
+                                    {foreach from=$order.goods_list item=goods name=goodsList}
+                                        <div class="product_info {if $smarty.foreach.goodsList.last}last{/if}">
+                                            <div class="ecsc-goods-thumb" ><a href="__ROOT__wholesale_goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" onmouseover="toolTip('<img src={$goods.goods_thumb}>')" onmouseout="toolTip()"></a></div>
+                                            <div class="goods-info">
+                                                <div class="goods-name"><a target="_blank" href="__ROOT__wholesale_goods.php?id={$goods.goods_id}">{$goods.goods_name}{if $goods.trade_url}<a href="{$goods.trade_url}" target="_blank"><span class="org">[{$lang.trade_snapshot}]</span></a>{/if}</a></div>
+                                                <div class="price">￥{$goods.goods_price}</div>
+                                                <div class="num">* {$goods.goods_number}</div>
+                                            </div>
+                                        </div>
+                                    {/foreach}
+                                </td>
+                                <td class="bdl" rowspan="1">
+                                    <div class="buyer">
+                                        {$order.consignee}<p member_id="1"></p>
+                                        <div class="buyer-info"><em></em>
+                                            <div class="con">
+                                                <h3><i></i><span>{$lang.contact_info}</span></h3>
+                                                <dl>
+                                                    <dt>{$lang.user_name}</dt>
+                                                    <dd>{$order.consignee}</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>{$lang.label_service_phone}</dt>
+                                                    <dd>{$order.mobile}</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>{$lang.label_shop_address}</dt>
+                                                    <dd>{$order.region}{$order.address}</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="bdl" rowspan="1">
+                                    <p class="ecsc-order-amount">{$order.formated_order_amount}</p>
+                                </td>
+                                <td class="bdl bdr" rowspan="1">
+                                    <p><span>{$lang.os.$order.order_status}</span></p>
+                                </td>
+                                <td class="bdl bdr" rowspan="1">
+                                    <span><span>{$lang.ps[$order.pay_status]}</span><br>{if $order.pay_status eq 2}{$order.pay_time}{/if}</span>
+                                </td>
+                                <td class="bdl bdr" rowspan="1">
+                                    <span>{$lang.ss[$order.shipping_status]}</span>
+                                </td>
+                                <!-- 取消订单 -->
+                                <td class="bdl bdr" rowspan="1">
+                                    <a href="order.php?act=info&order_id={$order.order_id}">{$lang.order_details}</a>
+                               </td>
+                            </tr>
+							{foreachelse}
+							<tr><td class="no-records" colspan="11">{$lang.no_records}</td></tr>
+                        	{/foreach}
+                        </tbody>
+                        <tfoot>
+                        	<tr><td colspan="8"></td></tr>
+                            <tr class="head">
+                                <td class="frist tc"><input type="checkbox" id="all" class="ui-checkbox" name="checkboxes[]" value='' onclick='listTable.selectAll(this, "checkboxes")'><label for="all" class="ui-label"></label></td>
+                                <td class="batch-operation" colspan="20">                                   
+                                    <input name="remove" type="submit" id="btnSubmit3" value="{$lang.remove}" class="sc-btn btn_disabled" disabled="true" onclick="this.form.target = '_self'" />                            
+                                    <input name="batch" type="hidden" value="1" />
+                                    <input name="order_id" type="hidden" value="" />
+                                    <span>{if $record_count}{$lang.page_count}{$record_count}{$lang.count_table}{/if}</span>
+                                    <span class="page page_3">
+                                    	<i>{$lang.page_size}</i> <input type='text' size='3' id='pageSize' style=" border:1px solid #e5e5e5; background:#FFF; text-align:center; padding:3px; border-radius:4px;" value="{$filter.page_size}" onkeypress="return listTable.changePageSize(event)" />
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td colspan="8">{include file="page.dwt"}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                </form>
+                {if $full_page}
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript" src="__TPL__/js//utils.js"></script>
+<script type="text/javascript" src="__TPL__/js/ToolTip.js"></script>
+<script type="text/javascript" src="__TPL__/js/jquery.purebox.js"></script>
+<script type="text/javascript">
+	listTable.recordCount = {$record_count};
+	listTable.pageCount = {$page_count};
+	
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+
+	{literal}
+    /**
+     * 搜索订单
+     */
+    function searchOrder()
+    {
+		listTable.filter['keywords'] = Utils.trim(document.forms['searchForm'].elements['keywords'].value);
+        listTable.filter['order_sn'] = Utils.trim(document.forms['searchForm'].elements['order_sn'].value);
+        listTable.filter['consignee'] = Utils.trim(document.forms['searchForm'].elements['consignee'].value);
+        listTable.filter['page'] = 1;
+        listTable.loadList();
+    }
+
+    function check()
+    {
+      var snArray = new Array();
+      var eles = document.forms['listForm'].elements;
+      for (var i=0; i<eles.length; i++)
+      {
+        if (eles[i].tagName == 'INPUT' && eles[i].type == 'checkbox' && eles[i].checked && eles[i].value != 'on')
+        {
+          snArray.push(eles[i].value);
+        }
+      }
+	  
+      if (snArray.length == 0)
+      {
+        return false;
+      }
+      else
+      {
+		  if(confirm('{$lang.confirm_del}')){
+			$("input[name='order_id']").val(snArray.toString());
+        	return true;
+		  }else{
+			return false; 
+		  }
+      }
+    }
+
+	//导出订单列表
+	function download_orderlist()
+	{
+		var args = '';
+		for (var i in listTable.filter)
+		{
+			if (typeof(listTable.filter[i]) != "function" && typeof(listTable.filter[i]) != "undefined")
+			{
+			  args += "&" + i + "=" + encodeURIComponent(listTable.filter[i]);
+			}
+		}
+		location.href = "order.php?act=order_export" + args;
+	}
+	
+	//列表批量处理
+	$(document).on("click",".batch-operation a.sc-btn",function(){
+		var _this = $(this),
+			table = _this.parents(".ecsc-default-table"),
+			checked = table.find("input[name='checkboxes[]']").is(":checked"),
+			type = _this.data("type");
+		if(checked){
+			$("form[name='listForm']").submit();
+		}else{
+			alert("{$lang.please_select_goods}");
+		}
+	});
+	
+</script>
+</body>
+</html>
+{/if}

@@ -1,0 +1,433 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
+<link rel="stylesheet" type="text/css" href="__TPL__/css/wholesale_new.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/perfect-scrollbar/perfect-scrollbar.min.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__js/calendar/calendar.min.css" />
+</head>
+
+<body class="bg-ligtGary">
+<!-- #BeginLibraryItem "/library/page_header_business.lbi" --><!-- #EndLibraryItem -->
+
+
+<div class="content b2b-content bg-ligtGary">
+    <form action="wholesale_apply.php" method="POST" enctype="multipart/form-data" id="mupgrade_form" {if $supplier && ($supplier.review_status eq 2 || $supplier.review_status eq 1 || $supplier.review_status eq 3)}class="j-disabled"{/if}>
+        <div class="w w1200">
+            <div class="buyorder-title">供应商入驻</div>
+            <div class="buy-content">
+                <div class="bw-section">
+                    <div class="bw-title">
+                        <i></i>
+                        <h3>供应商信息</h3>
+                    </div>
+                    <div class="bw-content">
+                        <div class="items">
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.supplier_name}</div>
+                                <div class="value">
+                                    <input type="text" class="text" name="suppliers_name" value="{$supplier.suppliers_name}" >
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.supplier_describe}</div>
+                                <div class="value"><textarea name="suppliers_desc" class="textarea">{$supplier.suppliers_desc}</textarea></div>
+                            </div>
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.user_name}</div>
+                                <div class="value">
+                                    <input type="text" name="real_name" maxlength="60" value="{$supplier.real_name}" class="text" />
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.user_iphone}</div>
+                                <div class="value">
+                                    <input type="text" name="mobile_phone" maxlength="60" value="{$supplier.mobile_phone}" class="text" />
+                                    <div class="form_prompt"></div>
+                                    <div class="notic">{$lang.user_iphone_remind}</div>
+                               </div>
+                            </div>
+                            <div class="item">
+                                <div class="label">{$lang.kf_qq}</div>
+                                <div class="value">
+                                    <textarea name='kf_qq' value="{$supplier.kf_qq}" rows="6" cols="48" class="textarea">{$supplier.kf_qq}</textarea>
+                                    <div class="form_prompt"></div>
+                                    <div class="notic">{$lang.kf_qq_remind}</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.user_email}</div>
+                                <div class="value">
+                                    <input type="text" name="email" maxlength="60" value="{$supplier.email}" class="text" />
+                                    <div class="form_prompt"></div>
+                                    <div class="notic">{$lang.user_email_remind}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bw-section">
+                    <div class="bw-title">
+                        <i></i>
+                        <h3>实名信息</h3>
+                    </div>
+                    <div class="bw-content">
+                        <div class="items">
+                            <div class="item">
+                                <div class="label"><em class="org">*</em> {$lang.user_id} </div>
+                                <div class="value"><input type="text" name="self_num" maxlength="60" value="{$supplier.self_num}" class="text" /><div class="form_prompt"></div></div>
+                            </div>
+
+                            <div class="item">
+                                <div class="label"><em class="org">*</em> {$lang.user_id_positive} </div>
+                                <div class="value">
+                                   <div class="type-file-box w500">
+                                    <div class="input">
+
+                                        <input type="button"  class="type-file-button" value="{$lang.upload}" />
+                                        <input type="file" class="type-file-file" id="front_of_id_card" name="front_of_id_card" data-state="imgfile" size="30" hidefocus="true" {if $supplier.front_of_id_card} value="{$supplier.front_of_id_card}" {/if} autocomplete="off" />
+                                        <input type="text" name="front_of_id_card_path" class="type-file-text" id="front_textfile" {if $supplier.front_of_id_card}value="{$supplier.front_of_id_card}"{/if} autocomplete="off" readonly />
+                                       </div>
+                                       {if $supplier.front_of_id_card}
+                                       <span class="show">
+                                           <a href="{$supplier.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$supplier.front_of_id_card}>')" onmouseout="toolTip()"></i></a>
+                                       </span>
+                                       {/if}
+                                   </div>
+                                   <div class="form_prompt"></div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="label"><em class="org">*</em> {$lang.user_id_other_side} </div>
+                                <div class="value">
+                                    <div class="type-file-box w500">
+                                        <div class="input">
+
+                                            <input type="button" class="type-file-button" value="{$lang.upload}" />
+                                            <input type="file" class="type-file-file" id="reverse_of_id_card" name="reverse_of_id_card" data-state="imgfile" size="30" hidefocus="true" {if $supplier.reverse_of_id_card} value="{$supplier.reverse_of_id_card}" {/if} autocomplete="off" />
+                                            <input type="text" name="reverse_of_id_card_path" class="type-file-text" id="reverse_textfile" {if $supplier.reverse_of_id_card}value="{$supplier.reverse_of_id_card}"{/if} autocomplete="off" readonly />
+
+                                        </div>
+                                        {if $supplier.reverse_of_id_card}
+                                        <span class="show">
+                                            <a href="{$supplier.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$supplier.reverse_of_id_card}>')" onmouseout="toolTip()"></i></a>
+                                        </span>
+                                        {/if}
+                                    </div>
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="label"><em class="org">*</em> {$lang.supplier_logo} </div>
+                                <div class="value">
+                                    <div class="type-file-box w500">
+                                        <div class="input">
+
+                                            <input type="button"  class="type-file-button" value="{$lang.upload}" />
+                                            <input type="file" class="type-file-file" id="suppliers_logo" name="suppliers_logo" data-state="imgfile" size="30" hidefocus="true" {if $supplier.suppliers_logo} value="{$supplier.suppliers_logo}" {/if} autocomplete="off" />
+                                            <input type="text" name="suppliers_logo_path" class="type-file-text" id="logo_textfile" {if $supplier.suppliers_logo} value="{$supplier.suppliers_logo}" {/if} autocomplete="off" readonly />
+
+                                        </div>
+                                        {if $supplier.suppliers_logo}
+                                        <span class="show">
+                                            <a href="{$supplier.suppliers_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$supplier.suppliers_logo}>')" onmouseout="toolTip()"></i></a>
+                                        </span>
+                                        {/if}
+                                    </div>
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.company_name} </div>
+                                <div class="value">
+                                    <input type="text" name="company_name" maxlength="60" size="40" value="{$supplier.company_name}" class="text" />
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.select_area} </div>
+                                <div class="value">
+                                    <div class="form-value" ectype="regionLinkage">
+                                        <dl class="mod-select mod-select-small" ectype="smartdropdown">
+                                            <dt>
+                                                <span class="txt" ectype="txt">{$lang.please_select} </span>
+                                                <input type="hidden" value="{$region_level.0}" name="country">
+                                            </dt>
+                                            <dd ectype="layer">
+                                                <!-- {foreach from=$country_list item=country} -->
+                                                <div class="option" data-value="{$country.region_id}" data-text="{$country.region_name}" ectype="ragionItem" data-type="1">{$country.region_name}</div>
+                                                <!-- {/foreach} -->
+                                            </dd>
+                                        </dl>
+                                        <dl class="mod-select mod-select-small" ectype="smartdropdown">
+                                            <dt>
+                                            <span class="txt" ectype="txt">{$lang.please_select} </span>
+                                            <input type="hidden" value="{$region_level.1}" ectype="ragionItem" name="province">
+                                            </dt>
+                                            <dd ectype="layer">
+                                                <div class="option" data-value="0">{$lang.please_select}</div>
+                                                <!-- {foreach from=$province_list item=province} -->
+                                                <div class="option" data-value="{$province.region_id}" data-text="{$province.region_name}" data-type="2" ectype="ragionItem">{$province.region_name}</div>
+                                                <!-- {/foreach} -->
+                                            </dd>
+                                        </dl>
+                                        <dl class="mod-select mod-select-small" ectype="smartdropdown">
+                                            <dt>
+                                            <span class="txt" ectype="txt">{$lang.please_select}</span>
+                                            <input type="hidden" value="{$region_level.2}" name="city" >
+                                            </dt>
+                                            <dd ectype="layer">
+                                                <div class="option" data-value="0">{$lang.please_select}</div>
+                                                <!-- {foreach from=$city_list item=city} -->
+                                                <div class="option" data-value="{$city.region_id}" data-type="3" data-text="{$city.region_name}" ectype="ragionItem">{$city.region_name}</div>
+                                                <!-- {/foreach} -->
+                                            </dd>
+                                        </dl>
+                                        <dl class="mod-select mod-select-small" ectype="smartdropdown" style="display:none;">
+                                            <dt>
+                                                <span class="txt" ectype="txt">{$please_select}</span>
+                                                <input type="hidden" value="{$supplier.region_id}" name="district">
+                                            </dt>
+                                            <dd ectype="layer">
+                                                <div class="option" data-value="0">{$please_select}</div>
+                                                {foreach from=$district_list item=district}
+                                                <div class="option" data-value="{$district.region_id}" data-type="4" data-text="{$district.region_name}" ectype="ragionItem">{$district.region_name}</div>
+                                                {/foreach}
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="label"><em class="org">*</em>{$lang.company_address}</div>
+                                <div class="value">
+                                    <input type="text" name="company_address" maxlength="60" size="40" value="{$supplier.company_address}" class="text" />
+                                    <div class="form_prompt"></div>
+                                </div>
+                            </div>
+
+                            {if $supplier && $supplier.review_status}
+                            <div class="item">
+                                <div class="label">{$lang.examine_status}</div>
+                                <div class="value" style="line-height: 40px">
+                                    {if $supplier.review_status eq 1}
+                                        <font class="orange2">{$lang.not_audited}</font>
+                                    {elseif $supplier.review_status eq 2}
+                                        <font class="red">{$lang.audited_not_adopt}</font><br/>{$supplier.review_content}
+                                        <i class="tip yellow" title="{$supplier.review_content}" data-toggle="tooltip">{$lang.prompt}</i>
+                                    {elseif $supplier.review_status eq 3}
+                                        <font class="blue">{$lang.audited_yes_adopt}</font>
+                                    {/if}
+                                </div>
+                            </div>
+                            {/if}
+
+                            <div class="item button-item">
+                                <div class="label">&nbsp;</div>
+                                <div class="value">
+                                    <!--<div class="checkbox_items">
+                                        <div class="checkbox_item mr0">
+                                            <input type="checkbox" class="ui-checkbox" name="remember" id="remember" checked>
+                                            <label for="remember" class="ui-b2b-checkbox-label">我已阅读并同意{$lang.article_wholesale_rule}</label>
+                                            
+                                        </div>
+                                        <div class="form_prompt"></div>
+                                    </div>-->
+                                    <input type="hidden" name="act" value="do_apply" />
+                                    {if $supplier && $supplier.review_status eq 2}
+                                        <a href="javascirpt:;" class="btn sc-greenBg-btn" id="editBtn" />{$lang.edit}</a>
+                                        <input type="button" class="btn sc-orgBg-btn" style="display: none;" value="{$lang.button_submit}" id="submitBtn" />
+                                    {elseif $supplier && ($supplier.review_status eq 1 || $supplier.review_status eq 3)}
+                                    {else}
+                                        <input type="button" class="btn sc-orgBg-btn" value="{$lang.button_submit}" id="submitBtn" />
+                                    {/if}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+{insert_scripts files="jquery.SuperSlide.2.1.1.js,jquery.yomi.js,plupload.full.min.js,jquery.picTip.js,jquery.nyroModal.js,jquery.validation.min.js,perfect-scrollbar/perfect-scrollbar.min.js"}
+<script type="text/javascript" src="__TPL__/js/region.js"></script>
+<script type="text/javascript" src="__TPL__/js/dsc-common.js"></script>
+<script type="text/javascript" src="__TPL__/js/jquery.purebox.js"></script>
+<script type="text/javascript" src="__ROOT__js/lib_ecmobanFunc.js"></script>
+
+<script type="text/javascript">
+$(function(){
+
+    // 禁用表单，点修改启用
+    $("#mupgrade_form").each(function(i,el){
+        var $form = $(el);
+        var isDisabled = $form.hasClass("j-disabled");
+        console.log(isDisabled,111)
+        if(isDisabled){
+            Disabled($form)
+        }
+    });
+    $("#editBtn").click(function(){
+        var $this = $(this);
+        var $form = $this.parents("#mupgrade_form");
+        var inputClick = $form.find("input[type=file],[type=button]");
+        var inputText = $form.find("input[type=text],textarea");
+        var modSelect = $form.find(".mod-select");
+        ableClick(modSelect);
+        ableClick(inputClick);
+        ableClick(inputText);
+        $form.find("#submitBtn").css("display","inline-block")
+        $this.hide()
+    })
+    function Disabled($form){
+        var inputClick = $form.find("input[type=file],[type=button]");
+        var inputText = $form.find("input[type=text],textarea");
+        var modSelect = $form.find(".mod-select");
+        // 模拟下拉禁用
+        disableClick(modSelect);
+        disableClick(inputClick);
+        disableClick(inputText);
+        // inputClick.click(function(){
+        //     return false;
+        // })
+        // inputText.attr("readonly","true")
+    }
+    function disableClick($el){
+        $el.css({
+            "pointer-events":"none",
+            "background":"#f3f3f3"
+        })
+    }
+    function ableClick($el){
+        $el.removeAttr("style");
+
+    }
+
+    //地区切换
+    {if $supplier}
+    $.levelLink(0);
+    {else}
+    $.levelLink(1);
+    {/if}
+
+	$('.nyroModal').nyroModal();
+
+	//表单验证
+	$("#submitBtn").click(function(){
+		if($("#mupgrade_form").valid()){
+            $("#mupgrade_form").submit();
+		}
+	});
+
+	$('#mupgrade_form').validate({
+		errorPlacement:function(error, element){
+			var error_div = element.parents('div.value').find('div.form_prompt');
+            element.parents('div.value').find(".notic").hide();
+            error_div.append(error);
+		},
+		ignore:".ignore",
+		rules:{
+			suppliers_name:{
+				required : true
+			},
+			real_name :{
+				required : true
+			},
+			mobile_phone:{
+				required : true,
+				isMobile : true
+			},
+			email:{
+				required : true,
+				email : true
+			},
+			self_num:{
+				required : true,
+				//isIdCardNo :true
+			},
+			front_textfile:{
+				required : true
+			},
+			reverse_textfile:{
+				required : true
+			},
+			logo_textfile:{
+				required : true
+			},
+			company_name:{
+				required : true
+			},
+			company_address:{
+				required : true
+			},
+			city:{
+				required : true,
+                min : 1
+			}
+		},
+		messages:{
+			suppliers_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_supplier_name}'
+			},
+			real_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_name}'
+			},
+			mobile_phone:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_iphone}',
+				isMobile : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.error_iphone}',
+			},
+			email:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_email}',
+				email : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.error_email}',
+			},
+			self_num:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_user_id}',
+				isIdCardNo : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.error_user_id}'
+			},
+			front_textfile:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.upload_user_id_positive}'
+			},
+			reverse_textfile:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.upload_other_side_user_id}'
+			},
+			logo_textfile:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.upload_supplier_logo}'
+			},
+			company_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_company_name}'
+			},
+			company_address:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_company_address}'
+			},
+			city:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.select_address}'
+			}
+		}
+	});
+
+
+});
+</script>
+
+</body>
+</html>

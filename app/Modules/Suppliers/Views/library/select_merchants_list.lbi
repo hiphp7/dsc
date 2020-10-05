@@ -1,0 +1,73 @@
+<form enctype="multipart/form-data" method="post" action="goods.php">
+	<div class="step_content">
+		<div class="ecsc-form-goods">	
+			<dl>
+				<dt>{$lang.lab_goods_name}</dt>
+				<dd class="lh30 red">{$goods.goods_name}</dd>
+			</dl>	
+			<dl>
+				<dt>{$lang.lab_type}</dt>
+				<dd>
+                    <div class="checkbox_items">
+                        <div class="checkbox_item mr15">
+                            <input type="radio" name="export_type" class="ui-radio freight" id="export_type_0" value="0" {if !$goods.export_type}checked="checked"{/if} />
+                            <label for="export_type_0" class="ui-radio-label">{$lang.business_grade}</label>
+                        </div>
+                        
+                        <div class="checkbox_item">
+                            <input type="radio" name="export_type" class="ui-radio freight" id="export_type_1" value="1" {if $goods.export_type}checked="checked"{/if} />
+                            <label for="export_type_1" class="ui-radio-label">{$lang.designated_businessmen}</label>
+                        </div>
+                    </div>
+				</dd>
+			</dl>
+            <dl id="select_grade" {if $goods.export_type}style="display:none;"{/if}>
+                <dt>{$lang.lab_select_level}</dt>
+                <dd>
+                    <div class="checkbox_items">
+                        {foreach from=$seller_grade item=item key=key}
+                        <div class="checkbox_item">
+                            <input type="checkbox" name="grade_ext[]" class="ui-checkbox" id="grade_ext_{$item.id}" value="{$item.id}" {if $item.is_checked}checked="checked"{/if}>
+                                <label class="ui-label" for="grade_ext_{$item.id}">{$item.grade_name}</label>
+                        </div>
+                        {/foreach}
+                    </div>
+                </dd>
+            </dl>
+            <dl id="select_merchants" {if !$goods.export_type}style="display:none;"{/if}>
+                <dt>{$lang.lab_select_business}</dt>
+                <dd>
+                    <div class="checkbox_items">
+                        {foreach from=$seller_list item=item key=key}
+                        <div class="checkbox_item">
+                            <input type="checkbox" name="merchants_ext[]" class="ui-checkbox" id="merchants_ext_{$item.ru_id}" value="{$item.ru_id}" {if $item.is_checked}checked="checked"{/if}>
+                                <label class="ui-label" for="merchants_ext_{$item.ru_id}">{$item.shop_name}</label>
+                        </div>
+                        {/foreach}
+                    </div>             
+                </dd>
+            </dl>            
+			<div class="buttom tc">
+				<div class="button_info">
+					<input type="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn btn35" />
+					<input type="reset" value="{$lang.button_reset}" class="sc-btn btn35 sc-blue-btn" />
+					<input type="hidden" name="act" value="set_merchants" />
+					<input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	//商品运费 by wu
+	$("input[name='export_type']").click(function(){
+		var value = $(this).val();
+		if(value == 1){
+			$('#select_grade').hide();
+			$('#select_merchants').show();			
+		}else{
+			$('#select_grade').show();
+			$('#select_merchants').hide();
+		}
+	});
+</script>

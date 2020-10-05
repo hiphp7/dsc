@@ -1,0 +1,41 @@
+<?php
+
+$_LANG = array (
+  'Selected_condition' => 'The selected conditions',
+  'All_undo' => 'All cancellation',
+  'Other' => 'Other',
+  'close' => 'close',
+  'multi_select' => 'MC',
+  'Min_price' => 'Min price',
+  'Max_price' => 'Max price',
+  'More_options' => 'More options',
+  'hot' => 'hot',
+  'pic_cat' => 'icon',
+  'Today_recommended' => 'Today recommended',
+  'Today_new' => 'Today new',
+  'New_arrival' => 'New arrival',
+  'Special_commodity' => 'Special commodity',
+  'cat_tpl_one' => 'Platform goods classification, edit secondary classification in top-level classified pages',
+  'cat_tpl_two' => 'The default top-tier category page is advertised on the left',
+  'cat_tpl_three' => 'Top class page (default) slide advertising',
+  'cat_tpl_four' => 'Platform goods category - > platform sub-category - > classifying goods - > editorial products - > other information - > check to add the best products',
+  'cat_tpl_five' => 'Platform goods category - > platform sub-category - > classifying products - > editorial products - > other information - > check for new products',
+  'cat_tpl_six' => 'Platform goods category - > platform sub-category - > catalogs - > editorial merchandise - > general information - > sets promotion price and promotion time',
+  'cat_tpl_Seven' => 'Platform goods category - > platform sub-category - > classifying goods - > editorial products - > other information - > check to include the sales promotion',
+  'cat_tpl_female' => 'Top classified-page (ladies\' dress template) banner ads',
+  'cat_tpl1_one' => 'Top classified-page (ladies\' dress template)Buying date today',
+  'cat_tpl1_two' => 'Top classified-page (ladies\' dress template)new product',
+  'cat_tpl2_one' => 'Top classified-page (home appliance template) banner ads',
+  'cat_tpl2_two' => 'Top classified-page (home appliance template) brand advertising',
+  'cat_tpl3_one' => 'Top classified-page (food template) banner ads',
+  'cat_tpl3_two' => 'Top classified-page (food template) Hot spots',
+  'Sold' => 'Sold',
+  'qiang' => 'contend',
+  'new_first' => 'new product',
+  'have_a_look' => 'look around',
+  'Change_set' => 'Change set',
+  'Ccearance' => 'clearance',
+);
+
+
+return $_LANG;

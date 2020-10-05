@@ -1,0 +1,150 @@
+{if $full_page}
+<!doctype html>
+<html> 
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+<div class="warpper">
+    <div class="title"><a href="merchants_commission.php?act=list" class="s-back"></a>{$lang.seller} - {$ur_here}</div>
+    <div class="content">
+        {include file="library/commission_tab.lbi"}
+        <div class="explanation" id="explanation">
+            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <ul>
+                <li>{$lang.operation_prompt_content.negative_order_list.0}</li>
+            </ul>
+        </div>
+        <div class="flexilist">
+            <div class="common-head">
+            	<div class="fl ml0 red">
+                	{$lang.negative_number}：{$filter.bill_sn}
+                    &nbsp;&nbsp;{$lang.return_total}：{$filter.format_return_amount}
+                    &nbsp;&nbsp;{$lang.return_shipping_total}：{$filter.format_return_shippingfee}
+                </div>
+                <div class="search mr0">
+                	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
+                    <div class="input mr10">
+                        <input type="text" name="return_sn" value="" placeholder="{$lang.return_sn}" autocomplete="off" class="text" />
+                    </div>
+                     <div class="input mr10">
+                        <input type="text" name="order_sn" value="" placeholder="{$lang.order_sn}" autocomplete="off" class="text" />
+                    </div>
+                    <input type="submit" value="{$lang.search_word}" class="btn btn30 blue_btn_2" />
+                    </form>
+                </div>
+            </div>
+            
+            <div class="common-content">
+                <div class="list-div" id="listDiv" >
+                    {/if}
+                    <form method="post" action="" name="listForm" onsubmit="return confirm('{$lang.batch_confirm_settlement}');" style="position:relative;">
+                    <table cellpadding="1" cellspacing="1">
+                        <thead>
+                            <tr>
+                                <th><div class="tDiv">{$lang.return_sn}</div></th>
+                                <th><div class="tDiv">{$lang.order_sn}</div></th>
+                                <th><div class="tDiv">{$lang.return_amount}</div></th>
+                                <th><div class="tDiv">{$lang.return_shippingfee}</div></th>
+                                <th><div class="tDiv">{$lang.negative_return_time}</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach from=$order_list item=order name=noorder}
+                            <tr>
+                            	<td><div class="tDiv">{$order.return_sn|default:N/A}</div></td>
+                                <td><div class="tDiv">{$order.order_sn}</div></td>	
+                                <td><div class="tDiv">{$order.format_return_amount}</div></td>
+                                <td><div class="tDiv">{$order.format_return_shippingfee}</div></td>
+                                <td><div class="tDiv">{$order.add_time}</div></td>	
+                            </tr>
+                            {foreachelse}
+                            <tr>
+                            	<td class="no-records" colspan="14">{$lang.no_records}</td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="14">
+                                    <div class="tDiv">
+                                        <div class="tfoot_btninfo">
+                                            &nbsp;
+                                        </div>
+                                        <div class="list-page">
+                                            {include file="library/page.lbi"}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    </form>
+                    {if $full_page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="gj_search">
+    <div class="search-gao-list" id="searchBarOpen">
+        <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+    </div>
+    <div class="search-gao-bar">
+        <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
+        <div class="title"><h3>{$lang.advanced_search}</h3></div>
+        <form action="javascript:searchOrder()" name="searchHighForm">
+            <div class="searchContent">
+                <div class="layout-box">
+                    <dl>
+                        <dt>{$lang.order_sn}</dt>
+                        <dd><input type="text" value="" name="order_sn" id="order_sn" class="s-input-txt" autocomplete="off" /></dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.consignee|escape}</dt>
+                        <dd><input type="text" value="" name="consignee" id="consignee" class="s-input-txt" autocomplete="off" /></dd>
+                    </dl>
+                    <dl>
+                        <dt>{$lang.order_category}</dt>
+                        <dd>
+                            <div id="order_cat" class="imitate_select select_w145">
+                              <div class="cite">{$lang.select_please}</div>
+                              <ul>
+                                 <li><a href="javascript:;" data-value="">{$lang.select_please}</a></li>
+                                 <li><a href="javascript:;" data-value="stages">{$lang.baitiao_order}</a></li>
+                                 <li><a href="javascript:;" data-value="zc">{$lang.zc_order}</a></li>
+                                 <li><a href="javascript:;" data-value="store">{$lang.so_order}</a></li>
+                                 <li><a href="javascript:;" data-value="other">{$lang.other_order}</a></li>
+                                 <li><a href="javascript:;" data-value="dbdd">{$lang.db_order}</a></li>
+                                 <li><a href="javascript:;" data-value="msdd">{$lang.ms_order}</a></li>
+                                 <li><a href="javascript:;" data-value="tgdd">{$lang.tg_order}</a></li>
+                                 <li><a href="javascript:;" data-value="pmdd">{$lang.pm_order}</a></li>
+                                 <li><a href="javascript:;" data-value="jfdd">{$lang.jf_order}</a></li>
+                                 <li><a href="javascript:;" data-value="ysdd">{$lang.ys_order}</a></li>
+                              </ul>
+                            <input name="order_cat" type="hidden" value="" id="order_cat_val">
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="bot_btn">
+                <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+            </div>
+        </form>
+    </div>
+</div>
+<input name="bill_seller" type="hidden" value="{$user_id|default:0}" />
+{include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
+	//分页传值
+	listTable.recordCount = {$record_count|default:0};
+	listTable.pageCount = {$page_count|default:1};
+	listTable.query = "negative_order_query";
+
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+</script>
+</body>
+</html>
+{/if}

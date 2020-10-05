@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+<body style="background-color:#fff;">
+	<div class="sller_login">
+    	<div class="sller_login_warp">
+            <div class="ecsc-login-container">
+            	<div class="logo"><img src="__TPL__/images/suppliers_login_logo.png" /></div>
+                <div class="container">
+                	<div class="warp">
+                    	<div class="warp_content">
+                            <div class="title">
+                                <h3>{$lang.suppliers_backstage}</h3>
+                            </div>
+                            <form method="post" id="theForm" action="privilege.php?act=signin" name='theForm'>
+                                <div class="formInfo">
+                                    <div class="formText">
+                                        <i class="login-icon login-icon-user"></i>
+                                        <input type="text" name="username" autocomplete="off" class="input-text" value="" placeholder="{$lang.label_username}">
+                                    </div>
+                                    <div class="formText">
+                                        <i class="login-icon login-icon-pwd"></i>
+                                        <input type="password"   style="display:none"/>
+                                        <input type="password" name="password" autocomplete="off" class="input-text" value="" placeholder="{$lang.password}">
+                                    </div>
+                                    <div class="formText" style='height: 2px;'>
+                                        <a href="javascript:void(0);" class="forget_pwd">{$lang.forget_password}</a>
+                                    </div>
+                                    <div class="formText submitDiv">
+                                        {if $gd_version > 0}
+                                        <span class="text_span">
+                                            <div class="code">
+                                                <div class="arrow"></div>
+                                                <div class="code-img"><img style="cursor: pointer;" src="privilege.php?act=login&step=captcha" onclick= $(".code-img").find('img').attr('src',"privilege.php?act=login&step=captcha&"+Math.random()) /></div>
+                                            </div>
+                                            <input type="text" name="captcha" class="input-yzm" value="" autocomplete="off" placeholder="{$lang.please_input_code}" size="4" />
+                                        </span>
+                                        <span class="submit_span">
+                                            <input type="submit" name="submit" class="sub" value="{$lang.lable_login}" />
+                                        </span>
+                                        {else}
+                                        <span class="submit_span">
+                                            <input type="submit"  name="submit" class="sub qp_sub" value="{$lang.lable_login}" />
+                                        </span>
+                                        {/if}
+                                    </div>
+                                </div>
+                                <div id="error" class="error"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backpwd_layout">
+        <div class="backpwd_info">
+            <div class="close"></div>
+            {if $form_act eq "forget_pwd"}
+            <div class="title">{$lang.lable_forget_password}</div>
+            <form action="get_password.php" method="post" name="submitAdmin" id="submitAdmin1" >
+                <div class="formInfo">
+                    <div class="formText">
+                        <input type="text" name="user_name" class="input-text" autocomplete="off" placeholder="{$lang.user_name}"/>
+                        <div class="form_prompt"></div>
+                    </div>
+                    <div class="formText">
+                        <input type="text" name="email" class="input-text" autocomplete="off" placeholder="{$lang.email}"/>
+                        <div class="form_prompt"></div>
+                    </div>
+                    <div class="formText submitDiv">
+                        <input type="button" class="sub qp_sub" value="{$lang.send}" id="submitBtn"/>
+                        <input type="hidden" name="action" value="get_pwd" />
+                        <input type="hidden" name="act" value="forget_pwd" />
+                    </div>
+                </div>
+            </form>
+            {/if}
+            {if $form_act eq "reset_pwd"}
+            <div class="title">{$lang.reset_password}</div>
+            <form action="get_password.php" method="post" name="submitAdmin" id="submitAdmin2">
+                <div class="formInfo">
+                    <div class="formText">
+                        <input type="password"   style="display:none"/>
+                        <input type="password" name="password" id="password" class="input-text" autocomplete="off" placeholder="{$lang.enter_admin_pwd}"/>
+                        <div class="form_prompt"></div>
+                    </div>
+                    <div class="formText">
+                        <input type="password"   style="display:none"/>
+                        <input type="password" name="confirm_pwd" class="input-text" autocomplete="off" placeholder="{$lang.confirm_admin_pwd}"/>
+                        <div class="form_prompt"></div>
+                    </div>
+                    <div class="formText submitDiv">
+                        <input type="hidden" name="action" value="reset_pwd" />
+                        <input type="hidden" name="act" value="forget_pwd" />
+                        <input type="hidden" name="adminid" value="{$adminid}" />
+                        <input type="hidden" name="code" value="{$code}" />
+                        <input type="button" class="sub qp_sub" value="{$lang.click_button2}" id="submitBtn1"/>
+                    </div>
+                </div>
+            </form>
+            {/if}
+        </div>
+    </div>
+    <div class="backpwd_layout_bg"></div>
+    <script type="text/javascript">
+		$(function(){
+            if("{$form_act}" == 'forget_pwd' || "{$form_act}" == 'reset_pwd'){
+            	$(".backpwd_layout").show();
+				$(".backpwd_layout_bg").show();
+            }
+			$(".formText .input-text").focus(function(){
+				$(this).parent().addClass("focus");
+			});
+
+			$(".formText .input-text").blur(function(){
+				$(this).parent().removeClass("focus");
+			});
+
+			$(".checkbox").click(function(){
+				if($(this).hasClass("checked")){
+					$(this).removeClass("checked");
+                    $('input[name=remember]').val(0);
+				}else{
+					$(this).addClass("checked");
+                    $('input[name=remember]').val(1);
+				}
+			});
+
+			$(".formText .input-yzm").focus(function(){
+				$(this).prev().show();
+			});
+
+			$(".formText").blur(function(){
+				$(this).prev().hide();
+			});
+
+			$('.submit_span .sub').on('click',function(){
+                $('.code').show();
+            });
+		});
+
+		$(function(){
+			$('#theForm input[name=submit]').on('click',function(){
+                var username=true,password=true,captcha=true;
+				var yzm = $('#theForm input[name=captcha]'),
+					seller_name = $('#theForm input[name=username]'),
+					pwd = $('#theForm input[name=password]');
+
+                if(seller_name.val() == ''){
+                    $('#error').html('{$lang.js_languages.email_empty}');
+                    seller_name.focus();
+                    username = false;
+                    return false;
+                }
+
+                if(pwd.val() == ''){
+                    $('#error').html('{$lang.js_languages.password_empty}');
+                    pwd.focus();
+                    password = false;
+                    return false;
+                }
+
+                if(yzm.val() == ''){
+                    $('#error').html('{$lang.no_empty_verification}');
+                    yzm.focus();
+                    captcha = false;
+                    return false;
+                }
+
+                if(captcha){
+					$.ajax({
+						async:false,
+						url:'privilege.php?act=signin&type=captcha',
+						data:{'captcha':yzm.val()},
+						headers:{
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+						type:'post',
+						success:function(data){
+							if(data == 'false'){
+								$('#error').html('{$lang.verification_error}');
+								captcha = false;
+								return false;
+							}
+						}
+					});
+                }
+                if(captcha && seller_name != '' && pwd != ''){
+                    $.ajax({
+                        async:false,
+                        url:'privilege.php?act=signin&type=password',
+                        data:{'username':seller_name.val(),'password':pwd.val()},
+						headers:{
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+                        type:'post',
+                        success:function(data){
+                            if(data == 'false'){
+                                $('#error').html('{$lang.js_languages.username_password_error}');
+                                $('.code-img img').attr('src','index.php?act=captcha&'+Math.random());
+                                username=false;
+                                password=false;
+                                return false;
+                            }
+                        }
+                    });
+                }
+
+                if(captcha && username && password){
+                    $('#theForm').submit();
+                }else{
+                    return false;
+                }
+            });
+
+			$(document).click(function(e){
+				if(e.target.name !='captcha' && !$(e.target).parents("div").is(".submitDiv")){
+					$('.code').hide();
+				}
+			});
+
+			//忘记密码
+			$(".forget_pwd").on("click",function(){
+            	window.location.href = "get_password.php?act=forget_pwd";
+			});
+
+			$(".close").on("click",function(){
+            	window.location.href = "privilege.php?act=login";
+			});
+		});
+
+		$(function(){
+			//表单验证
+			$("#submitBtn").click(function(){
+				if($("#submitAdmin1").valid()){
+                    //防止表单重复提交
+                    if(checkSubmit() == true){
+    					$("#submitAdmin1").submit();
+                    }
+                    return false
+				}
+			});
+
+			$('#submitAdmin1').validate({
+				errorPlacement:function(error, element){
+					var error_div = element.parents('.formText').find('div.form_prompt');
+					element.parents('.formText').find(".notic").hide();
+					error_div.append(error);
+				},
+				rules:{
+					user_name :{
+						required : true
+					},
+					email :{
+						required : true,
+						email : true
+					}
+				},
+				messages:{
+					user_name :{
+						required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.user_name_empty}'
+					},
+					email :{
+						required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.email_empty}',
+						email : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.email_error}'
+					}
+				}
+			});
+
+			$("#submitBtn1").click(function(){
+				if($("#submitAdmin2").valid()){
+                    //防止表单重复提交
+                    if(checkSubmit() == true){
+    					$("#submitAdmin2").submit();
+                    }
+                    return false
+				}
+			});
+
+			$('#submitAdmin2').validate({
+				errorPlacement:function(error, element){
+					var error_div = element.parents('.formText').find('div.form_prompt');
+					element.parents('.formText').find(".notic").hide();
+					error_div.append(error);
+				},
+				rules:{
+					password :{
+						required : true,
+						minlength : 6
+					},
+					confirm_pwd :{
+						required : true,
+						equalTo:"#password"
+					}
+				},
+				messages:{
+					password :{
+						required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.admin_pwd_empty}',
+						minlength : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.new_password_error}'
+					},
+					confirm_pwd :{
+						required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.confirm_pwd_empty}',
+						equalTo : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.both_pwd_error}'
+					}
+				}
+			});
+		});
+    </script>
+</body>
+</html>

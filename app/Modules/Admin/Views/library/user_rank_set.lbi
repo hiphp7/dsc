@@ -1,0 +1,26 @@
+<div class="prompt mt20">
+    <span>{$lang.user_rank_notice}</span>
+</div>
+<div class="items">
+    <div class="item">
+        <div class="label">{$lang.is_open}</div>
+        <div class="value">
+            <div class="checkbox_items" style="padding-top:10px;">
+                <div class="checkbox_item">
+                    <input type="radio" class="ui-radio" name="open_user_rank" id="open_1" value="1" {if $rank_config.open_user_rank_set} checked="checked" {/if} />
+                    <label for="open_1" class="ui-radio-label">{$lang.yes}</label>
+                </div>
+                <div class="checkbox_item">
+                    <input type="radio" class="ui-radio" name="open_user_rank" id="open_2" value="0" {if !$rank_config.open_user_rank_set} checked="checked" {/if} />
+                    <label for="open_2" class="ui-radio-label">{$lang.no}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="label">{$lang.expiry_date}</div>
+        <div class="value">
+            <input type="text" name="clear_rank_point" class="text w150" autocomplete="off" value="{$rank_config.clear_rank_point}"><span style="line-height: 28px;">{$lang.month}</span>
+        </div>
+    </div>
+</div>

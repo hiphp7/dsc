@@ -1,0 +1,68 @@
+<?php
+
+$_LANG['storage_short'] = '庫存不足';
+$_LANG['summary_phone'] = '手機購買';
+$_LANG['Group_purchase'] = "團購";
+$_LANG['group_buy_price'] = "團購價";
+$_LANG['Group_purchase_title'] = "精品質 惠生活";
+$_LANG['day'] = '天';
+$_LANG['hour'] = '小時';
+$_LANG['hour_two'] = '時';
+$_LANG['minutes'] = '分';
+$_LANG['seconds'] = '秒';
+$_LANG['Sales_count'] = "累計銷量";
+$_LANG['Collection_count'] = "累計收藏";
+$_LANG['Bond'] = "保 證 金";
+$_LANG['Distribution'] = '配　　送';
+$_LANG['gs_number'] = '數　　量';
+$_LANG['jian'] = '件';
+$_LANG['Group_purchase_end'] = "團購結束";
+$_LANG['Group_purchase_now'] = "立即團";
+$_LANG['see_to_see'] = "看了又看";
+$_LANG['Buy_and_buy'] = "買了又買";
+$_LANG['Sold'] = "已售";
+$_LANG['hot_group_purchase'] = "本期熱賣團購";
+$_LANG['Change_set'] = "換一組";
+$_LANG['store_other_group'] = "該商鋪的其他團購";
+$_LANG['details_order'] = "團購詳情";
+$_LANG['introduce_pic'] = "圖文介紹";
+$_LANG['evaluate_user'] = "會員評價";
+$_LANG['captcha_comment'] = '發表評論';
+$_LANG['Rate_praise'] = '好評率';
+$_LANG['Rate'] = '好評';
+$_LANG['zhong_p'] = '中評';
+$_LANG['Bad'] = '差評'; 
+$_LANG['go_see'] = "去看看";
+$_LANG['Buyer_impression'] = '買家印象';
+$_LANG['default'] = "默認";
+$_LANG['Newest'] = "最新"; 
+$_LANG['Comment_number'] = "評論數";
+$_LANG['Activity_name'] = "活動名稱";
+$_LANG['people_participate'] = "人已參加";
+$_LANG['fen'] = "分";
+$_LANG['fracture'] = "折";
+$_LANG['residue_time'] = "剩餘時間：";
+$_LANG['gong'] = "共";
+$_LANG['di_no'] = "第";
+$_LANG['weight'] = "重量";
+$_LANG['insane_group_buy'] = "瘋狂團購";
+$_LANG['hot_group_buy'] = "熱門團購";
+$_LANG['all_group_buy'] = "全部團購";
+$_LANG['other_group_buy'] = "其他團購";
+
+$_LANG['js_languages']['shiping_prompt'] = "暫不支持配送";
+$_LANG['js_languages']['Have_goods'] = "有貨"; 
+$_LANG['js_languages']['No_goods'] = "無貨";
+$_LANG['js_languages']['Deliver_back_order'] = "下單後立即發貨";
+$_LANG['js_languages']['goods_over'] = "此商品暫時售完";
+$_LANG['js_languages']['Stock_goods_null'] = "商品庫存不足";
+$_LANG['js_languages']['Already_buy'] = '已購買';
+$_LANG['js_languages']['Already_buy_two'] = '件商品達到限購條件,無法再購買';
+$_LANG['js_languages']['Already_buy_three'] = '件該商品,只能再購買';
+$_LANG['js_languages']['jian'] = '件';
+$_LANG['js_languages']['Purchase_quantity'] = '超過限購數量';
+
+$_LANG['js_languages']['common']['Stock_goods_null'] = "您團購的商品暫時缺貨，請耐心等待！";
+$_LANG['buy_error'] = "很抱歉，您團購的商品暫時缺貨，請及時聯繫客服！";
+
+return $_LANG;

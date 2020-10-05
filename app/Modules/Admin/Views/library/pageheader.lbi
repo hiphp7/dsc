@@ -1,0 +1,251 @@
+<div class="admin-header clearfix" style="min-width:1280px;">
+	<div class="bgSelector"></div>
+	<div class="admin-logo">
+    	<a href="javascript:void(0);" data-param="home" target="workspace">
+        {if $admin_logo}
+        <img src="__TPL__/{$admin_logo}" />
+        {else}
+        <img src="__TPL__/images/admin-logo.png" />
+        {/if}
+        </a>
+    	<div class="foldsider"><i class="icon icon-indent-left"></i></div>
+    </div>
+	<div class="module-menu">
+		<ul>
+        {foreach from=$nav_top item=nav}
+        {if $nav.children && $nav.type neq 'home'}
+        {if $nav.type != ""}<li data-param="{$nav.type}"><a href="javascript:void(0);">{$nav.label}</a></li>{/if}
+        {/if}
+        {/foreach}
+		</ul>
+	</div>
+	<div class="admin-header-right">
+    	<div class="manager">
+        	<a href="javascript:;" {if $is_empower eq 0}ectype='dsc_empower'{/if} style=" width:100%; color:#FF8B17; position:relative; top:8px; right:20px; float:left;">
+            
+            	<em class="empower_em {if $is_empower eq 1}empower_yes{else}empower_no{/if}">&nbsp;</em>
+            
+            	{if $is_empower eq 1}
+            	<em class="ectype_empower empower_font_yes">{$lang.authorization}</em>
+                {else}
+                <em class="ectype_empower empower_font_no">{$lang.no_authorization}</em>
+                {/if}
+            </a>
+        </div>
+		<div class="manager">
+			<dl>
+				<dt class="name">{$admin_info.user_name}</dt>
+				<dd class="group">{$lang.superadministrator}</dd>
+			</dl>
+			<span class="avatar">
+				<form action="index.php" id="fileForm" method="post"  enctype="multipart/form-data"  runat="server">
+					<input name="img" type="file" class="admin-avatar-file" id="_pic" title="{$lang.set_admin_avatar}">
+				</form>
+				<img nctype="admin_avatar" src="{if $admin_info.admin_user_img}{$admin_info.admin_user_img}{else}__TPL__/images/admin.png{/if}" />
+			</span>
+            <div id="admin-manager-btn" class="admin-manager-btn"><i class="arrow"></i></div>
+			<div class="manager-menu">
+				<div class="title">
+					<h4>{$lang.last_login}</h4>
+					<a href="privilege.php?act=edit&id={$admin_id}" target="workspace" class="edit_pwd">{$lang.change_password}</a>
+				</div>
+				<div class="login-date">
+					<strong>{$admin_info.last_login}</strong>
+					<span>(IP:{$admin_info.last_ip})</span>
+				</div>
+				<div class="title mt10">
+					<h4>{$lang.common_operation}</h4>
+					<a href="javascript:;" class="add_nav">{$lang.add_menu}</a>
+				</div>
+				<div class="quick_link">
+					<ul>
+                        {foreach from=$auth_menu item=vo}
+                        <li class="tl"><a href="{$vo.1}" target="workspace">{$vo.0}</a></li>
+                        {/foreach}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="operate">
+			<li style="position: relative;" ectype="oper_msg">
+				<a href="javascript:void(0);" class="msg" title="{$lang.view_message}">&nbsp;</a>
+				<div id="msg_Container">
+                	<div class="item">
+                        <h3 class="order_msg" ectype="msg_tit">{$lang.order_prompt}<em class="iconfont icon-up"></em></h3>
+                        <div class="msg_content" ectype="orderMsg" style="display:block;"></div>
+                    </div>
+					
+					<div class="item">
+                        <h3 class="goods_msg" ectype="msg_tit">{$lang.goods_prompt}<em class="iconfont icon-down"></em></h3>
+                        <div class="msg_content" ectype="goodMsg"></div>
+                    </div>
+					
+                    <div class="item">
+                    	<h3 class="shop_msg" ectype="msg_tit">{$lang.seller_audit_prompt}<em class="iconfont icon-down"></em></h3>
+                        <div class="msg_content" ectype="sellerMsg"></div>
+                    </div>
+					
+                    <div class="item">
+                    	<h3 class="ad_msg" ectype="msg_tit">{$lang.ad_position_prompt}<em class="iconfont icon-down"></em></h3>
+                        <div class="msg_content" ectype="advMsg"></div>
+                    </div>
+					
+                    <div class="item">
+                    	<h3 class="user_msg" ectype="msg_tit">{$lang.member_remind}<em class="iconfont icon-down"></em></h3>
+                        <div class="msg_content" ectype="userMsg"></div>
+                    </div>
+					
+					<div class="item">
+                    	<h3 class="campaign_msg" ectype="msg_tit">{$lang.activity_remind}<em class="iconfont icon-down"></em></h3>
+                        <div class="msg_content" ectype="promotionMsg"></div>
+                    </div>
+					<div class="item">
+						<h3 class="suppliers_msg" ectype="msg_tit">{$lang.suppliers_remind}<em class="iconfont icon-down"></em></h3>
+						<div class="msg_content" ectype="suppliersMsg"></div>
+					</div>
+				</div>
+			</li>
+			<i></i>
+			<li><a href="__ROOT__" target="_blank" class="home" title="{$lang.new_window_homepage}">&nbsp;</a></li>
+			<i></i>
+			<li><a href="javascript:void(0);" class="sitemap" title="{$lang.view_all_manage_menu}">&nbsp;</a></li>
+			<i></i>
+			<li><a href="javascript:void(0);" id="trace_show" class="style-color" title="{$lang.chenge_color_admin}">&nbsp;</a></li>
+			<i></i>
+			<li><a href="index.php?act=clear_cache" class="clear" target="workspace" title="{$lang.clear_cache}">&nbsp;</a></li>
+			<i></i>
+			<li><a href="privilege.php?act=logout" class="prompt" title="{$lang.safe_logout_admin}">&nbsp;</a></li>
+		</div>
+	</div>
+</div>
+
+<div id="allMenu" style="display: none;">
+	<div class="admincp-map ui-widget-content ui-draggable" nctype="map_nav" id="draggable">
+		<div class="title ui-widget-header ui-draggable-handle" style="border:none; background:#fff;">
+			<h3>{$lang.admin_all_menu}</h3>
+			<h5>{$lang.set_common_menu}</h5>
+			<span><a nctype="map_off" onclick="$('#allMenu').hide();" href="JavaScript:void(0);">X</a></span>
+        </div>
+		<div class="content">
+			<ul class="admincp-map-nav">
+				<li class=""><a href="javascript:void(0);" data-param="map-system">{$lang.menuplatform}</a></li>
+				<li class="selected"><a href="javascript:void(0);" data-param="map-shop">{$lang.menushopping}</a></li>
+				<li class=""><a href="javascript:void(0);" data-param="map-mobile">{$lang.mobile_terminal}</a></li>
+                <!--<li class=""><a href="javascript:void(0);" data-param="map-cms">APP</a></li>-->
+                <li class=""><a href="javascript:void(0);" data-param="map-cms">{$lang.menuinformation}</a></li>
+			</ul>
+			<div class="admincp-map-div" data-param="map-system" style="display: none;">
+                {foreach from=$nav_top.menuplatform.children item=vo}
+                <dl>
+                    <dt>{$vo.label}</dt>
+                    {foreach from=$vo.children item=vo2}
+                    <dd class="{foreach from=$auth_menu item=vo3}{if $vo3.0 == $vo2.label}selected{/if}{/foreach}"><a href="{$vo2.action}" data-param="" target="workspace">{$vo2.label}</a><i class="fa fa-check-square-o"></i></dd>
+                    {/foreach}
+                </dl>
+                {/foreach}
+			</div>
+			<div class="admincp-map-div" data-param="map-shop" style="display: block;">
+                {foreach from=$nav_top.menushopping.children item=vo}
+				<dl>
+					<dt>{$vo.label}</dt>
+                    {foreach from=$vo.children item=vo2}
+					<dd class="{foreach from=$auth_menu item=vo3}{if $vo3.0 == $vo2.label}selected{/if}{/foreach}"><a href="{$vo2.action}" data-param="" target="workspace">{$vo2.label}</a><i class="fa fa-check-square-o"></i></dd>
+                    {/foreach}
+				</dl>
+                {/foreach}
+			</div>
+            <div class="admincp-map-div" data-param="map-mobile" style="display: none;">
+                {foreach from=$nav_top.ectouch.children item=vo}
+                <dl>
+                    <dt>{$vo.label}</dt>
+                    {foreach from=$vo.children item=vo2}
+                    <dd class="{foreach from=$auth_menu item=vo3}{if $vo3.0 == $vo2.label}selected{/if}{/foreach}"><a href="{$vo2.action}" data-param="" target="workspace">{$vo2.label}</a><i class="fa fa-check-square-o"></i></dd>
+                    {/foreach}
+                </dl>
+                {/foreach}
+			</div>
+			<div class="admincp-map-div" data-param="map-cms" style="display: none;">
+                {foreach from=$nav_top.menuinformation.children item=vo}
+                <dl>
+                    <dt>{$vo.label}</dt>
+                    {foreach from=$vo.children item=vo2}
+                    <dd class="{foreach from=$auth_menu item=vo3}{if $vo3.0 == $vo2.label}selected{/if}{/foreach}"><a href="{$vo2.action}" data-param="" target="workspace">{$vo2.label}</a><i class="fa fa-check-square-o"></i></dd>
+                    {/foreach}
+                </dl>
+                {/foreach}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="application/javascript">
+
+$(document).on("click","a[ectype='dsc_empower']",function(){
+	$.ajax({
+		url:"dialog.php?is_ajax=1",
+		dataType:"json",
+		type:'get',
+		data:{
+			"act" : 'empower',
+		},
+		success:function(data){
+			var content = data.content;
+			pb({
+				id:"categroy_dialog",
+				title:"{$lang.authentication}",
+				width:493,
+				content:content,
+				ok_title:"{$lang.button_submit_alt}",
+				cl_title:"{$lang.cancel}",
+				drag:true,
+				foot: true,
+				onOk: function(){
+					empower();
+				}
+			});
+		}
+	});
+});
+
+function empower(){
+	var AppKey = $(":input[name='AppKey']").val();
+	
+	$.ajax({
+		url:"dialog.php?is_ajax=1",
+		dataType:"json",
+		type:'get',
+		data:{
+			"act" : 'submit_empower',
+			"AppKey" : AppKey
+		},
+		success:function(data){
+			
+			if(data.error == 1){
+				$("em.ectype_empower").html('{$lang.no_authorization}');
+				
+				$("em.empower_em").removeClass('empower_yes');
+				$("em.empower_em").addClass('empower_no');
+				
+				$("em.ectype_empower").removeClass('empower_font_yes');
+				$("em.ectype_empower").addClass('empower_font_no');
+				
+				var error = 0;
+			}else{
+				$("em.ectype_empower").html('{$lang.authorization}');
+				
+				$("em.empower_em").removeClass('empower_no');
+				$("em.empower_em").addClass('empower_yes');
+				
+				$("em.ectype_empower").removeClass('empower_font_no');
+				$("em.ectype_empower").addClass('empower_font_yes');
+				
+				$("a[ectype='dsc_empower']").attr('ectype', 'no_empower');
+				
+				var error = 1;
+			}
+			
+			pbDialog(data.msg, "", error);
+		}
+	});
+}
+</script>

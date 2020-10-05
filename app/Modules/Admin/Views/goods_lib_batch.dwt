@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title">{$lang.goods_alt} - 商品库批量导入</div>
+        <div class="content">		
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-head">					
+                </div>
+                <div class="common-content">
+					<form action="goods_lib.php?act=batch_import" method="post" name="theForm">
+                    <div class="list-div" id="listDiv">
+                        <div class="flexigrid ht_goods_list">
+                    	<table cellpadding="0" cellspacing="0" border="0">
+                        	<thead>
+                            	<tr>
+                                	<th width="10%" class="sky_id"><div class="tDiv">{$lang.goods_id}</div></th>
+                                    <th width="40%"><div class="tDiv">{$lang.goods_name}</div></th>
+                                    <th width="15%"><div class="tDiv">{$lang.goods_sn}</div></th>
+									<th width="10%"><div class="tDiv">{$lang.goods_number}</div></th>
+                                    <th width="15%"><div class="tDiv">{$lang.on_sale}</div></th>
+                                    <th width="15%"><div class="tDiv">{$lang.free_ship}</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								{foreach from=$goods_list item=goods}
+                            	<tr>
+                                    <td class="sky_id"><div class="tDiv">{$goods.goods_id}<input name="goods_id[]" type="hidden" value="{$goods.goods_id}"/></div></td>
+                                    <td>
+                                        <div class="tDiv">{$goods.goods_name}</div>
+                                    </td>
+                                    <td>
+                                        <div class="tDiv">
+                                        	<input name="goods_sn[{$goods.goods_id}]" type="text" value="{$goods.goods_sn}" size="20" class="text_5 text" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                    	<div class="tDiv">
+											<input name="goods_number[{$goods.goods_id}]" type="text" value="{$goods.goods_number}" size="3" class="text_3 text" />
+                                    	</div>
+                                    </td>
+                                    <td>
+                                    	<div class="tDiv">
+											<div class="switch switch_2 ml50" title="{$lang.no}">
+												<div class="circle"></div>
+											</div>
+											<input type="hidden" value="{$goods.is_on_sale|default:0}" name="is_on_sale[{$goods.goods_id}]">
+                                    	</div>
+                                    </td>   
+                                    <td>
+                                    	<div class="tDiv">
+											<div class="switch switch_2 ml30" title="{$lang.no}">
+												<div class="circle"></div>
+											</div>
+											<input type="hidden" value="{$goods.is_shipping|default:0}" name="is_shipping[{$goods.goods_id}]">	
+                                    	</div>
+                                    </td>       
+                                </tr>
+								{foreachelse}
+								<tr><td class="no-records"  colspan="20">{$lang.no_records}</td></tr>								
+								{/foreach}
+                            </tbody>
+                            <tfoot>
+                            	<tr>
+                                	<td colspan="12">
+                                    	<div class="tDiv">
+                                            <div class="list-page">{include file="library/page.lbi"}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        </div>
+                    </div>
+	                <div class="button-bottom">
+	                	<div class="button_info">
+	            			<input type='hidden' name='standard_goods' value='{$standard_goods}' />
+	                        <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+	                        <input type="reset" name="reset" value="{$lang.button_reset}" class="button button_reset" />
+	                    </div>
+	                </div>
+					</form>
+                </div>
+            </div>
+		</div>
+	</div>
+	{include file ='library/pagefooter.lbi'}
+</body>
+</html>
+
+

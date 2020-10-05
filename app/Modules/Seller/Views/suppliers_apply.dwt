@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+                {include file ='library/seller_menu_tab.lbi'}
+
+                <!-- 供应商登录 -->
+                {if $supplier}
+                <div class="btn-info">
+                    <a class="sc-btn sc-blue-btn" href="__ROOT__suppliers" target="_blank"><i class="icon-info-sign"></i>{$lang.supplier_login}</a>
+                </div>
+                {/if}
+
+                <div class="ecsc-form-goods">
+                    <form method="post" action="merchants_upgrade.php" name="theForm" enctype="multipart/form-data" id="mupgrade_form">
+                    <div class="wrapper-list border1">
+                    	<dl>
+                        	<dt>{$lang.require_field}{$lang.supplier_name}</dt>
+                            <dd>
+                            	<input type="text" name="suppliers_name" value="{$supplier.suppliers_name}" class="text" autocomplete="off" id="suppliers_name" />
+                                <div class="form_prompt"></div>
+                            </dd>
+                        </dl>
+                        <dl>
+                        	<dt>{$lang.supplier_describe}</dt>
+                            <dd><textarea class="textarea" name="suppliers_desc" id="role_describe">{$supplier.suppliers_desc}</textarea></dd>
+                        </dl>
+						<dl>
+                        	<dt>{$lang.require_field}{$lang.user_name}</dt>
+                            <dd>
+							<input type="text" name="real_name" maxlength="60" value="{$supplier.real_name}" class="text" />
+							<div class="form_prompt"></div>
+							</dd>
+                        </dl>
+                        <dl>
+                        	<dt>{$lang.require_field}{$lang.user_iphone}</dt>
+                            <dd>
+                                <input type="text" name="mobile_phone" maxlength="60" value="{$supplier.mobile_phone}" class="text" />
+                                <div class="form_prompt"></div>
+                                <div class="notic">{$lang.user_iphone_remind}</div>
+							</dd>
+                        </dl>
+
+                        <dl>
+                            <dt>{$lang.kf_qq}</dt>
+                            <dd>
+                              <textarea name='kf_qq' value="{$supplier.kf_qq}" rows="6" cols="48" class="textarea">{$supplier.kf_qq}</textarea>
+                              <div class="notic">{$lang.kf_qq_remind}</div>
+                            </dd>
+                        </dl>
+                        <dl>
+                        	<dt>{$lang.require_field}{$lang.user_email}</dt>
+                            <dd>
+                                <input type="text" name="email" maxlength="60" value="{$supplier.email}" class="text" />
+                                <div class="form_prompt"></div>
+                                <div class="notic">{$lang.user_email_remind}</div>
+							</dd>
+                        </dl>                        
+                        <dl>
+                        	<dt>{$lang.require_field}{$lang.user_id}</dt>
+                            <dd>
+							<input type="text" name="self_num" maxlength="60" value="{$supplier.self_num}" class="text" />
+							<div class="form_prompt"></div>
+							</dd>
+                        </dl>
+                        <dl>
+                            <dt>{$lang.require_field}{$lang.user_id_positive}</dt>
+                            <dd>
+                                <div class="type-file-box">
+                                	<div class="input">
+                                    	<input type="text" name="front_textfile" class="type-file-text" id="front_textfile" {if $supplier.front_of_id_card}value="{$supplier.front_of_id_card}"{/if} autocomplete="off" readonly />
+                                        <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload}" />
+                                        <input type="file" class="type-file-file" id="front_of_id_card" name="front_of_id_card" data-state="imgfile" size="30" hidefocus="true"{if $supplier.front_of_id_card} value="{$supplier.front_of_id_card}"{/if} autocomplete="off" />
+                                    </div>
+                                    {if $supplier.front_of_id_card neq ""}
+                                    <span class="show">
+                                        <a href="{$supplier.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$supplier.front_of_id_card}>')" onmouseout="toolTip()"></i></a>
+                                    </span>
+                                    {/if}
+                                </div>
+                                <div class="form_prompt"></div>                                
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>{$lang.require_field}{$lang.user_id_other_side}</dt>
+                            <dd>
+                                <div class="type-file-box">
+                                	<div class="input">
+                                    	<input type="text" name="reverse_textfile" class="type-file-text" id="reverse_textfile" {if $supplier.reverse_of_id_card}value="{$supplier.reverse_of_id_card}"{/if} autocomplete="off" readonly />
+                                        <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload}" />
+                                        <input type="file" class="type-file-file" id="reverse_of_id_card" name="reverse_of_id_card" data-state="imgfile" size="30" hidefocus="true"{if $supplier.reverse_of_id_card} value="{$supplier.reverse_of_id_card}"{/if} autocomplete="off" />
+                                    </div>
+                                    {if $supplier.reverse_of_id_card neq ""}
+                                    <span class="show">
+                                        <a href="{$supplier.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$supplier.reverse_of_id_card}>')" onmouseout="toolTip()"></i></a>
+                                    </span>
+                                    {/if}
+                                </div>
+                                <div class="form_prompt"></div>                                 
+                            </dd>
+                        </dl> 
+                        <dl>
+                            <dt>{$lang.require_field}{$lang.supplier_logo}</dt>
+                            <dd>
+                                <div class="type-file-box">
+                                	<div class="input">
+                                    	<input type="text" name="logo_textfile" class="type-file-text" id="logo_textfile" {if $supplier.suppliers_logo}value="{$supplier.suppliers_logo}"{/if} autocomplete="off" readonly />
+                                        <input type="button" name="button" id="button" class="type-file-button" value="{$lang.upload}" />
+                                        <input type="file" class="type-file-file" id="suppliers_logo" name="suppliers_logo" data-state="imgfile" size="30" hidefocus="true"{if $supplier.suppliers_logo} value="{$supplier.suppliers_logo}"{/if} autocomplete="off" />
+                                    </div>
+                                    {if $supplier.suppliers_logo neq ""}
+                                    <span class="show">
+                                        <a href="{$supplier.suppliers_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$supplier.suppliers_logo}>')" onmouseout="toolTip()"></i></a>
+                                    </span>
+                                    {/if}
+                                </div>
+                                <div class="form_prompt"></div>                                 
+                            </dd>
+                        </dl>                        
+                        <dl>
+                        	<dt>{$lang.require_field}{$lang.company_name}</dt>
+                            <dd>
+                            <input type="text" name="company_name" maxlength="60" size="40" value="{$supplier.company_name}" class="text" />
+                            <div class="form_prompt"></div>
+                            </dd>
+
+                        </dl>
+                        <dl>
+                        	<dt>{$lang.require_field}{$lang.company_address}</dt>
+                            <dd>
+                                <input type="text" name="company_address" maxlength="60" size="40" value="{$supplier.company_address}" class="text" />
+                                <div class="form_prompt"></div>
+                            </dd>
+                            
+                        </dl>
+                        <dl>
+                        	<dt>{$lang.require_field}{$lang.select_area}</dt>
+                            <dd>
+                                <div id="dlcountry" class="ui-dropdown smartdropdown alien mr15">
+                                    <input type="hidden" value="1" name="country" id="selcountry">
+                                    <div class="txt">{$lang.country}</div>
+                                    <i class="down u-dropdown-icon"></i>
+                                    <div class="options clearfix" style="max-height:300px;">
+                                        {foreach from=$countries item=list}
+                                        <span class="liv" data-text="{$list.region_name}" data-type="1"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                                <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
+                                    <input type="hidden" value="{$region_level.1}" name="province" id="selProvinces">
+                                    <div class="txt">{$lang.province_alt}</div>
+                                    <i class="down u-dropdown-icon"></i>
+                                    <div class="options clearfix" style="max-height:300px;">
+                                        {foreach from=$provinces item=list}
+                                        <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                                <div id="dlCity" class="ui-dropdown smartdropdown alien">
+                                    <input type="hidden" value="{$region_level.2}" name="city" id="selCities">
+                                    <div class="txt">{$lang.city}</div>
+                                    <i class="down u-dropdown-icon"></i>
+                                    <div class="options clearfix" style="max-height:300px;">
+                                        {foreach from=$cities item=list}
+                                        <span class="liv" data-text="{$list.region_name}" data-type="3"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                                <div id="dlRegion" class="ui-dropdown smartdropdown alien" >
+                                    <input type="hidden" value="{$region_level.3}" name="district" id="selDistricts">
+                                    <div class="txt">{$lang.area_alt}</div>
+                                    <i class="down u-dropdown-icon"></i>
+                                    <div class="options clearfix" style="max-height:300px;">
+                                        {foreach from=$districts item=list}
+                                        <span class="liv" data-text="{$list.region_name}" data-type="4"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                        {/foreach}
+                                    </div>
+                                </div>
+								<div class="form_prompt"></div>						                       
+                            </dd>
+                        </dl>
+                        {if $supplier.review_status}
+                        <dl>
+                        	<dt>{$lang.examine_status}</dt>
+                            <dd class="lh30">
+                                {if $supplier.review_status eq 1}
+                                    <font class="org2">{$lang.not_audited}</font>
+                                {elseif $supplier.review_status eq 2}
+                                    <font class="red">{$lang.audited_not_adopt}</font><br/>
+                                    <i class="tip yellow" title="{$supplier.review_content}" data-toggle="tooltip">{$lang.prompt}</i>
+                                {elseif $supplier.review_status eq 3}
+                                    <font class="blue">{$lang.audited_yes_adopt}</font>
+                                {/if}
+                            </dd>
+                        </dl>
+                        {/if}
+                        <dl class="button_info">
+                        	<dt>&nbsp;</dt>
+                            <dd>
+                            	<input type="button" class="sc-btn sc-blueBg-btn btn35" value="{$lang.button_submit}" id="submitBtn"/>
+                                <input type="reset" class="sc-btn btn35 sc-blue-btn" value="{$lang.button_reset}" />
+                                <input type="hidden" name="act" value="supplier_info" />
+                                <input type="hidden" name="id" value="{$supplier.suppliers_id}" />
+                                <input type="hidden" name="form_action" value="{$form_action}" />
+                            </dd>
+                        </dl>
+                    </div>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript" src="__ROOT__/js/jquery.picTip.js"></script>
+<script type="text/javascript" src="__TPL__/js/region.js"></script>
+<script>
+$(function(){
+    $.levelLink();
+	$('.nyroModal').nyroModal();
+	
+	//表单验证
+	$("#submitBtn").click(function(){
+		if($("#mupgrade_form").valid()){
+            //防止表单重复提交
+            if(checkSubmit() == true){
+    			$("#mupgrade_form").submit();
+            }
+            return false
+		}
+	});
+
+	$('#mupgrade_form').validate({
+		errorPlacement:function(error, element){
+			var error_div = element.parents('dl').find('div.form_prompt');
+			//element.parents('dl').find(".notic").hide();
+			error_div.append(error);
+		},
+		ignore:".ignore",
+		rules:{
+			suppliers_name:{
+				required : true
+			},
+			real_name :{
+				required : true
+			},
+			mobile_phone:{
+				required : true,
+				isMobile : true
+			},
+			email:{
+				required : true,
+				email : true
+			},
+			self_num:{
+				required : true,
+				isIdCardNo :true
+			},
+			front_textfile:{
+				required : true
+			},
+			reverse_textfile:{
+				required : true
+			},
+			logo_textfile:{
+				required : true
+			},
+			company_name:{
+				required : true
+			},
+			company_address:{
+				required : true
+			},
+			city:{
+				required : true,
+                min : 1
+			}            
+		},
+		messages:{
+			suppliers_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_supplier_name}'
+			},
+			real_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_name}'
+			},
+			mobile_phone:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_iphone}',
+				isMobile : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.error_iphone}',
+			},
+			email:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_email}',
+				email : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.error_email}',
+			},
+			self_num:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_user_id}',
+				isIdCardNo : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.error_user_id}'
+			},
+			front_textfile:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.upload_user_id_positive}'
+			},
+			reverse_textfile:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.upload_other_side_user_id}'
+			},
+			logo_textfile:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.upload_supplier_logo}'
+			},
+			company_name:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_company_name}'
+			},
+			company_address:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.input_company_address}'
+			},            
+			city:{
+				required : '<i class="icon icon-exclamation-sign"></i>{$lang.js_languages.select_address}'
+			}
+		}			
+	});
+	
+	$("#brand_name").keyup(function () {    
+   		for (var i = 0; i < $(".li_item").length; i++) {  
+            //模糊匹配，将所有匹配项显示  
+            if ($(".li_item").eq(i).text().substr(0, $("#brand_name").val().length) == $("#brand_name").val()) {  
+                $(".li_item").eq(i).css('display', 'block');  
+            } else{
+				$(".li_item").eq(i).css('display', 'none');  
+			} 
+        }  
+    }); 
+	//项点击  
+    $(".li_item").click(function () {  
+        $("#brand_name").val($(this).text());  
+    });
+});
+</script>
+</body>
+</html>

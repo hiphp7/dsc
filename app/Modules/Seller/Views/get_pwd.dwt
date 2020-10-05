@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+<body>
+<div class="sller_login">
+    <div class="sller_login_warp">
+        <div class="ecsc-login-container"></div>
+    </div>
+</div>
+<div class="backpwd_layout">
+    <div class="backpwd_info">
+        <div class="close"></div>
+        {if $form_act eq "forget_pwd"}
+        <div class="title">{$lang.forget_password}</div>
+        <form action="get_password.php" method="post" name="submitAdmin" id="submitAdmin1" >
+            <div class="formInfo">
+                <div class="formText">
+                    <input type="text" name="user_name" class="input-text" autocomplete="off" placeholder="{$lang.user_name}"/>
+                    <div class="form_prompt"></div>
+                </div>
+                <div class="formText">
+                    <input type="text" name="email" class="input-text" autocomplete="off" placeholder="{$lang.email}"/>
+                    <div class="form_prompt"></div>
+                </div>
+                <div class="formText submitDiv">
+                    <input type="submit" name="submit" class="sub qp_sub" value="{$lang.send}" id="submitBtn"/>
+                    <input type="hidden" name="action" value="get_pwd" />
+                    <input type="hidden" name="act" value="forget_pwd" />
+                </div>
+                <div class="formText">
+                    <a href="privilege.php?act=login" class="return">{$lang.return_login}</a>
+                </div>
+
+            </div>
+        </form>
+        {/if}
+        {if $form_act eq "reset_pwd"}
+        <div class="title">{$lang.reset_pwd}</div>
+        <form action="get_password.php" method="post" name="submitAdmin" id="submitAdmin2">
+            <div class="formInfo">
+                <div class="formText">
+                    <input type="password" style="display:none" autocomplete="off"/>
+                    <input type="password" name="password" id="password" class="input-text" autocomplete="off" placeholder="{$lang.enter_admin_pwd}"/>
+                    <div class="form_prompt"></div>
+                </div>
+                <div class="formText">
+                    <input type="password" style="display:none" autocomplete="off" />
+                    <input type="password" name="confirm_pwd" class="input-text" autocomplete="off" placeholder="{$lang.confirm_admin_pwd}"/>
+                    <div class="form_prompt"></div>
+                </div>
+                <div class="formText submitDiv">
+                    <input type="hidden" name="action" value="reset_pwd" />
+                    <input type="hidden" name="act" value="forget_pwd" />
+                    <input type="hidden" name="adminid" value="{$adminid}" />
+                    <input type="hidden" name="code" value="{$code}" />
+                    <input type="submit" name="submit" class="sub qp_sub" value="{$lang.click_button2}" id="submitBtn1"/>
+                </div>
+            </div>
+        </form>
+        {/if}
+    </div>
+</div>
+<div class="backpwd_layout_bg"></div>
+<script type="text/javascript">
+
+    $(function () {
+        if("{$form_act}" == 'forget_pwd' || "{$form_act}" == 'reset_pwd'){
+            $(".backpwd_layout").show();
+            $(".backpwd_layout_bg").show();
+        }
+    });
+
+<!--
+/**
+* 检查表单输入的数据
+*/
+function validate()
+{
+  validator = new Validator("submitAdmin");
+  validator.required("user_name", user_name_empty);
+  validator.required("email", email_empty, 1);
+  validator.isEmail("email", email_error);
+
+  return validator.passed();
+}
+
+function validate2()
+{
+  validator = new Validator("submitPwd");
+  validator.required("password",            admin_pwd_empty);
+  validator.required("confirm_pwd",         confirm_pwd_empty);
+  if (document.forms['submitPwd'].elements['confirm_pwd'].value.length > 0)
+  {
+    validator.eqaul("password","confirm_pwd", both_pwd_error);
+  }
+
+  return validator.passed();
+}
+//-->
+</script>
+{/literal}
+</body>
+</html>

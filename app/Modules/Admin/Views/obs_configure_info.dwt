@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.file_management} - {$ur_here}</div>
+        <div class="content">
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>{$lang.operation_prompt_content.info.0}</li>
+                    <li>{$lang.operation_prompt_content.info.1}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-content">
+                    <div class="mian-info">
+                        <form action="obs_configure.php" method="post" name="theForm" enctype="multipart/form-data" id="obs_configure_form">
+                            <div class="switch_info">
+                                <div class="item">
+                                    <div class="label">{$lang.require_field}{$lang.bucket}：</div>
+                                    <div class="label_value">
+										<input type='text' name='bucket' value='{$bucket.bucket|escape:html}' size='55' class="text" />
+                                   		<div class="form_prompt"></div>
+                                        <div class="notic">{$lang.bucket_oss_notic}</div>	
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">{$lang.require_field}{$lang.keyid}：</div>
+                                    <div class="label_value">
+										<input type='text' name='keyid' value='{$bucket.keyid|escape:html}' size='55' class="text" />
+                                        <div class="form_prompt"></div>
+                                        <div class="notic">{$lang.bucket_keyid_notic}</div>	
+                                    </div>
+                                </div>								
+                                <div class="item">
+                                    <div class="label">{$lang.require_field}{$lang.keysecret}：</div>
+                                    <div class="label_value">
+										<input type='text' name='keysecret' value='{$bucket.keysecret|escape:html}' size='55' class="text" />
+                                        <div class="form_prompt"></div>
+                                        <div class="notic">{$lang.bucket_secret_notic}</div>	
+                                    </div>
+                                </div>	
+                                <div class="item" style="margin-bottom:0px;">
+                                    <div class="label">{$lang.is_cname}：</div>
+                                    <div class="label_value">
+                                        <div class="checkbox_items">
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="is_cname" id="is_cname_0" value="0" {if $bucket.is_cname eq 0} checked="true" {/if}  />
+                                                <label for="is_cname_0" class="ui-radio-label">{$lang.off}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="is_cname" id="is_cname_1" value="1" {if $bucket.is_cname eq 1} checked="true" {/if}  />
+                                                <label for="is_cname_1" class="ui-radio-label">{$lang.on}</label>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                </div>		
+                                <div class="item">
+                                    <div class="label">&nbsp;</div>
+                                    <div class="label_value">
+                                        <div class="notic">{$lang.bucket_url_notic}</div>	
+                                    </div>
+                                </div>						
+                                <div class="item" id="iscname" {if $bucket.is_cname eq 0} style="display:none"{/if}>
+                                    <div class="label">{$lang.require_field}&nbsp;{$lang.endpoint}：</div>
+                                    <div class="label_value">
+										<input type='text' name='endpoint' value='{$bucket.endpoint|escape:html}' size='55' class="text" />
+                                    </div>
+                                </div>
+                                <div class="item hide">
+                                    <div class="label">{$lang.port}：</div>
+                                    <div class="label_value">
+										<input type='text' name='port' value='{$bucket.port}' size='55' class="text" />
+                                    </div>
+                                </div>	
+                                <div class="item">
+                                    <div class="label">{$lang.regional}：</div>
+                                    <div class="label_value">
+                                        <div class="checkbox_items" style="width:800px;">
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="huabei-beijing-four" value="cn-north-4" {if $bucket.regional eq 'cn-north-4'} checked="true" {/if}  />
+                                                <label for="huabei-beijing-four" class="ui-radio-label">{$lang.huabei-beijing-four}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="huabei-beijing-one" value="cn-north-1" {if $bucket.regional eq 'cn-north-1'} checked="true" {/if}  />
+                                                <label for="huabei-beijing-one" class="ui-radio-label">{$lang.huabei-beijing-one}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="huadong-shanghai-two" value="cn-east-2" {if $bucket.regional eq 'cn-east-2'} checked="true" {/if}  />
+                                                <label for="huadong-shanghai-two" class="ui-radio-label">{$lang.huadong-shanghai-two}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="huadong-guangzhou" value="cn-south-1" {if $bucket.regional eq 'cn-south-1'} checked="true" {/if}  />
+                                                <label for="huadong-guangzhou" class="ui-radio-label">{$lang.huadong-guangzhou}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="af-south" value="af-south-1" {if $bucket.regional eq 'af-south-1'} checked="true" {/if}  />
+                                                <label for="af-south" class="ui-radio-label">{$lang.af-south}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="xinan-guiyang-one" value="cn-southwest-2" {if $bucket.regional eq 'cn-southwest-2'} checked="true" {/if}  />
+                                                <label for="xinan-guiyang-one" class="ui-radio-label">{$lang.xinan-guiyang-one}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="ap-bangkok" value="ap-southeast-2" {if $bucket.regional eq 'ap-southeast-2'} checked="true" {/if}  />
+                                                <label for="ap-bangkok" class="ui-radio-label">{$lang.ap-bangkok}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="ap-hong-kong" value="ap-southeast-1" {if $bucket.regional eq 'ap-southeast-1'} checked="true" {/if}  />
+                                                <label for="ap-hong-kong" class="ui-radio-label">{$lang.ap-hong-kong}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="regional" id="ap-singapore" value="ap-southeast-3" {if $bucket.regional eq 'ap-southeast-3'} checked="true" {/if}  />
+                                                <label for="ap-singapore" class="ui-radio-label">{$lang.ap-singapore}</label>
+                                            </div>											
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">{$lang.is_use}：</div>
+                                    <div class="label_value">
+                                        <div class="checkbox_items">
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="is_use" id="is_use_0" value="0" {if $bucket.is_use eq 0} checked="true" {/if}  />
+                                                <label for="is_use_0" class="ui-radio-label">{$lang.no}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="is_use" id="is_use_1" value="1" {if $bucket.is_use eq 1} checked="true" {/if}  />
+                                                <label for="is_use_1" class="ui-radio-label">{$lang.yes}</label>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                </div>
+                                <div class="item hide">
+                                    <div class="label">{$lang.delimg}：</div>
+                                    <div class="label_value">
+                                        <div class="checkbox_items">
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="is_delimg" id="delimg_0" value="0" {if $bucket.is_delimg eq 0} checked="true" {/if}  />
+                                                <label for="delimg_0" class="ui-radio-label">{$lang.no}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="radio" class="ui-radio" name="is_delimg" id="delimg_1" value="1" {if $bucket.is_delimg eq 1} checked="true" {/if}  />
+                                                <label for="delimg_1" class="ui-radio-label">{$lang.yes}</label>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                </div>									
+                                <div class="item">
+                                    <div class="label">&nbsp;</div>
+                                    <div class="label_value info_btn">
+										<input type="hidden" name="id" value="{$bucket.id}" />
+										<input class="button" type="button" value="{$lang.button_submit}" id="submitBtn" />
+										<input class="button button_reset" type="reset" value="{$lang.button_reset}" />
+										<input type="hidden" name="act" value="{$form_act}" />
+                                    </div>
+                                </div>								
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+		</div>
+    </div>
+ 	{include file ='library/pagefooter.lbi'}
+	<script type="text/javascript">
+	$(function(){
+		$("input[name='is_cname']").change(function(){
+			var isval = $(this).val();
+			if(isval == 1){
+				$("#iscname").show();
+			}else{
+				$("#iscname").hide();
+			}
+		});
+		
+		//表单验证
+		$("#submitBtn").click(function(){
+			if($("#obs_configure_form").valid()){
+                //防止表单重复提交
+                if(checkSubmit() == true){
+    				$("#obs_configure_form").submit();
+                }
+                return false
+			}
+		});
+	
+		$('#obs_configure_form').validate({
+			errorPlacement:function(error, element){
+				var error_div = element.parents('div.label_value').find('div.form_prompt');
+				element.parents('div.label_value').find(".notic").hide();
+				error_div.append(error);
+			},
+			rules:{
+				bucket:{
+					required:true
+				},
+				keyid:{
+					required:true
+				},
+				keysecret:{
+					required:true
+				}
+			},
+			messages:{
+				bucket:{
+					required:'<i class="icon icon-exclamation-sign"></i>' + oss_bucket_null
+				},
+				keyid:{
+					required:'<i class="icon icon-exclamation-sign"></i>' + oss_keyid_null
+				},
+				keysecret:{
+					required:'<i class="icon icon-exclamation-sign"></i>' + oss_keysecret_null
+				}
+			}
+		});
+	});
+	</script>
+</body>
+</html>

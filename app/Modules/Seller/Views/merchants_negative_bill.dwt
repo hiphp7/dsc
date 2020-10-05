@@ -1,0 +1,86 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">
+                {include file ='library/url_here.lbi'}
+				{include file ='library/seller_menu_tab.lbi'}
+                <form method="post" action="" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+                <div class="list-div" id="listDiv">
+					{/if}
+					<table class="ecsc-default-table goods-default-table mt20">	
+                    <thead>
+                    	<tr>
+                            <th width="7%">{$lang.negative_number}</th>
+                            <th class="hide">{$lang.steps_shop_name}</th>
+                            <th>{$lang.bill_number}</th>
+                            <th>{$lang.return_amount}</th>
+                            <th>{$lang.return_shippingfee}</th>
+                            <th width="10%">{$lang.return_total}</th>
+                            <th>{$lang.negative_status}</th>
+                            <th width="8%">{$lang.order_start_time}</th>
+                            <th width="8%">{$lang.order_end_time}</th>
+                            <th width="15%" class="tc">{$lang.handler}</th>
+                    	</tr>
+                    </thead>
+                    <tbody>
+                    {foreach from=$bill_list item=bill name=nobill}
+                    <tr>
+                        <td>{$bill.bill_sn}</td>
+                        <td class="hide red">{$bill.shop_name}</td>
+                        <td><div class="red">{if $bill.commission_bill_sn}{$bill.commission_bill_sn}{else}{$lang.negative_binding}{/if}</div></td>
+                        <td>{$bill.format_return_amount}</td>
+                        <td>{$bill.format_return_shippingfee}</td>
+                        <td><div class="red">{$bill.format_return_total}</div></td>
+                        <td>{$bill.chargeoff_status}</td>
+                        <td>{$bill.start_time}</td>
+                        <td>{$bill.end_time}</td>
+                      	<td class="ecsc-table-handle">
+                            <span><a href="merchants_commission.php?act=negative_order&negative_id={$bill.id}&seller_id={$bill.seller_id}" class="btn-orange"><i class="sc_icon_see"></i><p>{$lang.negative_bill_detail}</p></a></span>
+                      	</td>
+                    </tr>
+                    {foreachelse}
+                    <tr><td class="no-records" colspan="20">{$lang.no_records}</td></tr>
+                    {/foreach}
+                    </tbody>
+                  	</table>
+                 	{include file="page.dwt"}
+                	{if $full_page}
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<input name="bill_seller" type="hidden" value="{$user_id|default:0}" />
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript">
+
+	//检查结算账单
+	checkBill();
+	
+	listTable.recordCount = {$record_count};
+	listTable.pageCount = {$page_count};
+	listTable.query = "commission_bill_query";
+	
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+	
+	{literal}
+	onload = function()
+	{
+	  startCheckOrder();
+	}
+	{/literal}
+</script>
+</body>
+</html>
+{/if}

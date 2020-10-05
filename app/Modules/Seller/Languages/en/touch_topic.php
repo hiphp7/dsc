@@ -1,0 +1,81 @@
+<?php
+
+$_LANG = array(
+    'tab_general' => 'General information',
+    'tab_desc' => 'Project introduction',
+    'tab_goods' => 'Special goods',
+    'tab_advanced' => 'Advanced options',
+    'back_list' => 'Return topic list',
+    'continue_add' => 'Continue adding topics',
+    'add_topic' => 'Add the project',
+    'topic_class' => 'Project classification',
+    'select_product' => 'Choose goods',
+    'default_class' => 'No classification',
+    'publish_to_player' => 'Publish to Flash playlist',
+    'publish_to_ads' => 'Post to AD',
+    'screen_goods' => 'Classification of goods',
+    'succed' => 'Operation successful!',
+    'notice_template_file' => 'Fill in the template file name of the current topic. The template file should be uploaded to the current mall template directory.',
+    'notice_css' => 'Fill in the CSS style code for the current theme, leaving it blank will invoke the template default CSS file',
+    'js_languages' =>
+        array(
+            'topic_name_empty' => 'Please enter topic name!',
+            'start_time_empty' => 'Please select the project start time!',
+            'end_time_empty' => 'Please choose the end of the project!',
+            'delete_topic_confirm' => 'Are you sure to delete the selected items?',
+            'sort_name_exist' => 'This classification already exists',
+            'sort_name_empty' => 'Please enter category name',
+            'move_item_confirm' => 'The selected items have been transferred to the \\"className\\" category',
+            'item_upper_limit' => 'There are no more than 50 items in each category',
+            'start_lt_end' => 'The start time of the project cannot be longer than the end time',
+            'select_remove_cat' => 'Please select delete category',
+            'select_cat_add' => 'Please select category first and add category first if there is no category',
+            'jl_upload_banner_img' => 'Please upload a banner image',
+            'jl_add_topic_cat' => 'Please add a topic category first',
+        ),
+    'invalid_type' => 'The image you uploaded is not in the correct format!',
+    'web_url_no' => 'Remote address error. Please fill in the full URL address!',
+    'topic_id' => 'Serial number',
+    'topic_title' => 'Project name',
+    'topic_desc' => 'Project introduction',
+    'start_time' => 'The start time',
+    'end_time' => 'The end of time',
+    'cycle' => 'cycle',
+    'template_file' => 'Thematic template file',
+    'style_sheet' => 'Thematic style sheet',
+    'lable_topic_type' => 'Image type',
+    'lable_base_style' => 'Basic style',
+    'lable_title_upload' => 'Category title picture',
+    'lable_topic_keywords' => 'Topic page keywords',
+    'lable_topic_description' => 'Topic page description',
+    'tips_width_height' => 'The image standard width of this template is: %s and the standard height is: %s',
+    'tips_upload_notice' => 'Upload the image file of the AD, or you can specify a remote URL for the image of the AD',
+    'tips_title_width_height' => 'The image standard width of this template is: %s and the standard height is: %s',
+    'all_goods' => 'Optional items',
+    'selected_goods' => 'The selected items',
+    'top_img' => 'The picture',
+    'top_flash' => 'Flash',
+    'top_html' => 'code',
+    'lable_upload' => 'upload',
+    'lable_from_web' => 'Or a remote URL address',
+    'lable_content' => 'content',
+    'goods_desc' => 'Project introduction',
+    'add_topic_cat' => 'Please add a topic category first',
+    'operation_prompt_content' =>
+        array(
+            'info' =>
+                array(
+                    0 => 'Add topical information: general information, topical products, topical presentations, advanced options, etc.',
+                    1 => 'Click ok to create a special page.',
+                    2 => 'Click on the list page to see the topic page displayed in the foreground.',
+                ),
+            'list' =>
+                array(
+                    0 => 'Present information about special events.',
+                    1 => 'Can be released advertising, Flash release and other operations.',
+                ),
+        ),
+);
+
+
+return $_LANG;

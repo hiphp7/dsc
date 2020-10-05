@@ -1,0 +1,494 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>{include file ='library/seller_html_head.lbi'}</head>
+<body>
+{include file ='library/seller_header.lbi'}
+<div class="ecsc-layout">
+    <div class="site wrapper">
+        {include file ='library/seller_menu_left.lbi'}
+        <div class="ecsc-layout-right">
+            <div class="main-content" id="mainContent">     
+            	{include file ='library/url_here.lbi'}
+				{include file ='library/seller_menu_tab.lbi'}
+                <div class="search-info">
+                	<div class="search-form">
+                    <form method="get" action="javascript:searchGoodsList()" name="searchFormList">		
+                        <div class="search-key">
+                        	<input type="text" class="text" name="keyword" value="" placeholder="{$lang.search_where}">
+                            <input type="submit" class="submit" value="{$lang.button_search}">
+                            <input type="hidden" name="cat_id" id="cat_id" value="0"/>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                <form method="post" action="goods_lib.php" name="listForm" onsubmit="return confirmSubmit(this)">
+                    <input type="hidden" name="act" value="batch">
+                    <input type="hidden" name="type" value>
+                    {/if}
+                    <div id="listDiv">
+                        <table class="ecsc-default-table goods-default-table">
+                            <thead>
+                                <tr ectype="table_header">
+									<th width="8%">
+										<div class="first_all">
+											<input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" class="ui-checkbox" id="all"/>
+											<label for="all" class="ui-label">{$lang.record_id}</label>
+										</div>
+									</th>
+                                    <th width="35%" class="tl">{$lang.goods_info_name}</th>
+									<th width="15%" class="tl">{$lang.goods_lib_cat}</th>
+                                    {if $standard_goods eq 1}
+                                   	<th width="15%" class="tl">{$lang.supplier}</th>
+                                   	{/if}
+                                    <th width="10%">{$lang.shop_price}</th>
+                                    <th width="7%"><a href="javascript:listTable.sort('sort_order'); ">{$lang.sort_order}</a></th>
+                                    <th width="10%">{$lang.handler}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {foreach from=$goods_list item=goods name=goods}
+                                <tr>
+									<td class="first_td_checkbox">
+										<div class="first_all">
+											<input value="{$goods.goods_id}" name="checkboxes[]" type="checkbox" id="goods_{$goods.goods_id}" class="ui-checkbox">
+											<label for="goods_{$goods.goods_id}" class="ui-label">{$goods.goods_id}</label>
+										</div>
+									</td>									
+                                    <td class="tl">
+                                        <div class="goods-info">
+                                        	<div class="goods-img"><a href="__ROOT__goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" onmouseover="toolTip('<img src={$goods.goods_thumb}>')" onmouseout="toolTip()"></a></div>
+                                            <div class="goods-desc">
+                                                <div class="name" class="hidden">{$goods.goods_name|escape:html}</div>
+                                            	<div class="goods-tag">
+                                                    {if $goods.brand_name}<font class="fl blue mr5">[ {$goods.brand_name} ]</font>{/if}
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                    </td>
+                                    <td class="tl"><span>{$goods.lib_cat_name}</span></td>
+                                    {if $standard_goods eq 1}
+                                    <td class="tl"><span>{$goods.suppliers_name}</span></td>    
+                                    {/if}
+                                    <td><span>{$goods.shop_price}</span></td>
+                                    <td><span>{$goods.sort_order}</span></td>
+                                    <td class="ecsc-table-handle tr">
+                                        {if $standard_goods eq 1}
+                                        <span><a href="__ROOT__wholesale_goods.php?id={$goods.goods_id}" target="_blank" class="btn-orange"><i class="sc_icon_see"></i><p>{$lang.purchase}</p></a></span>
+                                        {/if}
+                                        <span><a href="javascript:void(0);" ectype="seller_import" data-goodsid="{$goods.goods_id}" data-standard='{$standard_goods}' class="btn-red"><i class="icon-upload-alt"></i><p>{$lang.import}</p></a></span>
+                                    </td>
+                                </tr>
+                            {foreachelse}
+                            <tr><td colspan="20" class="no-records">{$lang.no_records}</td></tr>
+                            {/foreach}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="frist tc"></th>
+                                    <th class="batch-operation" colspan="20">
+                                        <input name="standard_goods" type="hidden" value="{$standard_goods}"/>
+										<a href="javascript:void(0);" class="sc-btn sc-red-btn"><i class="icon-upload-alt"></i>{$lang.batch_import}</a>
+                                    	<span>{if $record_count}{$lang.total_data}{$record_count}{$lang.record}{/if}</span>
+                                        <span class="page page_3">
+                                            <i>{$lang.go_number}</i>
+                                            <select id="gotoPage" onchange="listTable.gotoPage(this.value)">
+                                                {create_pages count=$page_count page=$filter.page}
+                                            </select>
+                                            <i>{$lang.page_ye}</i>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        {include file="page.dwt"}
+                        {if $full_page}
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{if $standard_goods eq 1}
+<!--高级搜索 start-->
+{include file="library/goods_search.lbi"}
+<!--高级搜索 end-->
+{/if}
+    
+{include file ='library/seller_footer.lbi'}
+<script type="text/javascript" src="__TPL__/js/ToolTip.js"></script>
+<script type="text/javascript" src="__TPL__/js/jquery.purebox.js"></script>
+<script type="text/javascript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+{if $standard_goods eq 1}
+listTable.query = 'lib_query';
+{/if}
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+
+function searchGoodsList()
+{
+	listTable.filter['keyword'] = Utils.trim(document.forms['searchFormList'].elements['keyword'].value);
+	listTable.filter['page'] = 1;
+
+	listTable.loadList();
+}
+
+function confirmSubmit(frm, ext)
+{
+  return true;
+}
+
+function changeAction(type)
+{
+  var frm = document.forms['listForm'];
+  frm.elements['type'].value = type;
+  if(confirmSubmit(frm, false))
+  {
+	frm.submit();
+  }
+}
+
+//单选勾选
+function get_ajax_act(t, goods_id, act, FileName){
+	
+	if(t.checked == false){
+		t.value = 0;
+	}
+	
+	Ajax.call(FileName + '.php?act=' + act, 'id=' + goods_id + '&val=' + t.value, act_response, 'POST', 'JSON');
+}
+
+function act_response(result){
+}  
+  
+$(function(){
+	//列表批量处理
+	$(document).on("click",".batch-operation a.sc-btn",function(){
+		var _this = $(this),
+			table = _this.parents(".ecsc-default-table"),
+			checked = table.find("input[name='checkboxes[]']").is(":checked"),
+			type = _this.data("type");
+		if(checked){
+			changeAction(type);
+		}else{
+			alert("{$lang.select_goods}");
+		}
+	});
+});
+
+//商品库商品导入 start
+$(document).on("click","a[ectype='seller_import']",function(){
+	var goods_id = $(this).data("goodsid");
+    var standard = $(this).data('standard');
+	
+	$.jqueryAjax('goods_lib.php', 'act=seller_import' + '&goods_id=' + goods_id + "&standard=" + standard, function(data){
+		var content = data.content;
+		pb({
+			id:"seller_export",
+			title:"{$lang.js_languages.jl_goods_import}",
+			width:900,
+            height:500,
+			content:content,
+			ok_title:"{$lang.button_submit_alt}",
+			cl_title:"{$lang.cancel}",
+			drag:true,
+			foot:false
+		});
+		
+		//商品运费 by wu
+		$("input[name='freight']").click(function(){
+			var value = $(this).val();
+			if(value == 0){
+				$('#shipping_fee').hide();
+				$('#tid').hide();			
+			}else if(value == 1){
+				$('#shipping_fee').show();
+				$('#tid').hide();
+			}else if(value == 2){
+				$('#shipping_fee').hide();
+				$('#tid').show();		
+			}
+		});
+	});
+});
+
+//仓库/地区价格 end
+
+//SKU/库存 start
+$(document).on("click","a[ectype='add_sku']",function(){
+	
+	var goods_id = $(this).data('goodsid');
+	var user_id = $(this).data('userid');
+	
+	$.jqueryAjax('dialog.php', 'act=add_sku' + '&goods_id=' + goods_id + '&user_id=' + user_id, function(data){
+		var content = data.content;
+		pb({
+			id:"categroy_dialog",
+			title:"{$lang.edit_goods_sku_info}",
+			width:863,
+			content:content,
+			ok_title:"{$lang.button_submit_alt}",
+			cl_title:"{$lang.cancel}",
+			drag:true,
+			foot:false
+		});
+	});
+});
+
+	//SKU/库存 start
+	$(document).on("click","a[ectype='add_attr_sku']",function(){
+		var goods_id = $(this).data('goodsid');
+		var product_id = $(this).data('product');
+		
+		$.jqueryAjax('dialog.php', 'act=add_attr_sku' + '&goods_id=' + goods_id + '&product_id=' + product_id, function(data){
+			var content = data.content;
+			pb({
+				id:"attr_sku_dialog",
+				title:"{$lang.edit_goods_sku_price}",
+				width:563,
+				content:content,
+				ok_title:"{$lang.button_submit_alt}",
+				cl_title:"{$lang.cancel}",
+				drag:true,
+				foot:true,
+				onOk:function(){
+					if(data.method){
+						insert_attr_warehouse_area_price(data.method);
+					}
+				}
+			});
+		});
+	});
+
+	function insert_attr_warehouse_area_price(method){
+		var actionUrl = "dialog.php?act=" + method;  
+		$("#warehouseForm").ajaxSubmit({
+			type: "POST",
+			dataType: "JSON",
+			url: actionUrl,
+			data: { "action": "TemporaryImage" },
+			success: function (data) {
+			},
+			async: true  
+		});
+	}
+
+	//设置商品属性
+	function getAttrList(goodsId)
+	{
+                var selGoodsType = $('#set_import_attr').find('input[name="goods_type"]')
+		var modelAttr = 0;
+		if (selGoodsType != undefined)
+		{
+			var goodsType = selGoodsType.val();	
+			Ajax.call('goods.php?is_ajax=1&act=get_attribute', 'goods_id=' + goodsId + "&goods_type=" + goodsType + '&modelAttr=' + modelAttr, setAttrList, "GET", "JSON");
+		}
+	}
+	
+	function setAttrList(result, text_result)
+	{
+		document.getElementById('tbody-goodsAttr').innerHTML = result.goods_attribute;
+		if(result.is_spec){
+			$("#goods_attr_gallery").show();
+			document.getElementById('goods_attr_gallery').innerHTML = result.goods_attr_gallery;
+		}else{
+			$("#goods_attr_gallery").hide();
+		}
+		
+		set_attribute_table(0);
+	}
+	$(document).on("click","a[ectype='set_import_attr']",function(){
+		var new_goods_type = $("#seller_export").find('input[name="new_goods_type"]').val();
+		$.jqueryAjax('goods_lib.php', 'act=set_import_attr&new_goods_type=' + new_goods_type, function(data){
+			var content = data.content;
+			pb({
+				id:"set_import_attr",
+				title:"{$lang.set_goods_info}",
+				width:1020,
+				height:500,
+				content:content,
+				ok_title:"{$lang.button_submit_alt}",
+				cl_title:"{$lang.cancel}",
+				drag:true,
+				foot:true,
+				onOk:function(){
+					var goods_type = $("#set_import_attr").find('input[name="goods_type"]').val();
+					$("#seller_export").find('input[name="new_goods_type"]').val(goods_type);
+				}
+			});
+			
+			$("#set_import_attr .pb-ct").perfectScrollbar("destroy");
+			$("#set_import_attr .pb-ct").perfectScrollbar();
+		});
+	});
+	
+	$(document).on("click","a[ectype='attr_input']",function(){
+		var attr_id = $(this).data('attrid');
+		var goods_id = 0;
+		
+		$.jqueryAjax('dialog.php', 'is_ajax=1&act=attr_input_type' + '&attr_id=' + attr_id + '&goods_id=' + goods_id, function(data){
+			var content = data.content;
+			pb({
+				id:"attr_input_type",
+				title:"{$lang.manual_entry_property}",
+				width:820,
+				content:content,
+				ok_title:"{$lang.button_submit_alt}",
+				cl_title:"{$lang.cancel}",
+				drag:false,
+				foot:true,
+				cl_cBtn:true,
+				onOk:function(){
+					insert_attr_input();
+				}
+			});
+		});
+	});
+	
+	function insert_attr_input(){
+		var actionUrl = "dialog.php?act=insert_attr_input";  
+		$("#insertAttrInput").ajaxSubmit({
+			type: "POST",
+			dataType: "JSON",
+			url: actionUrl,
+			data: { "action": "TemporaryImage" },
+			success: function (data) {
+				$(".attr_input_type_" + data.attr_id).html(data.content);
+				
+				//自动加载商品属性
+				getAttrList(data.goods_id);
+			},
+			async: true
+		});
+	}
+	
+	$(document).on("click",".xds_up",function(){
+		var _div = $(this).parent().clone();
+		_div.find("i").removeClass("xds_up").addClass("xds_down");
+		$(this).parents(".input_type_items").append(_div);
+	});
+	
+	$(document).on("click",".xds_down",function(){
+		var parent = $(this).parents(".input_type_item");
+		var goods_attr_id = parent.children("input[name='goods_attr_id[]']").val();
+		var goods_id = 0;
+		
+		if(goods_attr_id > 0){
+			
+			var attr_id = $("input[name='attr_id']").val();
+
+			if(confirm('{$lang.sure_del}')){
+				$.jqueryAjax('dialog.php', 'is_ajax=1&act=del_input_type' + '&goods_attr_id=' + goods_attr_id + '&attr_id=' + attr_id + '&goods_id=' + goods_id, function(data){
+					$(".attr_input_type_" + data.attr_id).html(data.attr_content);
+					parent.remove();
+					
+					//自动加载商品属性
+					getAttrList(goods_id);
+				});
+			}
+			
+		}else{
+			parent.remove();
+		}
+	});
+	
+	$(document).on("click","[ectype='search_attr']",function(){
+		set_attribute_table(0 , 1); //重置表格
+	});
+	
+	//上传属性图片 start
+	$(document).on("click","a[ectype='add_attr_img']",function(){
+		var goods_id = 0;
+		var goods_name = $("[ectype='lib_goods_name']").html();
+		var attr_id = $(this).data('attrid');
+		var goods_attr_id = $(this).data('goodsattrid');
+		var attr_value = $("#goodsAttrValue_" + goods_attr_id).val();
+		
+		if(attr_value == ''){
+			alert("{$lang.select_goods_spec}");
+			return false;
+		}
+		
+		$.jqueryAjax('dialog.php', 'act=add_attr_img' + '&lib_type=1&goods_id=' + goods_id + '&goods_name=' + goods_name + '&attr_id=' + attr_id + '&goods_attr_id=' + goods_attr_id + '&goods_attr_name=' + attr_value, function(data){
+			var content = data.content;
+			pb({
+				id:"categroy_dialog",
+				title:"{$lang.file_attr_img}",
+				width:664,
+				content:content,
+				ok_title:"{$lang.button_submit_alt}",
+				cl_title:"{$lang.cancel}",
+				drag:true,
+				foot:true,
+				cl_cBtn:true,
+				onOk:function(){
+					get_attr_gallery();
+				}
+			});
+		});
+	});
+	
+	function get_attr_gallery(){
+		var actionUrl = "dialog.php?act=insert_attr_img";  
+		$("#fileForm").ajaxSubmit({
+			type: "POST",
+			dataType: "JSON",
+			url: actionUrl,
+			data: { "action": "TemporaryImage" },
+			success: function (data) {
+				if(data.is_checked){
+					$(".attr_gallerys").find(".img[data-type='img']").remove();
+					var _div_img = '<div class="img" data-type="img"><img src="images/yes.png" /></div>';
+					$(".attr_gallerys").find("a[data-goodsattrid='" + data.goods_attr_id + "']").after(_div_img);
+				}
+			},
+			async: true
+		});
+	}
+	
+	function delete_attr_gallery(goods_id, attr_id, goods_attr_name, goods_attr_id){
+		$.jqueryAjax('dialog.php', 'act=drop_attr_img' + '&goods_id=' + goods_id + '&attr_id=' + attr_id + '&goods_attr_name=' + goods_attr_name + '&goods_attr_id=' + goods_attr_id, function(data){
+			if(data.error == 0){
+				$(".img_flie_" + data.goods_attr_id).remove();
+			}
+		});
+	}
+	
+	function get_choose_attrImg(goods_id, goods_attr_id){
+		if($("#feedbox").is(":hidden")){
+			$.jqueryAjax('dialog.php', 'act=choose_attrImg' + "&goods_id="+goods_id +  "&goods_attr_id="+goods_attr_id, function(data){
+				if(data.error == 0){
+					$("#feedcontent").html(data.content);
+					$("#feedbox").show();
+				}
+			});
+		}else{
+			$("#feedbox").hide();
+		}
+	}
+	
+	//删除商品勾选属性
+	$(document).on("click","*[ectype='attrClose']",function(){
+		var _this = $(this);
+		var goods_id = _this.data("goodsid");
+		var attr_id = _this.data("attrid");
+		var goods_attr_id = _this.data("goodsattrid");
+		var attr_value = _this.data("attrvalue");
+		
+		if(_this.siblings("input[type='checkbox']").is(":checked") == true){
+			_this.siblings("input[type='checkbox']").prop("checked",false);
+			$.jqueryAjax('dialog.php', 'act=del_goods_attr' + '&goods_id=' + goods_id + '&attr_id=' + attr_id + '&goods_attr_id=' + goods_attr_id + '&attr_value=' + attr_value, function(data){
+				getAttrList(goods_id);
+			});
+		};
+	});
+        
+        
+</script>
+</body>
+</html>
+{/if}

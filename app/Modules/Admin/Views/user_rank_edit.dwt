@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>{include file ='library/admin_html_head.lbi'}</head>
+
+<body class="iframe_body">
+	<div class="warpper">
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.08_members} - {$ur_here}</div>
+        <div class="content">
+        	<div class="explanation" id="explanation">
+                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <ul>
+                    <li>{$lang.operation_prompt_content_common}</li>
+                </ul>
+            </div>
+            <div class="flexilist">
+                <div class="common-content">
+                    <div class="mian-info">
+                        <form action="user_rank.php" method="post" name="theForm" id="user_rank_form"> 
+                        	<div class="switch_info">
+                                <div class="item">
+                                    <div class="label label-small">{$lang.require_field}&nbsp;{$lang.rank_name}：</div>
+                                    <div class="label_value">
+                                        <input type="text" name="rank_name" value="{$rank.rank_name}" class="text" id="rank_name" autocomplete="off" />
+                                        <div class="form_prompt"></div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label label-small">{$lang.require_field}&nbsp;{$lang.integral_min}：</div>
+                                    <div class="label_value">
+                                        <input type="text" name="min_points" value="{$rank.min_points}" class="text" {if $rank.special_rank}disabled{/if} id="min_points" autocomplete="off" />
+                                        <p class="notic">{$lang.integral_min_notice}</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label label-small">{$lang.set_show}：</div>
+                                    <div class="label_value">
+                                        <input type="checkbox" class="ui-checkbox" value='1' name="show_price" {if $rank.show_price eq 1}checked{/if}  id="checkbox_001"/>
+                                        <label for="checkbox_001" class="ui-label">{$lang.show_price}</label>
+                                        <div class="form_prompt"></div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label label-small">&nbsp;</div>
+                                    <div class="label_value info_btn">
+                                        <a href="javascript:;" class="button" id="submitBtn">{$lang.button_submit}</a>
+                                        <input type="hidden" name="act" value="{$form_action}" />
+                                        <input type="hidden" name="id" value="{$rank.rank_id}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+		</div>
+    </div>
+ {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript">
+		//列表导航栏设置下路选项
+    	$(".ps-container").perfectScrollbar();
+
+		$(function(){
+			$("#submitBtn").click(function(){
+				var minval = Number($.trim($("#min_points").val()));
+
+				if($("#user_rank_form").valid()){
+					//防止表单重复提交
+                    if(checkSubmit() == true){
+                        $("#user_rank_form").submit();
+                    }
+                    return false;
+				}
+			});
+		
+			$('#user_rank_form').validate({
+				errorPlacement:function(error, element){
+					var error_div = element.parents('div.label_value').find('div.form_prompt');
+					element.parents('div.label_value').find(".notic").hide();
+					error_div.append(error);
+				},
+				rules : {
+					rank_name : {
+						required : true
+					},
+					min_points : {
+						digits : true
+					},
+
+				},
+				messages : {
+					rank_name : {
+						required : '<i class="icon icon-exclamation-sign"></i>'+rank_name_empty
+					},
+					min_points : {
+						digits : '<i class="icon icon-exclamation-sign"></i>'+integral_min_invalid
+					},
+				}
+			});
+		});
+	</script>     
+</body>
+</html>
